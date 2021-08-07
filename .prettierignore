@@ -1,0 +1,7 @@
+docs/.vitepress/dist/
+packages/vite/dist/
+packages/*/CHANGELOG.md
+LICENSE.md
+.prettierignore
+yarn.lock
+.gitignore
