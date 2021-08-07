@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite ./src/client",
+    "dev-client": "vite ./src/client",
+    "dev-node": "tsc -w -p src/node",
     "build": "vite build ./src/client",
     "serve": "vite preview"
   },
