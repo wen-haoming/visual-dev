@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "declaration": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "types": ["node", "jest"],
+    "paths": {
+      "packages/*": ["packages/*"],
+      "webDevtools/*": ["packages/webDevtools/*"],
+      "webpack-devtools-plugin/*": ["packages/webpack-devtools-plugin/*"]
+    }
+  }
+}
