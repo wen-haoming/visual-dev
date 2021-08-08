@@ -1,3 +1,5 @@
 const { createServer } = require('../dist/node')
 
-createServer()
+createServer({
+  port: 1111
+})

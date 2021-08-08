@@ -9,6 +9,8 @@ export interface WebSocketServer {
   server: Server
 }
 
+export type CreateSocketServeOptions = ServerOptions
+
 export function createSocketServe(options?: ServerOptions) {
   const websocketServerOptions: ServerOptions = {
     port: 24686,
@@ -59,6 +61,8 @@ export function createSocketServe(options?: ServerOptions) {
     },
     close() {
       return new Promise<void>((resolve, reject) => {
+        clients.value.forEach((client) => client.close())
+
         wss.close((err) => {
           if (err) {
             reject(err)

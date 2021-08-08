@@ -18,13 +18,14 @@ const HttpProxy = () => {
   }
   useEffect(() => {
     sockjsRef.current = new WebSocket(
-      `ws://${window.location.hostname}:${24686}`,
+      `ws://${window.location.hostname}:${1111}`,
       'dev-tool-hmr'
     )
 
     sockjsRef.current!.addEventListener('message', async ({ data }) => {
       console.log(data, '---')
     })
+
     return () => {}
   })
 

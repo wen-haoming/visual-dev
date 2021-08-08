@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev-client": "vite ./src/client",
-    "dev-node": "run-s dev-serve build:node",
+    "dev-node": "run-s  dev-serve build:node",
     "build:node": "tsc -w -p ./src/node",
-    "dev-serve": "cd ./payground && node ./startServer.js",
+    "dev-serve": "cd ./payground && nodemon  ./startServer.js --watch",
     "build": "vite build ./src/client",
     "serve": "vite preview"
   },
@@ -28,6 +28,7 @@
     "@vitejs/plugin-react-refresh": "^1.3.1",
     "http-proxy-middleware": "^2.0.1",
     "less": "^4.1.1",
+    "nodemon": "^2.0.12",
     "typescript": "^4.3.2",
     "vite": "^2.4.4",
     "ws": "^8.0.0"
