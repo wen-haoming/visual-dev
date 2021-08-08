@@ -12,7 +12,7 @@ export function httpProxy(options: HttpProxyOptions): HttpProxyOptions {
           host: req.hostname
         }
       },
-      ...value
+      ...(value as any)
     }
   })
 

@@ -1,5 +1,5 @@
-const { createServer } = require('../dist/node')
+const { createServer, DEV_SERVER_PORT } = require('../dist/node')
 
 createServer({
-  port: 1111
+  port: DEV_SERVER_PORT
 })
