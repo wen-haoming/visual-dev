@@ -12,6 +12,7 @@
   "scripts": {
     "dev-client": "cd packages && cd webDevtools && yarn  dev-client",
     "dev-node": "cd packages && cd webDevtools && yarn dev-node",
+    "clean": "lerna clean",
     "format": "prettier --write .",
     "lint": "eslint packages/*/{src,types}/**"
   },

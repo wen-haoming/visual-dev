@@ -1371,6 +1371,18 @@
     "@rollup/pluginutils" "^4.1.1"
     react-refresh "^0.10.0"
 
+"@vue/reactivity@^3.1.5":
+  version "3.1.5"
+  resolved "https://registry.nlark.com/@vue/reactivity/download/@vue/reactivity-3.1.5.tgz?cache=0&sync_timestamp=1628306156758&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Freactivity%2Fdownload%2F%40vue%2Freactivity-3.1.5.tgz#dbec4d9557f7c8f25c2635db1e23a78a729eb991"
+  integrity sha1-2+xNlVf3yPJcJjXbHiOninKeuZE=
+  dependencies:
+    "@vue/shared" "3.1.5"
+
+"@vue/shared@3.1.5":
+  version "3.1.5"
+  resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.1.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.1.5.tgz#74ee3aad995d0a3996a6bb9533d4d280514ede03"
+  integrity sha1-dO46rZldCjmWpruVM9TSgFFO3gM=
+
 acorn-jsx@^5.3.1:
   version "5.3.2"
   resolved "https://registry.nlark.com/acorn-jsx/download/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"

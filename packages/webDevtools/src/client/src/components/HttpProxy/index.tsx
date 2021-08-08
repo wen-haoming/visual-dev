@@ -10,15 +10,23 @@ const options = [
 ]
 
 const HttpProxy = () => {
-  const sockjsRef = useRef({})
+  const sockjsRef = useRef<WebSocket>()
 
   const onFinish: FormProps['onFinish'] = (obj) => {
     // fetch('/')
+    sockjsRef.current?.send(JSON.stringify(obj))
   }
-
   useEffect(() => {
+    sockjsRef.current = new WebSocket(
+      `ws://${window.location.hostname}:${24686}`,
+      'dev-tool-hmr'
+    )
+
+    sockjsRef.current!.addEventListener('message', async ({ data }) => {
+      console.log(data, '---')
+    })
     return () => {}
-  }, [])
+  })
 
   return (
     <Form

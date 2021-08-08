@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev-client": "vite ./src/client",
-    "dev-node": "tsc -w -p ./src/node",
+    "dev-node": "run-s dev-serve build:node",
+    "build:node": "tsc -w -p ./src/node",
+    "dev-serve": "cd ./payground && node ./startServer.js",
     "build": "vite build ./src/client",
     "serve": "vite preview"
   },
@@ -14,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
+    "@vue/reactivity": "^3.1.5",
     "antd": "^4.16.9",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"

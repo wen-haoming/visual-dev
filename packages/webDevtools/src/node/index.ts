@@ -1,2 +1,3 @@
-export * as httpProxy from './src/httpProxy'
-export * as createSocketServe from './src/createSocketServe'
+export { httpProxy } from './src/httpProxy'
+export { createSocketServe } from './src/createSocketServe'
+export { createServer } from './src/createServer'
