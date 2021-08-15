@@ -6,3 +6,5 @@ LICENSE.md
 yarn.lock
 .gitignore
 LICENSE
+.editorconfig
+.gitkeep

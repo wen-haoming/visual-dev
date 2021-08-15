@@ -10,7 +10,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev-client": "cd packages && cd webDevtools && yarn  dev-client",
+    "dev-client": "cd packages && cd webDevtools && yarn dev-client",
     "dev-node": "cd packages && cd webDevtools && yarn dev-node",
     "clean": "lerna clean",
     "format": "prettier --write .",
@@ -34,11 +34,11 @@
     "*": [
       "prettier --write"
     ],
-    "packages/*/{src,types}/**/*.ts": [
+    "packages/**/*.tsx": [
       "eslint --ext .ts"
     ],
-    "packages/**/*.d.ts": [
-      "eslint --ext .ts"
+    "packages/**/*.ts": [
+      "eslint --ext .tsx"
     ]
   },
   "homepage": "https://github.com/wen-haoming/web-devtools#readme",
