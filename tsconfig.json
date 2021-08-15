@@ -15,5 +15,6 @@
       "webDevtools/*": ["packages/webDevtools/*"],
       "webpack-devtools-plugin/*": ["packages/webpack-devtools-plugin/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "spec", "examples", "dist", "coverage"]
 }
