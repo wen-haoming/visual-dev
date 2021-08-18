@@ -6,7 +6,8 @@
     "outDir": "./dist",
     "module": "commonjs",
     "lib": ["ESNext", "DOM"],
-    "sourceMap": true
+    "sourceMap": true,
+    "noImplicitAny": false
   },
   "exclude": ["node_modules", "spec", "examples", "dist", "coverage"]
 }

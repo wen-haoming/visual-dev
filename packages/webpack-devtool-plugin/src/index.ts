@@ -11,17 +11,12 @@ class WebpackDevtoolPlugin {
   apply(compiler: Compiler) {
     // eslint-disable-next-line no-param-reassign
     const newOpt = merge(compiler.options, {
-      resolveLoader: {
-        alias: {
-          'devtool-loader': path.resolve(__dirname, './devtool-loader')
-        }
-      },
       module: {
         rules: [
           {
             test: /\.(j|t)sx$/,
             use: {
-              loader: 'devtool-loader'
+              loader: path.resolve(__dirname, './devtool-loader/index.js')
             }
           }
         ]
