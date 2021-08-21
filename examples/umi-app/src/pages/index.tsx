@@ -10,6 +10,8 @@ const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 export default () => {
+  console.log('---');
+
   return (
     <Layout style={{ height: '100%' }}>
       <Header className="header">

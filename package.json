@@ -12,6 +12,8 @@
   "scripts": {
     "dev-client": "cd packages && cd webDevtools && yarn dev-client",
     "dev-node": "cd packages && cd webDevtools && yarn dev-node",
+    "dev-webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
+    "start": "cd examples && cd umi-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write .",
     "lint": "eslint packages/*/{src,types}/**"
@@ -35,10 +37,10 @@
       "prettier --write"
     ],
     "packages/**/*.tsx": [
-      "eslint --ext .ts"
+      "eslint --fix --ext .ts"
     ],
     "packages/**/*.ts": [
-      "eslint --ext .tsx"
+      "eslint --fix --ext .tsx "
     ]
   },
   "homepage": "https://github.com/wen-haoming/web-devtools#readme",

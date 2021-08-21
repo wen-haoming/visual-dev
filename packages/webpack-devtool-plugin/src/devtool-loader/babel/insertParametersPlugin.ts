@@ -9,7 +9,7 @@ const insertParametersPlugin = ({ types, template }): PluginObj => {
   return {
     visitor: {
       CallExpression(path, state) {
-        if (path.node.isNew) {
+        if ((path.node as any).isNew) {
           return
         }
         const calleeName = generate(path.node.callee).code
@@ -18,11 +18,10 @@ const insertParametersPlugin = ({ types, template }): PluginObj => {
           const { line, column } = path.node.loc.start
           const newNode = template.expression(
             `console.log("${
-              state.file.filename || 'unkown filename'
+              state.filename || 'unkown filename'
             }: (${line}, ${column})")`
           )()
           newNode.isNew = true
-
           if (path.findParent((nodePath) => nodePath.isJSXElement())) {
             path.replaceWith(types.arrayExpression([newNode, path.node]))
             path.skip()
