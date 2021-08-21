@@ -9,7 +9,7 @@
     "dev-node": "run-s  build:node",
     "build:node": "tsc -w -p ./src/node",
     "dev-serve": "cd ./payground && nodemon  ./startServer.js --watch",
-    "build": "vite build ./src/client",
+    "build": "vite build ./src/client && tsc  -p ./src/node",
     "serve": "vite preview"
   },
   "files": [

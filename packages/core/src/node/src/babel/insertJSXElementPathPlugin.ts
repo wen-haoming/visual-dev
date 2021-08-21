@@ -1,6 +1,6 @@
 import type { PluginObj } from '@babel/core'
 import { jsxIdentifier, jsxAttribute, stringLiteral } from '@babel/types'
-import type { JSXAttribute } from '@babel/types'
+// import type { JSXAttribute, JSXOpeninJSXgElement } from '@babel/types'
 
 export const insertJSXElementPathPlugin = (): PluginObj => {
   return {
@@ -10,25 +10,21 @@ export const insertJSXElementPathPlugin = (): PluginObj => {
 
         const { line, column } = path.node.loc.start
 
-        const lineAttr: JSXAttribute = jsxAttribute(
+        const lineAttr = jsxAttribute(
           jsxIdentifier('dev-tool-line'),
           stringLiteral(line.toString())
         )
 
-        const columnAttr: JSXAttribute = jsxAttribute(
+        const columnAttr = jsxAttribute(
           jsxIdentifier('dev-tool-column'),
           stringLiteral(column.toString())
         )
-        const relativePathAttr: JSXAttribute = jsxAttribute(
-          jsxIdentifier('deb-tool-relative-path'),
+        const relativePath = jsxAttribute(
+          jsxIdentifier('dev-tool-relative-path'),
           stringLiteral(state.filename.toString())
         )
 
-        const attributes: JSXAttribute[] = [
-          lineAttr,
-          columnAttr,
-          relativePathAttr
-        ]
+        const attributes: any[] = [lineAttr, columnAttr, relativePath]
 
         path.node.attributes.unshift(...attributes)
       }

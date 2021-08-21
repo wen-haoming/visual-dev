@@ -5,7 +5,7 @@ const targetCalleeName = ['log', 'info', 'error', 'debug'].map(
   (item) => `console.${item}`
 )
 
-export const insertParametersPlugin = ({ types, template }): PluginObj => {
+export const insertParametersPlugin = ({ types, template }: any): PluginObj => {
   return {
     visitor: {
       CallExpression(path, state) {
