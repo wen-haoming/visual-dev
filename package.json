@@ -16,7 +16,8 @@
     "start": "cd examples && cd umi-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write ./packages && npm run lint",
-    "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color"
+    "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color",
+    "build": "cd packages && cd core && yarn build"
   },
   "repository": {
     "type": "git",

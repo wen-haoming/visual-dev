@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Form, AutoComplete, Button, Row } from 'antd'
 import type { FormProps } from 'antd/es/form'
-import { DEV_SERVER_PORT } from '../../../../node'
+// import { DEV_SERVER_PORT } from '../../../../node'
 
 const { Item } = Form
 
@@ -20,7 +20,7 @@ const HttpProxy = () => {
   }
   useEffect(() => {
     sockjsRef.current = new WebSocket(
-      `ws://${window.location.hostname}:${DEV_SERVER_PORT}`,
+      `ws://${window.location.hostname}:${10010}`,
       'dev-tool-hmr'
     )
 

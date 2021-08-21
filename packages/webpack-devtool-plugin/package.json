@@ -15,6 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "peerDependencies": {
+    "webpack": "5.x"
+  },
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/generator": "^7.15.0",
@@ -24,8 +27,11 @@
     "@types/babel-core": "^6.25.7",
     "@types/babel-generator": "^6.25.4",
     "@types/babel-traverse": "^6.25.6",
+    "@web-devtool/core": "1.0.0",
     "loader-utils": "^2.0.0",
-    "webpack-merge": "^5.8.0",
-    "@web-devtool/core": "1.0.0"
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.3.2"
   }
 }

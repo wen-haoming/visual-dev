@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
+import polyfillNode from 'rollup-plugin-polyfill-node'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    outDir: `${process.cwd()}/dist/client`
+    outDir: `../../dist/client`,
+    assetsDir: '_dev-plugin'
   },
   css: {
     preprocessorOptions: {
@@ -14,5 +16,5 @@ export default defineConfig({
       }
     }
   },
-  plugins: [reactRefresh()]
+  plugins: [reactRefresh(), polyfillNode()]
 })
