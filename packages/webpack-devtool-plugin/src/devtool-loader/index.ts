@@ -1,6 +1,7 @@
 import { parse } from '@babel/parser'
 import { transformFromAst } from '@babel/core'
 import insertParametersPlugin from './babel/insertParametersPlugin'
+import insertJSXElementPathPlugin from './babel/insertJSXElementPathPlugin'
 import type { loader } from 'webpack'
 
 const webpackLoader: loader.Loader = function webpackLoader(this, source) {
@@ -18,7 +19,7 @@ const webpackLoader: loader.Loader = function webpackLoader(this, source) {
     // ...options?.babelOptions
   })
   const { code } = transformFromAst(ast as any, source.toString(), {
-    plugins: [insertParametersPlugin],
+    plugins: [insertParametersPlugin, insertJSXElementPathPlugin],
     filename: filePath,
     filenameRelative: rootPath
   })
