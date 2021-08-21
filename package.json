@@ -37,10 +37,10 @@
       "prettier --write"
     ],
     "packages/**/*.tsx": [
-      "eslint --fix --ext .ts"
+      "eslint --ext .ts --fix "
     ],
     "packages/**/*.ts": [
-      "eslint --fix --ext .tsx "
+      "eslint --ext .tsx --fix "
     ]
   },
   "homepage": "https://github.com/wen-haoming/web-devtools#readme",

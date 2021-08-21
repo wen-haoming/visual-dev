@@ -3,9 +3,8 @@ import { transformFromAst } from '@babel/core'
 import insertParametersPlugin from './babel/insertParametersPlugin'
 import type { loader } from 'webpack'
 
-const webpackLoader: loader.Loader = function (this, source) {
+const webpackLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this
-  // eslint-disable-next-line @typescript-eslint/no-invalid-this
   // const options: any = getOptions(this)
   const ast = parse(source.toString(), {
     sourceType: 'unambiguous',
