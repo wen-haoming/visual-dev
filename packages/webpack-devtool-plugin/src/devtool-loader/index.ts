@@ -6,8 +6,6 @@ import {
 } from '@web-devtool/core'
 import type { loader } from 'webpack'
 
-console.log(insertJSXElementPathPlugin, '--')
-
 const webpackLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this
   // const options: any = getOptions(this)

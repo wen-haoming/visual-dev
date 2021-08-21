@@ -16,7 +16,7 @@
     "start": "cd examples && cd umi-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write .",
-    "lint": "eslint packages/*/{src,types}/**"
+    "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,7 @@
   "lint-staged": {
     "*": "prettier --write",
     "packages/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix --color",
+      "eslint  --color",
       "prettier --write"
     ]
   },

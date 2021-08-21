@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import WebSocket, { Server } from 'ws'
 import type { ServerOptions } from 'ws'
 import type { HMRPayload, ErrorPayload } from './types/hmrPayload'

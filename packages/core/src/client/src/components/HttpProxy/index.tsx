@@ -24,9 +24,9 @@ const HttpProxy = () => {
       'dev-tool-hmr'
     )
 
-    sockjsRef.current!.addEventListener('message', async ({ data }) => {
-      console.log(data, '---')
-    })
+    // sockjsRef.current!.addEventListener('message', async ({ data }) => {
+    //   console.log(data, '---')
+    // })
 
     return () => {}
   })

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createSocketServe } from './createSocketServe'
 import type { CreateSocketServeOptions } from './createSocketServe'
 

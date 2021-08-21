@@ -18,5 +18,3 @@ export function httpProxy(options: HttpProxyOptions): HttpProxyOptions {
 
   return proxyOptions
 }
-
-console.log()
