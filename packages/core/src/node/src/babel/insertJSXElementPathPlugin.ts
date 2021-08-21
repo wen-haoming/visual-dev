@@ -2,7 +2,7 @@ import type { PluginObj } from '@babel/core'
 import { jsxIdentifier, jsxAttribute, stringLiteral } from '@babel/types'
 import type { JSXAttribute } from '@babel/types'
 
-const insertJSXElementPathPlugin = (): PluginObj => {
+export const insertJSXElementPathPlugin = (): PluginObj => {
   return {
     visitor: {
       JSXOpeningElement(path, state) {
@@ -35,5 +35,3 @@ const insertJSXElementPathPlugin = (): PluginObj => {
     }
   }
 }
-
-export default insertJSXElementPathPlugin

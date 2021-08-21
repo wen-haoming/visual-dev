@@ -1,16 +1,22 @@
 {
-  "name": "web-devtools",
+  "name": "@web-devtool/core",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/node/index.js",
+  "types": "dist/node/index.d.ts",
   "scripts": {
     "dev-client": "vite ./src/client",
-    "dev-node": "run-s  dev-serve build:node",
+    "dev-node": "run-s  build:node",
     "build:node": "tsc -w -p ./src/node",
     "dev-serve": "cd ./payground && nodemon  ./startServer.js --watch",
     "build": "vite build ./src/client",
     "serve": "vite preview"
   },
+  "files": [
+    "dist",
+    "LICENSE",
+    "package.json"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -22,6 +28,8 @@
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
+    "@babel/generator": "^7.15.0",
+    "@babel/core": "^7.15.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/ws": "^7.4.7",

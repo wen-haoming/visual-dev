@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Form, AutoComplete, Button, Row } from 'antd'
-import { FormProps } from 'antd/es/form'
+import type { FormProps } from 'antd/es/form'
 import { DEV_SERVER_PORT } from '../../../../node'
 
 const { Item } = Form

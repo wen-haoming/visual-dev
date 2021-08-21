@@ -1,15 +1,18 @@
 {
-  "name": "webpack-devtool-plugin",
+  "name": "@web-devtool/webpack",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "package.json"
+  ],
   "scripts": {
     "dev": "tsc -w -p ."
   },
   "keywords": [],
-  "peerDependencies": {
-    "webpack": "5.x"
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -22,6 +25,7 @@
     "@types/babel-generator": "^6.25.4",
     "@types/babel-traverse": "^6.25.6",
     "loader-utils": "^2.0.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "@web-devtool/core": "1.0.0"
   }
 }

@@ -1,8 +1,12 @@
 import { parse } from '@babel/parser'
 import { transformFromAst } from '@babel/core'
-import insertParametersPlugin from './babel/insertParametersPlugin'
-import insertJSXElementPathPlugin from './babel/insertJSXElementPathPlugin'
+import {
+  insertParametersPlugin,
+  insertJSXElementPathPlugin
+} from '@web-devtool/core'
 import type { loader } from 'webpack'
+
+console.log(insertJSXElementPathPlugin, '--')
 
 const webpackLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this

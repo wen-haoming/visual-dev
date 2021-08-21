@@ -1,5 +1,5 @@
 {
-  "name": "web-devtools",
+  "name": "web-devtool",
   "private": true,
   "version": "1.0.0",
   "engines": {
@@ -10,8 +10,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev-client": "cd packages && cd webDevtools && yarn dev-client",
-    "dev-node": "cd packages && cd webDevtools && yarn dev-node",
+    "dev-client": "cd packages && cd core && yarn dev-client",
+    "dev-node": "cd packages && cd core && yarn dev-node",
     "dev-webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
     "start": "cd examples && cd umi-app && yarn start",
     "clean": "lerna clean",
@@ -33,14 +33,10 @@
     "commit-msg": "fabric verify-commit"
   },
   "lint-staged": {
-    "*": [
+    "*": "prettier --write",
+    "packages/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --color",
       "prettier --write"
-    ],
-    "packages/**/*.tsx": [
-      "eslint --ext .ts --fix "
-    ],
-    "packages/**/*.ts": [
-      "eslint --ext .tsx --fix "
     ]
   },
   "homepage": "https://github.com/wen-haoming/web-devtools#readme",
