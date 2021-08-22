@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { Form, AutoComplete, Button, Row } from 'antd'
 import type { FormProps } from 'antd/es/form'
-// import { DEV_SERVER_PORT } from '../../../../node'
 
 const { Item } = Form
 
@@ -12,24 +11,10 @@ const options = [
 ]
 
 const HttpProxy = () => {
-  const sockjsRef = useRef<WebSocket>()
-
-  const onFinish: FormProps['onFinish'] = (obj) => {
+  const onFinish: FormProps['onFinish'] = () => {
     // fetch('/')
-    sockjsRef.current?.send(JSON.stringify(obj))
+    // sockjsRef.current?.send(JSON.stringify(obj))
   }
-  useEffect(() => {
-    sockjsRef.current = new WebSocket(
-      `ws://${window.location.hostname}:${10010}`,
-      'dev-tool-hmr'
-    )
-
-    // sockjsRef.current!.addEventListener('message', async ({ data }) => {
-    //   console.log(data, '---')
-    // })
-
-    return () => {}
-  })
 
   return (
     <Form

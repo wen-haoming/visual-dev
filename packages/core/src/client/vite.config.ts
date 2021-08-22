@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 
 export const ASSETS_DIR = '_dev-plugin'
-export const DEV_SERVER_PORT = 10010
 
 // https://vitejs.dev/config/
 export default defineConfig({

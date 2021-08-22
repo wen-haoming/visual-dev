@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Button, Modal, Menu, Row, Col, ConfigProvider } from 'antd'
 import {
   SettingOutlined,
@@ -6,10 +6,24 @@ import {
   ThunderboltOutlined
 } from '@ant-design/icons'
 import HttpProxy from './components/HttpProxy'
+import { DEV_SERVER_PORT } from './config'
 
 const App = () => {
   const [visible, setVisible] = useState(false)
   const [selectKey, setSelectKey] = useState('1')
+  const sockjsRef = useRef<WebSocket>()
+
+  useEffect(() => {
+    sockjsRef.current = new WebSocket(
+      `ws://${window.location.hostname}:${DEV_SERVER_PORT}`,
+      'dev-tool-hmr'
+    )
+    // sockjsRef.current!.addEventListener('message', async ({ data }) => {
+    //   console.log(data, '---')
+    // })
+
+    return () => {}
+  }, [])
 
   return (
     <ConfigProvider prefixCls="web-devtools">
