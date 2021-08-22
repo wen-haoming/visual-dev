@@ -13,7 +13,7 @@
     "dev-client": "cd packages && cd core && yarn dev-client",
     "dev-node": "cd packages && cd core && yarn dev-node",
     "dev-webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
-    "start": "cd examples && cd umi-app && yarn start",
+    "start": "cd examples && cd cra-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write ./packages && npm run lint",
     "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color",

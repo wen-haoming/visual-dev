@@ -4,9 +4,11 @@ import {
   insertParametersPlugin,
   insertJSXElementPathPlugin
 } from '@web-devtool/core'
-import type { loader } from 'webpack'
+import type { loader, Compiler } from 'webpack'
+import path from 'path'
+import { merge } from 'webpack-merge'
 
-const webpackLoader: loader.Loader = function webpackLoader(this, source) {
+const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this
   // const options: any = getOptions(this)
   const ast = parse(source.toString(), {
@@ -28,4 +30,21 @@ const webpackLoader: loader.Loader = function webpackLoader(this, source) {
   return code
 }
 
-export default webpackLoader
+export const mergeLoaderOption = (compiler: Compiler) => {
+  const newOptions = merge(compiler.options, {
+    module: {
+      rules: [
+        {
+          test: /\.(j|t)sx?$/,
+          use: {
+            loader: path.resolve(__dirname, './loader.js')
+          }
+        }
+      ]
+    }
+  } as typeof compiler.options)
+
+  Object.assign(compiler.options, newOptions)
+}
+
+export default devtoolLoader
