@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Form, AutoComplete, Button, Row } from 'antd'
+import { Context } from '../../App'
 import type { FormProps } from 'antd/es/form'
 
 const { Item } = Form
@@ -11,9 +12,11 @@ const options = [
 ]
 
 const HttpProxy = () => {
-  const onFinish: FormProps['onFinish'] = () => {
+  const sockjs = useContext<WebSocket>(Context)
+
+  const onFinish: FormProps['onFinish'] = (obj) => {
     // fetch('/')
-    // sockjsRef.current?.send(JSON.stringify(obj))
+    sockjs?.send(JSON.stringify(obj))
   }
 
   return (

@@ -47,6 +47,7 @@ export function createSocketServe(options?: ServerOptions) {
         })
       })
     },
+    addListener() {},
     send(payload: HMRPayload) {
       if (payload.type === 'error' && !wss.clients.size) {
         bufferedError = payload

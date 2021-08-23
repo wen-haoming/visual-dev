@@ -22,6 +22,7 @@ const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
     ]
     // ...options?.babelOptions
   })
+  // console.log(filePath)
   const { code } = transformFromAst(ast as any, source.toString(), {
     plugins: [insertParametersPlugin, insertJSXElementPathPlugin],
     filename: filePath,

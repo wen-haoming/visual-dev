@@ -11,7 +11,7 @@ const { Header, Content, Sider } = Layout;
 
 export default () => {
 
-  console.log('---');
+  console.log('-123123--');
 
   return (
     <Layout style={{ height: '100%' }}>

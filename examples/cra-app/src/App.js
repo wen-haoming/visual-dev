@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edi12312t <code>src/App.js</code> and save to reload.
+          12331223312312t <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"

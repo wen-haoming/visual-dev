@@ -22,4 +22,5 @@ declare module '@babel/generator' {
   export default generator
 }
 
+declare module 'react-dev-utils/launchEditorEndpoint' {}
 // import  Traverse from '@babel/traverse'

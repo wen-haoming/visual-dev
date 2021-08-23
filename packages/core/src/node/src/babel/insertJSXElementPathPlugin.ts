@@ -10,23 +10,14 @@ export const insertJSXElementPathPlugin = (): PluginObj => {
 
         const { line, column } = path.node.loc.start
 
-        const lineAttr = jsxAttribute(
-          jsxIdentifier('dev-tool-line'),
-          stringLiteral(line.toString())
-        )
-
-        const columnAttr = jsxAttribute(
-          jsxIdentifier('dev-tool-column'),
-          stringLiteral(column.toString())
-        )
-        const relativePath = jsxAttribute(
+        const relativePath: any = jsxAttribute(
           jsxIdentifier('dev-tool-relative-path'),
-          stringLiteral(state.filename.toString())
+          stringLiteral(
+            `${state.filename}:${line.toString()}:${column.toString()}`
+          )
         )
 
-        const attributes: any[] = [lineAttr, columnAttr, relativePath]
-
-        path.node.attributes.unshift(...attributes)
+        path.node.attributes.unshift(relativePath)
       }
     }
   }
