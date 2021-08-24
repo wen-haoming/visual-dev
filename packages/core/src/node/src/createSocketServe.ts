@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
-import WebSocket, { Server } from 'ws'
+import type WebSocket from 'ws'
+import { Server } from 'ws'
 import type { ServerOptions } from 'ws'
-import type { HMRPayload, ErrorPayload } from './types/hmrPayload'
 import { ref, effect } from '@vue/reactivity'
+import type { WSPayload } from './types/payload'
 
 export interface WebSocketServer {
-  send: (payload: HMRPayload) => void
+  send: (payload: WSPayload) => void
   close: () => Promise<void>
   server: Server
 }
@@ -18,7 +19,7 @@ export function createSocketServe(options?: ServerOptions) {
     ...options
   }
 
-  let bufferedError: ErrorPayload | null = null
+  let bufferedError: WSPayload | null = null
 
   const wss = new Server(websocketServerOptions)
 
@@ -40,7 +41,7 @@ export function createSocketServe(options?: ServerOptions) {
   })
 
   return {
-    listen(fn: (this: WebSocket, code: number, reason: string) => void) {
+    listen(fn: (this: WebSocket, buffer: Buffer) => void) {
       effect(() => {
         clients.value.forEach((client) => {
           client.on('message', fn)
@@ -48,18 +49,19 @@ export function createSocketServe(options?: ServerOptions) {
       })
     },
     addListener() {},
-    send(payload: HMRPayload) {
-      if (payload.type === 'error' && !wss.clients.size) {
-        bufferedError = payload
-        return
-      }
-      const stringified = JSON.stringify(payload)
+    send(payload: WSPayload) {
+      console.log(payload)
+      // if (payload.type === 'error' && !wss.clients.size) {
+      //   bufferedError = payload
+      //   return
+      // }
+      // const stringified = JSON.stringify(payload)
 
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(stringified)
-        }
-      })
+      // wss.clients.forEach((client) => {
+      //   if (client.readyState === WebSocket.OPEN) {
+      //     client.send(stringified)
+      //   }
+      // })
     },
     close() {
       return new Promise<void>((resolve, reject) => {

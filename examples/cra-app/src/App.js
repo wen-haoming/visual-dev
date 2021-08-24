@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import B from './b';
 
 function App() {
   return (
@@ -7,7 +8,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          12331223312312t <code>src/App.js</code> and save to reload.
+           <code>src/App.js</code> and save to reload.
+           <B/>
         </p>
         <a
           className="App-link"

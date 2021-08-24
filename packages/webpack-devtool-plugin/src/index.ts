@@ -12,6 +12,7 @@ const WebpackDevtoolPlugin: Plugin = class {
   apply(compiler: Compiler) {
     compiler.hooks.afterPlugins.tap('mergeLoaderOption', mergeLoaderOption)
     compiler.hooks.emit.tap('writeFileAndCopyFile', writeAndCopy)
+
     compiler.hooks.environment.tap('createServer', () => {
       createServer({
         port: DEV_SERVER_PORT

@@ -6,9 +6,14 @@ import {
   ThunderboltOutlined
 } from '@ant-design/icons'
 import HttpProxy from './components/HttpProxy'
+import Footer from './components/Footer'
 import { DEV_SERVER_PORT } from './config'
 
 export const Context = createContext({} as any)
+export interface ContextValue {
+  sockjsRef: WebSocket
+  setVisible: (flag: boolean) => void
+}
 
 const App = () => {
   const [visible, setVisible] = useState(false)
@@ -30,7 +35,7 @@ const App = () => {
 
   return (
     <ConfigProvider prefixCls="web-devtools">
-      <Context.Provider value={sockjsRef.current}>
+      <Context.Provider value={{ sockjsRef: sockjsRef.current, setVisible }}>
         <Button
           style={{
             position: 'fixed',
@@ -47,11 +52,10 @@ const App = () => {
         <Modal
           visible={visible}
           onCancel={() => setVisible(false)}
-          footer={null}
           width={800}
           bodyStyle={{ padding: 0 }}
           title="Dev plugin"
-          destroyOnClose
+          footer={<Footer />}
         >
           <Row style={{ minHeight: 500 }}>
             <Col span={5}>

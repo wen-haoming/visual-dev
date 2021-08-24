@@ -2,27 +2,28 @@
 import { createSocketServe } from './createSocketServe'
 import type { CreateSocketServeOptions } from './createSocketServe'
 import launchEditor from 'react-dev-utils/launchEditor'
+import type { WSPayload } from './types/payload'
+import { parseLaunchPath } from './utils'
 
 export async function createServer(options: CreateSocketServeOptions) {
   const ws = createSocketServe(options)
 
   // ws broadcast
-  ws.send({ type: 'connected' })
+  // ws.send({ type: 'connected' })
 
   // ws listener
-  ws.listen((data) => {
-    console.log(data.toString())
-    ;(async () => {
-      try {
-        const res = await launchEditor(
-          '/Users/wenhaoming/Desktop/practise/web-devtools/examples/cra-app/src/index.js',
-          2,
-          1
-        )
-        console.log(res)
-      } catch (e) {
-        // Ignore
+  ws.listen((buffer: Buffer) => {
+    const payload: WSPayload = JSON.parse(buffer.toString())
+
+    switch (payload.type) {
+      case 'launch-editor-payload': {
+        const { path, column, row } = parseLaunchPath(payload.path)
+        launchEditor(path, column, row)
+        break
       }
-    })()
+
+      default:
+        break
+    }
   })
 }
