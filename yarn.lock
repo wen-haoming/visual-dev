@@ -7675,9 +7675,14 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4.0.2, typescript@^4.3.2, typescript@^4.3.5:
+typescript@^4.0.2, typescript@^4.3.2:
   version "4.4.2"
   resolved "https://registry.nlark.com/typescript/download/typescript-4.4.2.tgz#6d618640d430e3569a1dfb44f7d7e600ced3ee86"
+  integrity sha1-bWGGQNQw41aaHftE99fmAM7T7oY=
+
+typescript@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.nlark.com/typescript/download/typescript-4.4.2.tgz?cache=0&sync_timestamp=1630012140746&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftypescript%2Fdownload%2Ftypescript-4.4.2.tgz#6d618640d430e3569a1dfb44f7d7e600ced3ee86"
   integrity sha1-bWGGQNQw41aaHftE99fmAM7T7oY=
 
 unbox-primitive@^1.0.1:

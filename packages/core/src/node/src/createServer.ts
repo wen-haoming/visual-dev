@@ -16,7 +16,7 @@ export async function createServer(options: CreateSocketServeOptions) {
 
     switch (payload.type) {
       case 'launch-editor-payload': {
-        launchEditor(payload.path)
+        launchEditor(`${process.cwd() + payload.path}`)
         break
       }
       default:

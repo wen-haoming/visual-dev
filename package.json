@@ -10,10 +10,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:client": "cd packages && cd core && yarn dev-client",
+    "dev:client": "cd packages && cd core && yarn dev:client",
     "dev:node": "cd packages && cd core && yarn dev:node",
     "dev:webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
-    "dev": "run-p dev:node dev:webpack",
+    "dev": "run-p dev:node dev:webpack dev:client",
     "start": "cd examples && cd cra-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write ./packages && npm run lint",
@@ -52,7 +52,7 @@
     "lint-staged": "^11.1.1",
     "npm-run-all": "^4.1.5",
     "prettier": "2.3.2",
-    "typescript": "^4.3.5",
+    "typescript": "^4.4.2",
     "yorkie": "^2.0.0"
   }
 }

@@ -10,8 +10,7 @@ const Footer = () => {
 
   const handleClick = useCallback((e: any) => {
     e.stopPropagation()
-    const attr = e.target.getAttribute('dev-tool-relative-path')
-    console.log(attr, '==')
+    const attr = e.target.getAttribute('__p')
     if (attr) {
       context.sockjsRef.send(
         JSON.stringify({
