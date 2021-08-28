@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
 import { createSocketServe } from './createSocketServe'
-import type { CreateSocketServeOptions } from './createSocketServe'
+import { CreateSocketServeOptions } from './createSocketServe'
 // import launchEditor from 'react-dev-utils/launchEditor'
 import launchEditor from '@umijs/launch-editor'
-import type { WSPayload } from './types/payload'
+import { WSPayload } from './types/payload'
 
 export async function createServer(options: CreateSocketServeOptions) {
   const ws = createSocketServe(options)
@@ -20,7 +19,6 @@ export async function createServer(options: CreateSocketServeOptions) {
         launchEditor(payload.path)
         break
       }
-
       default:
         break
     }

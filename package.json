@@ -3,21 +3,22 @@
   "private": true,
   "version": "1.0.0",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=10.0.0"
   },
   "description": "",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "dev-client": "cd packages && cd core && yarn dev-client",
-    "dev-node": "cd packages && cd core && yarn dev-node",
-    "dev-webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
+    "dev:client": "cd packages && cd core && yarn dev-client",
+    "dev:node": "cd packages && cd core && yarn dev:node",
+    "dev:webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
+    "dev": "run-p dev:node dev:webpack",
     "start": "cd examples && cd cra-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write ./packages && npm run lint",
     "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color",
-    "build": "cd packages && cd core && yarn build"
+    "build": "cd packages && cd core && yarn build && cd .. && cd webpack-devtool-plugin && yarn build"
   },
   "repository": {
     "type": "git",

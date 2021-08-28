@@ -5,10 +5,12 @@
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
   "scripts": {
-    "dev-client": "vite ./src/client",
-    "build:node": "tsc -w -p ./src/node",
+    "dev:client": "vite ./src/client",
+    "dev:node": "tsc -w -p ./src/node",
+    "build:client": "vite build ./src/client",
+    "build:node": "tsc  -p ./src/node",
     "dev-serve": " cd ./payground && nodemon  ./startServer.js --watch",
-    "build": "vite build ./src/client && tsc  -p ./src/node",
+    "build": "run-p build:client build:node",
     "serve": "vite preview"
   },
   "files": [
@@ -25,7 +27,8 @@
     "@vue/reactivity": "^3.1.5",
     "antd": "^4.16.9",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "vue-loader": "^15.9.8"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

@@ -1,6 +1,5 @@
-import type { PluginObj } from '@babel/core'
+import { PluginObj } from '@babel/core'
 import { jsxIdentifier, jsxAttribute, stringLiteral } from '@babel/types'
-// import type { JSXAttribute, JSXOpeninJSXgElement } from '@babel/types'
 
 export const insertJSXElementPathPlugin = (): PluginObj => {
   return {
@@ -16,7 +15,6 @@ export const insertJSXElementPathPlugin = (): PluginObj => {
             `${state.filename}:${line.toString()}:${column.toString()}`
           )
         )
-
         path.node.attributes.unshift(relativePath)
       }
     }
