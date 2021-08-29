@@ -1,21 +1,26 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import SvgIcon from './components/SvgIcon.vue'
 </script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div class="icon" style="width: 30px; height: 30px">
+    <SvgIcon class="svg" style="width: 30px; height: 30px" />
+  </div>
 </template>
-
-<style>
-#app {
-  margin-top: 60px;
-  color: #2c3e50;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style lang="less" scoped>
+.icon {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  .svg {
+    transition: transform 0.4s;
+    &:hover {
+      transform: rotateZ(90deg);
+    }
+  }
 }
 </style>
