@@ -10,8 +10,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:client": "cd packages && cd dev-ui && yarn dev:client",
-    "dev:node": "cd packages && cd core && yarn dev:node",
+    "dev:client": "cd packages && cd dev-ui && yarn dev",
+    "dev:node": "cd packages && cd core && yarn dev",
     "dev:webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
     "dev": "run-p dev:node dev:webpack dev:client",
     "start": "cd examples && cd cra-app && yarn start",
@@ -30,21 +30,11 @@
   "bugs": {
     "url": "https://github.com/wen-haoming/web-devtools/issues"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged --concurrent false",
-    "commit-msg": "fabric verify-commit"
-  },
-  "lint-staged": {
-    "*": "prettier --write",
-    "packages/**/*.{js,jsx,ts,tsx}": [
-      "eslint",
-      "prettier --write"
-    ]
-  },
+ 
   "homepage": "https://github.com/wen-haoming/web-devtools#readme",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@umijs/fabric": "2.6.2",
     "chokidar": "^3.5.1",
     "cross-env": "^7.0.3",
@@ -54,5 +44,9 @@
     "prettier": "2.3.2",
     "typescript": "^4.4.2",
     "yorkie": "^2.0.0"
+  },
+  "dependencies": {
+    "eslint-define-config": "^1.0.9",
+    "eslint-plugin-node": "^11.1.0"
   }
 }

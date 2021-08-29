@@ -29,7 +29,7 @@ onMounted(() => {
   data.DrawerPositionLeft = (iconRef.value?.offsetLeft || 0) + baseOffset
 })
 
-const handleClick = (e: HTMLElementEventMap['click']) => {
+const handleClick = (e: MouseEvent): void => {
   e.stopPropagation()
   data.isAimStatus = false
   data.visibile = !data.visibile
@@ -44,10 +44,10 @@ const handleClick = (e: HTMLElementEventMap['click']) => {
     <Drawer
       v-show="data.visibile"
       @changeVisibile="
-        ({ isAimStatus, visibile }) => {
-          data.isAimStatus = isAimStatus
-          data.visibile = visibile
-        }
+      ({ isAimStatus, visibile }) => {
+        data.isAimStatus = isAimStatus
+        data.visibile = visibile
+      }
       "
       :is-aim-status="data.isAimStatus"
       :style="`bottom: ${data.DrawerPositionBottom}px; left: ${data.DrawerPositionLeft}px`"

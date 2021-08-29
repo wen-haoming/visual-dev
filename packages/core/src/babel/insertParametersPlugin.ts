@@ -8,7 +8,7 @@ const targetCalleeName = ['log', 'info', 'error', 'debug'].map(
 export const insertParametersPlugin = ({ types, template }: any): PluginObj => {
   return {
     visitor: {
-      CallExpression(path, state) {
+      CallExpression(path: any, state) {
         if ((path.node as any).isNew) {
           return
         }
@@ -22,7 +22,7 @@ export const insertParametersPlugin = ({ types, template }: any): PluginObj => {
             }: (${line}, ${column})")`
           )()
           newNode.isNew = true
-          if (path.findParent((nodePath) => nodePath.isJSXElement())) {
+          if (path.findParent((nodePath: any) => nodePath.isJSXElement())) {
             path.replaceWith(types.arrayExpression([newNode, path.node]))
             path.skip()
           } else {

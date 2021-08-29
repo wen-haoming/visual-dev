@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { ref, onMounted, toRefs, reactive, watchEffect, effect } from 'vue'
-import AimIcon from '../IconCompents/Aim.vue'
+// import { SERVER_PORT } from '@web-devtools/core'
+import AimIcon from '../IconCompents/Aim.vue';
+import { watchEffect } from 'vue'
 
 const props = defineProps({
   isAimStatus: {
@@ -12,6 +13,7 @@ const props = defineProps({
 const emit = defineEmits<{
   (e: 'changeVisibile', flag: { visibile: boolean; isAimStatus: boolean }): void
 }>()
+
 
 let previosDom: HTMLElement | null = null
 
@@ -27,18 +29,27 @@ const handleAimClick = (e: HTMLElementEventMap['click']) => {
   )
 }
 
-const inspectComponent = (e: HTMLElementEventMap['mousemove']) => {
+const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
   const targetDom = e.target as HTMLElement | null
-  // targetDom?.getAttribute('__p')
   if (targetDom && targetDom !== previosDom) {
     previosDom?.classList.remove('__layer-dev-tool')
+
     targetDom.classList.add('__layer-dev-tool')
     previosDom = targetDom
   }
 }
 
-const documentHandleClick = () => {
+const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
+  const targetDom = e.target as HTMLElement | null
   emit('changeVisibile', { visibile: false, isAimStatus: false })
+  const filePath = targetDom?.getAttribute('__p')
+  await fetch(`http://localhost:10063/launchEditor`,{
+    method:'post',
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({filePath})
+  })
   previosDom?.classList.remove('__layer-dev-tool')
 }
 
@@ -70,53 +81,50 @@ watchEffect(() => {
     <div class="header">Dev-plugin</div>
     <div class="content"></div>
     <div class="footer">
-      <AimIcon class="aim-icon" title="组件定位" @click="handleAimClick" />
+      <AimIcon class="aim-icon" title="组件定位" @click="handleAimClick"></AimIcon>
     </div>
   </div>
 </template>
 
-<style lang="less">
-@import '../style/global.less';
-
+<style  scoped>
 .drawer {
   position: fixed;
   display: flex;
   flex-direction: column;
   min-width: 300px;
   min-height: 200px;
-  color: @font-color;
+  color: rgba (255, 255, 255, 0.65);
   font-size: 14px;
-  background-color: @primary-color;
+  background-color: #23232e;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
   will-change: transform;
-  .header,
-  .footer {
-    height: 30px;
-    padding: 2px 10px;
-    line-height: 30px;
-    background-color: @block-color;
-  }
-  .footer {
-    text-align: right;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-
-    .aim-icon {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
-  }
-  .header {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-  .content {
-    flex: 1;
-    padding: 10px;
-  }
+}
+.header,
+.footer {
+  height: 30px;
+  padding: 2px 10px;
+  line-height: 30px;
+  background-color: #30303d;
+}
+.footer {
+  text-align: right;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.aim-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.header {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.content {
+  flex: 1;
+  padding: 10px;
 }
 </style>
