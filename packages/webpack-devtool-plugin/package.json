@@ -1,5 +1,5 @@
 {
-  "name": "@web-devtool/webpack",
+  "name": "@web-devtools/webpack",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -28,8 +28,9 @@
     "@types/babel-core": "^6.25.7",
     "@types/babel-generator": "^6.25.4",
     "@types/babel-traverse": "^6.25.6",
-    "@web-devtool/core": "1.0.0",
+    "@web-devtools/core": "1.0.0",
     "loader-utils": "^2.0.0",
+    "cross-env": "^7.0.3",
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {

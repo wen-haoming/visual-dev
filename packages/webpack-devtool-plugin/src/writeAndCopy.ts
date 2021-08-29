@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { CLIENT_ASSETS_DIR, ASSETS_DIR } from '@web-devtool/core'
+import { CLIENT_ASSETS_DIR, ASSETS_DIR } from '@web-devtools/core'
 
 const writeAndCopyFile = (compilation) => {
   // const rootPath = path.resolve("./lib");

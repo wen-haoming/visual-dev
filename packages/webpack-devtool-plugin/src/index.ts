@@ -1,17 +1,28 @@
 import type { Compiler, Plugin } from 'webpack'
 import { mergeLoaderOption } from './loader'
 import writeAndCopy from './writeAndCopy'
-import { createServer, DEV_SERVER_PORT } from '@web-devtool/core'
+import { createServer, DEV_SERVER_PORT } from '@web-devtools/core'
+
+export interface Options {
+  injectFile?: boolean
+}
+
+const defaultOptions = {
+  injectFile: true
+}
 
 const WebpackDevtoolPlugin: Plugin = class {
-  public option: any
+  public options: Options
 
-  constructor(option: any) {
-    this.option = option
+  constructor(options?: Options) {
+    this.options = options || defaultOptions
   }
   apply(compiler: Compiler) {
     compiler.hooks.afterPlugins.tap('mergeLoaderOption', mergeLoaderOption)
-    compiler.hooks.emit.tap('writeFileAndCopyFile', writeAndCopy)
+
+    if (this.options.injectFile) {
+      compiler.hooks.emit.tap('writeFileAndCopyFile', writeAndCopy)
+    }
 
     compiler.hooks.environment.tap('createServer', () => {
       createServer({

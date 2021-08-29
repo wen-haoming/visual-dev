@@ -1,5 +1,5 @@
 {
-  "name": "@web-devtool/core",
+  "name": "@web-devtools/core",
   "version": "1.0.0",
   "description": "",
   "main": "dist/node/index.js",

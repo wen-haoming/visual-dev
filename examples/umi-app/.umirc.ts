@@ -9,6 +9,6 @@ export default defineConfig({
   fastRefresh: {},
   mfsu: {},
   chainWebpack(memo) {
-    memo.plugin('web-devtool').use(WebpackDevtoolPlugin);
+    memo.plugin('web-devtools').use(WebpackDevtoolPlugin);
   },
 });

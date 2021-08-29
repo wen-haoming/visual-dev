@@ -25,11 +25,6 @@ const App = () => {
       `ws://${window.location.hostname}:${DEV_SERVER_PORT}`,
       'dev-tool-hmr'
     )
-
-    // sockjsRef.current!.addEventListener('message', async ({ data }) => {
-    //   console.log(data, '---')
-    // })
-
     return () => {}
   }, [])
 

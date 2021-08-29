@@ -3,14 +3,13 @@ import { transformFromAst } from '@babel/core'
 import {
   insertParametersPlugin,
   insertJSXElementPathPlugin
-} from '@web-devtool/core'
+} from '@web-devtools/core'
 import type { loader, Compiler } from 'webpack'
 import path from 'path'
 
 const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this
   if (filePath.match(/node_modules/g)) return source.toString()
-  // const options: any = getOptions(this)
   const ast = parse(source.toString(), {
     sourceType: 'unambiguous',
     allowUndeclaredExports: true,

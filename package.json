@@ -1,5 +1,5 @@
 {
-  "name": "web-devtool",
+  "name": "web-devtools",
   "private": true,
   "version": "1.0.0",
   "engines": {
@@ -10,7 +10,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:client": "cd packages && cd core && yarn dev:client",
+    "dev:client": "cd packages && cd dev-ui && yarn dev:client",
     "dev:node": "cd packages && cd core && yarn dev:node",
     "dev:webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
     "dev": "run-p dev:node dev:webpack dev:client",
