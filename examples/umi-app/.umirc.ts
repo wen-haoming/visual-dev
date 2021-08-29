@@ -8,7 +8,7 @@ export default defineConfig({
   routes: [{ path: '/', component: '@/pages/index' }],
   fastRefresh: {},
   mfsu: {},
-  chainWebpack(memo) {
-    memo.plugin('web-devtools').use(WebpackDevtoolPlugin);
-  },
+  // chainWebpack(memo) {
+  //   memo.plugin('web-devtools').use(WebpackDevtoolPlugin);
+  // },
 });

@@ -1,20 +1,18 @@
 import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from '@ant-design/icons';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import './index.less';
-
+import TableColspanRowspan from './TableColspanRowspan';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-
 export default () => {
-
   console.log('-123123--');
-
   return (
-    <Layout style={{ height: '100%' }}>
+    <Layout
+      style={{
+        height: '100%',
+      }}
+    >
+      <TableColspanRowspan />
       <Header className="header">
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
@@ -29,7 +27,10 @@ export default () => {
             mode="inline"
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
+            style={{
+              height: '100%',
+              borderRight: 0,
+            }}
           >
             <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
               <Menu.Item key="1">option1</Menu.Item>
@@ -43,11 +44,7 @@ export default () => {
               <Menu.Item key="7">option7</Menu.Item>
               <Menu.Item key="8">option8</Menu.Item>
             </SubMenu>
-            <SubMenu
-              key="sub3"
-              icon={<NotificationOutlined />}
-              title="subnav 3"
-            >
+            <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
               <Menu.Item key="9">option9</Menu.Item>
               <Menu.Item key="10">option10</Menu.Item>
               <Menu.Item key="11">option11</Menu.Item>
@@ -55,8 +52,16 @@ export default () => {
             </SubMenu>
           </Menu>
         </Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
+        <Layout
+          style={{
+            padding: '0 24px 24px',
+          }}
+        >
+          <Breadcrumb
+            style={{
+              margin: '16px 0',
+            }}
+          >
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
