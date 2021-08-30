@@ -30,7 +30,17 @@
   "bugs": {
     "url": "https://github.com/wen-haoming/web-devtools/issues"
   },
- 
+  "gitHooks": {
+    "pre-commit": "lint-staged --concurrent false",
+    "commit-msg": "fabric verify-commit"
+  },
+  "lint-staged": {
+    "*": "prettier --write",
+    "packages/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "homepage": "https://github.com/wen-haoming/web-devtools#readme",
   "devDependencies": {
     "@typescript-eslint/parser": "^4.28.5",

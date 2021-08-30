@@ -1,15 +1,14 @@
 {
+  "exclude": ["node_modules"],
   "compilerOptions": {
-    "target": "ES2019",
-    "module": "commonjs",
-    "declaration": true,
-    "outDir": "./dist",
+    "typeRoots": ["node_modules/@types"],
+    "target": "ES2018",
+    "moduleResolution": "node",
     "strict": true,
-    "lib": ["ESNext"],
-    "sourceMap": true,
+    "declaration": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports":true,
- },
-  "include": ["./src"],
-  "exclude": ["**/node_modules", "**/__tests__/*"]
- }
+    "esModuleInterop": true
+  }
+}
