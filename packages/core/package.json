@@ -15,7 +15,7 @@
   ],
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@types/cors": "^2.8.12",
     "@umijs/launch-editor": "^1.0.1",

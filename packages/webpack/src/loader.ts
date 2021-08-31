@@ -9,7 +9,7 @@ import * as path from 'path'
 
 const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this
-  
+
   if (filePath.match(/node_modules/g)) return source.toString()
 
   const ast = parse(source.toString(), {

@@ -16,9 +16,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
-    "webpack": "5.x"
+    "webpack": "4.x || 5.x"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
