@@ -12,12 +12,14 @@
   "scripts": {
     "dev:client": "cd packages && cd dev-ui && yarn dev",
     "dev:core": "cd packages && cd core && yarn dev",
+    "build:before": "node ./scripts/clear.js",
     "dev:webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
     "build:ui": "cd packages/dev-ui && yarn build",
     "build:core": "cd packages/core  && yarn build",
-    "build:webpack": "cd packages/webpack-devtool-plugin && yarn build && cd .. && cd .. &&  node ./scripts/moveFiles.js",
+    "build:webpack": "cd packages/webpack-devtool-plugin && yarn build",
+    "build:end": "node ./scripts/moveFiles.js",
+    "build": " run-s build:*",
     "dev": "run-p dev:*",
-    "build": "run-s build:*",
     "start": "cd examples && cd cra-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write ./packages && npm run lint",
@@ -34,7 +36,7 @@
     "url": "https://github.com/wen-haoming/web-devtools/issues"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged --concurrent false",
+    "pre-commit": "npm run build:before && lint-staged --concurrent false",
     "commit-msg": "fabric verify-commit"
   },
   "lint-staged": {

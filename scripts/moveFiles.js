@@ -8,6 +8,6 @@ fs.move(
   resolve('../packages/webpack-devtool-plugin/dev-ui'),
   (err) => {
     if (err) return console.error(err)
-    console.log('success!')
+    console.log('dev-ui dir moved successfully!')
   }
 )
