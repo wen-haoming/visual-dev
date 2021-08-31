@@ -1,10 +1,11 @@
 {
   "name": "@web-devtools/webpack",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
+    "dev-ui",
     "dist",
     "LICENSE",
     "package.json"
@@ -28,12 +29,10 @@
     "@types/babel-core": "^6.25.7",
     "@types/babel-generator": "^6.25.4",
     "@types/babel-traverse": "^6.25.6",
-    "@web-devtools/core": "1.0.0",
+    "@web-devtools/core": "0.0.1",
     "loader-utils": "^2.0.0",
     "cross-env": "^7.0.3",
-    "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {
+    "webpack-merge": "^5.8.0",
     "html-webpack-plugin": "^5.3.2",
     "vue-loader": "^15.9.8"
   }

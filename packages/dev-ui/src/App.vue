@@ -2,7 +2,7 @@
 import SvgIcon from './IconCompents/SvgIcon.vue'
 import CloseIcon from './IconCompents/Close.vue'
 import Drawer from './components/Drawer.vue'
-import { reactive, ref, onMounted, computed, watchEffect } from 'vue'
+import { reactive, ref, onMounted, computed } from 'vue'
 
 const data = reactive<{
   visibile: boolean
@@ -29,7 +29,7 @@ onMounted(() => {
   data.DrawerPositionLeft = (iconRef.value?.offsetLeft || 0) + baseOffset
 })
 
-const handleClick = (e: MouseEvent): void => {
+const handleClick = (e: any) => {
   e.stopPropagation()
   data.isAimStatus = false
   data.visibile = !data.visibile
@@ -44,10 +44,10 @@ const handleClick = (e: MouseEvent): void => {
     <Drawer
       v-show="data.visibile"
       @changeVisibile="
-      ({ isAimStatus, visibile }) => {
-        data.isAimStatus = isAimStatus
-        data.visibile = visibile
-      }
+        ({ isAimStatus, visibile }) => {
+          data.isAimStatus = isAimStatus
+          data.visibile = visibile
+        }
       "
       :is-aim-status="data.isAimStatus"
       :style="`bottom: ${data.DrawerPositionBottom}px; left: ${data.DrawerPositionLeft}px`"

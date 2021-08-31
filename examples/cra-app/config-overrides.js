@@ -1,5 +1,4 @@
 const { override, addWebpackPlugin } = require('customize-cra')
-const WebpackDevToolPLugin = require('../../packages/webpack-devtool-plugin').default
+const WebpackDevToolPLugin = require('@web-devtools/webpack').default
 
-
-module.exports = override(addWebpackPlugin(new WebpackDevToolPLugin({injectFile:false})))
+module.exports = override(addWebpackPlugin(new WebpackDevToolPLugin()))

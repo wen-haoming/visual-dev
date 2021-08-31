@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // import { SERVER_PORT } from '@web-devtools/core'
-import AimIcon from '../IconCompents/Aim.vue';
+import AimIcon from '../IconCompents/Aim.vue'
 import { watchEffect } from 'vue'
 
 const props = defineProps({
@@ -14,12 +14,10 @@ const emit = defineEmits<{
   (e: 'changeVisibile', flag: { visibile: boolean; isAimStatus: boolean }): void
 }>()
 
-
 let previosDom: HTMLElement | null = null
 
-const handleAimClick = (e: HTMLElementEventMap['click']) => {
+const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation()
-  e.preventDefault()
   // 关闭弹窗，同时打开 瞄准模式
   emit('changeVisibile', { visibile: false, isAimStatus: true })
   document.body.addEventListener<'mousemove'>(
@@ -43,12 +41,12 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   const targetDom = e.target as HTMLElement | null
   emit('changeVisibile', { visibile: false, isAimStatus: false })
   const filePath = targetDom?.getAttribute('__p')
-  await fetch(`http://localhost:10063/launchEditor`,{
-    method:'post',
-    headers:{
-      "Content-Type":"application/json"
+  await fetch(`http://localhost:10063/launchEditor`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
     },
-    body:JSON.stringify({filePath})
+    body: JSON.stringify({ filePath })
   })
   previosDom?.classList.remove('__layer-dev-tool')
 }
@@ -81,12 +79,16 @@ watchEffect(() => {
     <div class="header">Dev-plugin</div>
     <div class="content"></div>
     <div class="footer">
-      <AimIcon class="aim-icon" title="组件定位" @click="handleAimClick"></AimIcon>
+      <AimIcon
+        class="aim-icon"
+        title="组件定位"
+        v-on:click="handleAimClick"
+      ></AimIcon>
     </div>
   </div>
 </template>
 
-<style  scoped>
+<style scoped>
 .drawer {
   position: fixed;
   display: flex;
@@ -105,6 +107,7 @@ watchEffect(() => {
 .footer {
   height: 30px;
   padding: 2px 10px;
+  color: #fff;
   line-height: 30px;
   background-color: #30303d;
 }

@@ -11,14 +11,17 @@
   ],
   "scripts": {
     "dev:client": "cd packages && cd dev-ui && yarn dev",
-    "dev:node": "cd packages && cd core && yarn dev",
+    "dev:core": "cd packages && cd core && yarn dev",
     "dev:webpack": "cd packages && cd webpack-devtool-plugin && yarn dev",
-    "dev": "run-p dev:node dev:webpack dev:client",
+    "build:ui": "cd packages/dev-ui && yarn build",
+    "build:core": "cd packages/core  && yarn build",
+    "build:webpack": "cd packages/webpack-devtool-plugin && yarn build && cd .. && cd .. &&  node ./scripts/moveFiles.js",
+    "dev": "run-p dev:*",
+    "build": "run-s build:*",
     "start": "cd examples && cd cra-app && yarn start",
     "clean": "lerna clean",
     "format": "prettier --write ./packages && npm run lint",
-    "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color",
-    "build": "cd packages && cd core && yarn build && cd .. && cd webpack-devtool-plugin && yarn build"
+    "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color"
   },
   "repository": {
     "type": "git",
@@ -43,8 +46,8 @@
   },
   "homepage": "https://github.com/wen-haoming/web-devtools#readme",
   "devDependencies": {
-    "@typescript-eslint/parser": "^4.28.5",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.28.5",
     "@umijs/fabric": "2.6.2",
     "chokidar": "^3.5.1",
     "cross-env": "^7.0.3",
@@ -53,7 +56,8 @@
     "npm-run-all": "^4.1.5",
     "prettier": "2.3.2",
     "typescript": "^4.4.2",
-    "yorkie": "^2.0.0"
+    "yorkie": "^2.0.0",
+    "fs-extra": "^10.0.0"
   },
   "dependencies": {
     "eslint-define-config": "^1.0.9",
