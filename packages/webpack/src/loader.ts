@@ -7,7 +7,10 @@ import {
 import type { loader, Compiler } from 'webpack'
 import * as path from 'path'
 
-const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
+export const devtoolLoader: loader.Loader = function webpackLoader(
+  this,
+  source
+) {
   const { rootContext: rootPath, resourcePath: filePath } = this
 
   if (filePath.match(/node_modules/g)) return source.toString()

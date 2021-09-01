@@ -1,5 +1,4 @@
 import { defineConfig } from 'umi';
-import WebpackDevtoolPlugin from '../../packages/webpack-devtool-plugin';
 
 export default defineConfig({
   nodeModulesTransform: {
@@ -7,7 +6,7 @@ export default defineConfig({
   },
   routes: [{ path: '/', component: '@/pages/index' }],
   fastRefresh: {},
-  mfsu: {},
+  plugins:[require.resolve('../../packages/umi/dist'),]
   // chainWebpack(memo) {
   //   memo.plugin('web-devtools').use(WebpackDevtoolPlugin);
   // },

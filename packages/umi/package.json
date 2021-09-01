@@ -1,0 +1,27 @@
+{
+  "name": "@web-devtools/umi",
+  "version": "0.0.2",
+  "description": "",
+  "main": "./dist/index.jss",
+  "files": [
+    "dev-ui",
+    "dist",
+    "LICENSE",
+    "package.json"
+  ],
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "umi": "3.x"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "typescript": "^4.4.2",
+    "@web-devtools/core": "0.0.3",
+    "@web-devtools/webpack": "0.0.3"
+  },
+  "license": "ISC"
+}

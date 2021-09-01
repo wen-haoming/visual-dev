@@ -11,6 +11,8 @@ const defaultOptions = {
   injectFile: true
 }
 
+export { devtoolLoader } from './loader'
+
 export const WebpackDevtoolPlugin: Plugin = class {
   public options: Options
 

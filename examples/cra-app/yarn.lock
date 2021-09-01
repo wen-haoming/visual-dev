@@ -1976,10 +1976,10 @@
     "@typescript-eslint/types" "4.15.2"
     eslint-visitor-keys "^2.0.0"
 
-"@web-devtools/webpack@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@web-devtools/webpack/-/webpack-0.0.1.tgz#57134f1b64668135c11506d2e0180649133f12aa"
-  integrity sha512-vS3NE3wkJN7ylfLRVyyU5kslnbmE//1Ts8fQIpYawGePtzc+sRuzxiR/CdIBK0ODTGRxHcc313bZzfiRsx7qcw==
+"@web-devtools/webpack@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@web-devtools/webpack/-/webpack-0.0.3.tgz#b2720d57ca98276b765cfa1426892f5d41a4de18"
+  integrity sha512-2DfwqW76oOnV7+Us5f7wNvvYxgt6X6pIcjM2dgFenjM+Dy5JbEEdCHVXIsh8JXEnPMDfUtCRBu1XyUO7XSdXtA==
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"

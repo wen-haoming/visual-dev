@@ -1537,6 +1537,17 @@
   resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.2.6.tgz?cache=0&sync_timestamp=1629824858387&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.2.6.tgz#2c22bae88fe2b7b59fa68a9c9c4cd60bae2c1794"
   integrity sha1-LCK66I/it7WfpoqcnEzWC64sF5Q=
 
+"@web-devtools/core@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@web-devtools/core/-/core-0.0.1.tgz#3ff2c54aba1b6fc999b1d132e59ec7e725d86bae"
+  integrity sha512-OrvrXkJP1nvnuKFa//dveVbSyWo92BajjFnEMfyn3us7GfZh+2xFDaGdjZHr/od4TSjZ5D7KcH2zrMe3l8CbIA==
+  dependencies:
+    "@types/cors" "^2.8.12"
+    "@umijs/launch-editor" "^1.0.1"
+    body-parser "^1.19.0"
+    cors "^2.8.5"
+    express "^4.17.1"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.nlark.com/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
