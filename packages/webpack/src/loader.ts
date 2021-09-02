@@ -1,19 +1,11 @@
-import { parse } from '@babel/parser'
-import { transformFromAst } from '@babel/core'
-import {
-  insertParametersPlugin,
-  insertJSXElementPathPlugin
-} from '@web-devtools/core'
-import type { loader, Compiler } from 'webpack'
-import * as path from 'path'
+import { parse } from '@babel/parser';
+import { transformFromAst } from '@babel/core';
+import { insertParametersPlugin, insertJSXElementPathPlugin } from '@web-devtools/core';
+import type { loader, Compiler } from 'webpack';
+import * as path from 'path';
 
-export const devtoolLoader: loader.Loader = function webpackLoader(
-  this,
-  source
-) {
-  const { rootContext: rootPath, resourcePath: filePath } = this
-
-  if (filePath.match(/node_modules/g)) return source.toString()
+export const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
+  const { rootContext: rootPath, resourcePath: filePath } = this;
 
   const ast = parse(source.toString(), {
     sourceType: 'unambiguous',
@@ -21,19 +13,19 @@ export const devtoolLoader: loader.Loader = function webpackLoader(
     allowImportExportEverywhere: true,
     plugins: [
       'typescript',
-      'jsx'
+      'jsx',
       // ...(options?.babelPlugins ?? [])
-    ]
+    ],
     // ...options?.babelOptions
-  })
+  });
   // console.log(filePath)
   const { code } = transformFromAst(ast as any, source.toString(), {
     plugins: [insertParametersPlugin, insertJSXElementPathPlugin],
     filename: filePath,
-    filenameRelative: rootPath
-  })
-  return code
-}
+    filenameRelative: rootPath,
+  });
+  return code;
+};
 
 export const mergeLoaderOption = (compiler: Compiler) => {
   compiler.options.module?.rules.push(
@@ -41,11 +33,11 @@ export const mergeLoaderOption = (compiler: Compiler) => {
       {
         test: /\.(j|t)sx?$/,
         use: {
-          loader: path.resolve(__dirname, './loader.js')
-        }
-      }
-    ]
-  )
-}
+          loader: path.resolve(__dirname, './loader.js'),
+        },
+      },
+    ],
+  );
+};
 
-export default devtoolLoader
+export default devtoolLoader;
