@@ -1,7 +1,7 @@
+import type { loader } from 'webpack';
 import { parse } from '@babel/parser';
 import { transformFromAst } from '@babel/core';
 import { insertParametersPlugin, insertJSXElementPathPlugin } from '@web-devtools/core';
-import type { loader } from 'webpack';
 
 export const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this;
@@ -10,14 +10,8 @@ export const devtoolLoader: loader.Loader = function webpackLoader(this, source)
     sourceType: 'unambiguous',
     allowUndeclaredExports: true,
     allowImportExportEverywhere: true,
-    plugins: [
-      'typescript',
-      'jsx',
-      // ...(options?.babelPlugins ?? [])
-    ],
-    // ...options?.babelOptions
+    plugins: ['typescript', 'jsx'],
   });
-  // console.log(filePath)
   const { code } = transformFromAst(ast as any, source.toString(), {
     plugins: [insertParametersPlugin, insertJSXElementPathPlugin],
     filename: filePath,

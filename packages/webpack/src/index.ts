@@ -1,6 +1,6 @@
 import type { Compiler, Plugin } from 'webpack';
 import path from 'path';
-import writeAndCopy from './writeAndCopy';
+import injectFile from './injectFile';
 import { createServer } from '@web-devtools/core';
 
 export interface Options {
@@ -28,7 +28,7 @@ export const WebpackDevtoolPlugin: Plugin = class {
     });
 
     if (this.options.injectFile) {
-      compiler.hooks.emit.tap('writeFileAndCopyFile', writeAndCopy);
+      compiler.hooks.emit.tap('injectFile', injectFile);
     }
     compiler.hooks.environment.tap('createServer', () => {
       createServer();

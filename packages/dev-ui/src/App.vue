@@ -1,42 +1,41 @@
 <script lang="ts" setup>
-import SvgIcon from './IconCompents/SvgIcon.vue'
-import CloseIcon from './IconCompents/Close.vue'
-import Drawer from './components/Drawer.vue'
-import { reactive, ref, onMounted, computed } from 'vue'
+import SvgIcon from './IconCompents/SvgIcon.vue';
+import CloseIcon from './IconCompents/Close.vue';
+import Drawer from './components/Drawer.vue';
+import { reactive, ref, onMounted, computed } from 'vue';
 
 const data = reactive<{
-  visibile: boolean
-  isAimStatus: boolean
-  DrawerPositionBottom: number | undefined
-  DrawerPositionLeft: number | undefined
+  visibile: boolean;
+  isAimStatus: boolean;
+  DrawerPositionBottom: number | undefined;
+  DrawerPositionLeft: number | undefined;
 }>({
   visibile: false,
   isAimStatus: false,
   DrawerPositionBottom: 0,
-  DrawerPositionLeft: 0
-})
+  DrawerPositionLeft: 0,
+});
 
-const iconRef = ref<HTMLDivElement>()
+const iconRef = ref<HTMLDivElement>();
 
 const closeStatus = computed(() => {
-  return data.visibile || data.isAimStatus
-})
+  return data.visibile || data.isAimStatus;
+});
 
 onMounted(() => {
-  const baseOffset = 20
-  data.DrawerPositionBottom =
-    window.innerHeight - (iconRef.value?.offsetTop || 0) + baseOffset
-  data.DrawerPositionLeft = (iconRef.value?.offsetLeft || 0) + baseOffset
-})
+  const baseOffset = 20;
+  data.DrawerPositionBottom = window.innerHeight - (iconRef.value?.offsetTop || 0) + baseOffset;
+  data.DrawerPositionLeft = (iconRef.value?.offsetLeft || 0) + baseOffset;
+});
 
 const handleClick = (e: any) => {
-  e.stopPropagation()
-  data.isAimStatus = false
-  data.visibile = !data.visibile
-}
+  e.stopPropagation();
+  data.isAimStatus = false;
+  data.visibile = !data.visibile;
+};
 </script>
 <template>
-  <div class="icon" ref="iconRef" @click="handleClick">
+  <div id="dev-tools-icon" ref="iconRef" @click="handleClick">
     <SvgIcon v-if="!closeStatus" class="svg" />
     <CloseIcon v-else class="svg" />
   </div>
@@ -45,18 +44,17 @@ const handleClick = (e: any) => {
       v-show="data.visibile"
       @changeVisibile="
         ({ isAimStatus, visibile }) => {
-          data.isAimStatus = isAimStatus
-          data.visibile = visibile
+          data.isAimStatus = isAimStatus;
+          data.visibile = visibile;
         }
       "
       :is-aim-status="data.isAimStatus"
-      :style="`bottom: ${data.DrawerPositionBottom}px; left: ${data.DrawerPositionLeft}px`"
     />
   </transition>
 </template>
 
 <style lang="less" scoped>
-.icon {
+#dev-tools-icon {
   position: fixed;
   bottom: 30px;
   left: 0;
@@ -80,7 +78,9 @@ const handleClick = (e: any) => {
 }
 .slide-enter-from,
 .slide-leave-to {
-  transform: translateY(20px);
-  opacity: 0;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  transform: translate3d(0, -100%, 0) !important;
+  opacity: 0 !important;
 }
 </style>

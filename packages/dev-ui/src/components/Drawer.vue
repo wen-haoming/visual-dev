@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-// import { SERVER_PORT } from '@web-devtools/core'
 import AimIcon from '../IconCompents/Aim.vue';
-import { watchEffect } from 'vue';
+import { watchEffect, reactive } from 'vue';
 
 const props = defineProps({
   isAimStatus: {
@@ -9,15 +8,33 @@ const props = defineProps({
     type: Boolean,
   },
 });
+const emit = defineEmits({
+  changeVisibile: (flag: { visibile: boolean; isAimStatus: boolean }) => true,
+});
 
-const emit = defineEmits<{
-  (e: 'changeVisibile', flag: { visibile: boolean; isAimStatus: boolean }): void;
-}>();
+//@ts-nocheck
+
+type HandleType = 'inspect_file' | 'inject_comp' | '';
+
+const data = reactive<{
+  type: HandleType;
+}>({
+  type: '',
+});
 
 let previosDom: HTMLElement | null = null;
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation();
+  data.type = 'inspect_file';
+  // 关闭弹窗，同时打开 瞄准模式
+  emit('changeVisibile', { visibile: false, isAimStatus: true });
+  document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
+};
+
+const handleInjectFileClick = (e: any) => {
+  e.stopPropagation();
+  data.type = 'inject_comp';
   // 关闭弹窗，同时打开 瞄准模式
   emit('changeVisibile', { visibile: false, isAimStatus: true });
   document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
@@ -27,7 +44,6 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
   const targetDom = e.target as HTMLElement | null;
   if (targetDom && targetDom !== previosDom) {
     previosDom?.classList.remove('__layer-dev-tool');
-
     targetDom.classList.add('__layer-dev-tool');
     previosDom = targetDom;
   }
@@ -38,13 +54,25 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   emit('changeVisibile', { visibile: false, isAimStatus: false });
 
   const filePath = targetDom?.getAttribute('__p');
-  await fetch(`http://localhost:10078/web-devtools/launchEditor`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ filePath }),
-  });
+
+  if (data.type === 'inspect_file') {
+    await fetch(`http://localhost:10078/web-devtools/launchEditor`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ filePath }),
+    });
+  } else {
+    await fetch(`http://localhost:10078/web-devtools/injectFile`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ filePath, type: 'button' }),
+    });
+  }
+
   previosDom?.classList.remove('__layer-dev-tool');
 };
 
@@ -60,27 +88,30 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div id="drawer">
+  <div id="dev-tools-drawer">
     <div class="header">Dev-plugin</div>
-    <div class="content"></div>
+    <div class="content">
+      <button @click="handleInjectFileClick">注入一个button</button>
+    </div>
     <div class="footer">
-      <AimIcon class="aim-icon" title="组件定位" v-on:click="handleAimClick"></AimIcon>
+      <AimIcon class="aim-icon" title="组件定位" @click="handleAimClick"></AimIcon>
     </div>
   </div>
 </template>
 
 <style scoped>
-#drawer {
+#dev-tools-drawer {
   position: fixed;
   display: flex;
   flex-direction: column;
-  min-width: 300px;
-  min-height: 200px;
+  min-width: 500px;
+  min-height: 300px;
   color: rgba (255, 255, 255, 0.65);
   font-size: 14px;
   background-color: #23232e;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 20px 25px -5px, rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
+  transform: translate3d(calc(50vw - 50%), calc(-60vh - 50%), 0);
   will-change: transform;
 }
 .header,
