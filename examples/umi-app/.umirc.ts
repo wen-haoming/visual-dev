@@ -6,7 +6,8 @@ export default defineConfig({
   },
   routes: [{ path: '/', component: '@/pages/index' }],
   fastRefresh: {},
-  plugins:[require.resolve('../../packages/umi/dist'),]
+  plugins:[require.resolve('../../packages/umi/dist'),],
+  mfsu:{},
   // chainWebpack(memo) {
   //   memo.plugin('web-devtools').use(WebpackDevtoolPlugin);
   // },

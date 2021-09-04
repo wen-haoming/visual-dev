@@ -1,8 +1,7 @@
 import { parse } from '@babel/parser';
 import { transformFromAst } from '@babel/core';
 import { insertParametersPlugin, insertJSXElementPathPlugin } from '@web-devtools/core';
-import type { loader, Compiler } from 'webpack';
-import * as path from 'path';
+import type { loader } from 'webpack';
 
 export const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
   const { rootContext: rootPath, resourcePath: filePath } = this;
@@ -25,19 +24,6 @@ export const devtoolLoader: loader.Loader = function webpackLoader(this, source)
     filenameRelative: rootPath,
   });
   return code;
-};
-
-export const mergeLoaderOption = (compiler: Compiler) => {
-  compiler.options.module?.rules.push(
-    ...[
-      {
-        test: /\.(j|t)sx?$/,
-        use: {
-          loader: path.resolve(__dirname, './loader.js'),
-        },
-      },
-    ],
-  );
 };
 
 export default devtoolLoader;
