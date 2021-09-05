@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import AimIcon from '../IconCompents/Aim.vue';
+import AimIcon from '../../IconCompents/Aim.vue';
+import ReactAntContent from '../ReactAntContent/index.vue';
+import AntIcon from '../../IconCompents/Ant.vue';
+
 import { watchEffect, reactive } from 'vue';
 
 const props = defineProps({
@@ -18,8 +21,10 @@ type HandleType = 'inspect_file' | 'inject_comp' | '';
 
 const data = reactive<{
   type: HandleType;
+  block: 'ant';
 }>({
   type: '',
+  block: 'ant',
 });
 
 let previosDom: HTMLElement | null = null;
@@ -50,30 +55,32 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
 };
 
 const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
-  const targetDom = e.target as HTMLElement | null;
-  emit('changeVisibile', { visibile: false, isAimStatus: false });
+  try {
+    const targetDom = e.target as HTMLElement | null;
+    emit('changeVisibile', { visibile: false, isAimStatus: false });
 
-  const filePath = targetDom?.getAttribute('__p');
+    const filePath = targetDom?.getAttribute('__p');
 
-  if (data.type === 'inspect_file') {
-    await fetch(`http://localhost:10078/web-devtools/launchEditor`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ filePath }),
-    });
-  } else {
-    await fetch(`http://localhost:10078/web-devtools/injectFile`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ filePath, type: 'button' }),
-    });
+    if (data.type === 'inspect_file') {
+      await fetch(`http://localhost:10078/web-devtools/launchEditor`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filePath }),
+      });
+    } else {
+      await fetch(`http://localhost:10078/web-devtools/injectFile`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filePath, type: 'button' }),
+      });
+    }
+  } finally {
+    previosDom?.classList.remove('__layer-dev-tool');
   }
-
-  previosDom?.classList.remove('__layer-dev-tool');
 };
 
 watchEffect(() => {
@@ -91,7 +98,14 @@ watchEffect(() => {
   <div id="dev-tools-drawer">
     <div class="header">Dev-plugin</div>
     <div class="content">
-      <button @click="handleInjectFileClick">注入一个button</button>
+      <ul class="slides">
+        <li :class="`slide-menu ${data.block === 'ant' && 'active'}`" @click="data.block = 'ant'">
+          <AntIcon />
+        </li>
+      </ul>
+      <div class="inner-content">
+        <ReactAntContent />
+      </div>
     </div>
     <div class="footer">
       <AimIcon class="aim-icon" title="组件定位" @click="handleAimClick"></AimIcon>
@@ -102,22 +116,23 @@ watchEffect(() => {
 <style scoped>
 #dev-tools-drawer {
   position: fixed;
+  top: 150px;
+  left: calc(50% - 250px);
   display: flex;
   flex-direction: column;
-  min-width: 500px;
-  min-height: 300px;
+  width: 600px;
+  height: 300px;
   color: rgba (255, 255, 255, 0.65);
   font-size: 14px;
   background-color: #23232e;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 20px 25px -5px, rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
-  transform: translate3d(calc(50vw - 50%), calc(-60vh - 50%), 0);
   will-change: transform;
 }
 .header,
 .footer {
   height: 30px;
-  padding: 2px 10px;
+  padding: 5px 10px;
   color: #fff;
   line-height: 30px;
   background-color: #30303d;
@@ -138,7 +153,34 @@ watchEffect(() => {
   border-top-right-radius: 5px;
 }
 .content {
+  display: flex;
   flex: 1;
-  padding: 10px;
+}
+.slides {
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  list-style: none;
+  border-right: 1px solid #30303d;
+}
+.slide-menu {
+  height: 40px;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.slide-menu:hover,
+.active {
+  background-color: #30303d;
+}
+.inner-content {
+  flex: 1;
+  height: 300px;
+  overflow-y: auto;
 }
 </style>

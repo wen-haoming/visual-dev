@@ -43,7 +43,7 @@ export const createServer = () => {
             column: 0,
           };
           if (line === currentLine && currentColumn === column) {
-            const parentNode = path.parent;
+            const parentNode: any = path.parent;
             if (parentNode && parentNode.children) {
               const newNode = template(`<h1>1111</h1>`, {
                 sourceType: 'module',

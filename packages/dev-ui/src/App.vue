@@ -1,31 +1,21 @@
 <script lang="ts" setup>
 import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
-import Drawer from './components/Drawer.vue';
+import Drawer from './components/Drawer/index.vue';
 import { reactive, ref, onMounted, computed } from 'vue';
 
 const data = reactive<{
   visibile: boolean;
   isAimStatus: boolean;
-  DrawerPositionBottom: number | undefined;
-  DrawerPositionLeft: number | undefined;
 }>({
   visibile: false,
   isAimStatus: false,
-  DrawerPositionBottom: 0,
-  DrawerPositionLeft: 0,
 });
 
 const iconRef = ref<HTMLDivElement>();
 
 const closeStatus = computed(() => {
   return data.visibile || data.isAimStatus;
-});
-
-onMounted(() => {
-  const baseOffset = 20;
-  data.DrawerPositionBottom = window.innerHeight - (iconRef.value?.offsetTop || 0) + baseOffset;
-  data.DrawerPositionLeft = (iconRef.value?.offsetLeft || 0) + baseOffset;
 });
 
 const handleClick = (e: any) => {
@@ -78,9 +68,10 @@ const handleClick = (e: any) => {
 }
 .slide-enter-from,
 .slide-leave-to {
+  top: 100% !important;
+  left: 0% !important;
   min-width: 0 !important;
   min-height: 0 !important;
-  transform: translate3d(0, -100%, 0) !important;
   opacity: 0 !important;
 }
 </style>
