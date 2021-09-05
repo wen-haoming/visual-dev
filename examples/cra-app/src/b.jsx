@@ -1,5 +1,9 @@
+import React from 'react';
+
 const B = () => {
-  return <h1><h1>1111</h1>;<h1>1111</h1>;123111123</h1>;
+  return <div>
+    <div>123</div>
+  </div>;
 };
 
 export default B;

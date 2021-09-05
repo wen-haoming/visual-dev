@@ -5,9 +5,21 @@ import launchEditor from '@umijs/launch-editor';
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import template from '@babel/template';
+import * as t from '@babel/types';
 import { SERVER_PORT } from './index';
 import generate from '@babel/generator';
 import { parsePath } from './utils';
+import { findLastIndex } from 'lodash';
+
+function addImport(node: any, id: string) {
+  const { body } = node;
+  const lastImportSit = findLastIndex(body, (item: any) => t.isImportDeclaration(item));
+  const newImport = t.importDeclaration(
+    [t.importSpecifier(t.identifier(id), t.identifier(id))],
+    t.stringLiteral('antd'),
+  );
+  body.splice(lastImportSit + 1, 0, newImport);
+}
 
 export const createServer = () => {
   const app = express();
@@ -23,6 +35,9 @@ export const createServer = () => {
 
   app.post('/web-devtools/injectFile', (req, res) => {
     const { filePath, column, line } = parsePath(req.body.filePath);
+    let { component } = req.body as { component: string; componentType?: string };
+    component = component.replace(/^./, ($1) => $1.toUpperCase());
+
     const absPath = process.cwd() + filePath;
     if (!fs.existsSync(absPath)) return;
 
@@ -36,6 +51,9 @@ export const createServer = () => {
     });
 
     traverse(ast as any, {
+      Program(path) {
+        addImport(path.node, component);
+      },
       JSXOpeningElement: {
         enter(path) {
           const { line: currentLine, column: currentColumn } = path.node.loc?.start || {
@@ -45,12 +63,11 @@ export const createServer = () => {
           if (line === currentLine && currentColumn === column) {
             const parentNode: any = path.parent;
             if (parentNode && parentNode.children) {
-              const newNode = template(`<h1>1111</h1>`, {
+              const newNode = template(`<${component}>1111</${component}>`, {
                 sourceType: 'module',
                 allowImportExportEverywhere: true,
                 plugins: ['typescript', 'jsx'],
               })();
-
               parentNode.children.unshift(newNode);
             }
           }

@@ -68,7 +68,6 @@ const handleClick = (e: any) => {
 }
 .slide-enter-from,
 .slide-leave-to {
-  top: 100% !important;
   left: 0% !important;
   min-width: 0 !important;
   min-height: 0 !important;

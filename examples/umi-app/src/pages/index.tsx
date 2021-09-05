@@ -2,16 +2,21 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import './index.less';
 import TableColspanRowspan from './TableColspanRowspan';
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
-export default () => {
+import { Button } from "antd";
+
+const {
+  SubMenu
+} = Menu;
+const {
+  Header,
+  Content,
+  Sider
+} = Layout;
+export default (() => {
   console.log('-123123--');
-  return (
-    <Layout
-      style={{
-        height: '100%',
-      }}
-    >
+  return <Layout style={{
+    height: '100%'
+  }}>
       <TableColspanRowspan />
       <Header className="header">
         <div className="logo" />
@@ -23,15 +28,10 @@ export default () => {
       </Header>
       <Layout>
         <Sider width={200} className="site-layout-background">
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{
-              height: '100%',
-              borderRight: 0,
-            }}
-          >
+          <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{
+          height: '100%',
+          borderRight: 0
+        }}>
             <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
               <Menu.Item key="1">option1</Menu.Item>
               <Menu.Item key="2">option2</Menu.Item>
@@ -52,32 +52,24 @@ export default () => {
             </SubMenu>
           </Menu>
         </Sider>
-        <Layout
-          style={{
-            padding: '0 24px 24px',
-          }}
-        >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
+        <Layout style={{
+        padding: '0 24px 24px'
+      }}>
+          <Breadcrumb style={{
+          margin: '16px 0'
+        }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
+          <Content className="site-layout-background" style={{
+          padding: 24,
+          margin: 0,
+          minHeight: 280
+        }}><Button>1111</Button>;
             Content
           </Content>
         </Layout>
       </Layout>
-    </Layout>
-  );
-};
+    </Layout>;
+});

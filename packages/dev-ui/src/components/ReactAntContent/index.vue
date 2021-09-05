@@ -1,10 +1,25 @@
 <script lang="ts" setup>
 import dataJson from './data.json';
-console.log(dataJson);
+
+const emit = defineEmits({
+  handleInjectFileClick: (componentName: string) => {},
+});
 </script>
 <template>
   <div class="ant-wrapper">
-    <div class="item" v-for="item in dataJson" :key="item.name">{{ item.name }}</div>
+    <div
+      class="item"
+      @click="
+        (e) => {
+          e.stopPropagation();
+          emit('handleInjectFileClick', item.name);
+        }
+      "
+      v-for="item in dataJson"
+      :key="item.name"
+    >
+      {{ item.name }}
+    </div>
   </div>
 </template>
 

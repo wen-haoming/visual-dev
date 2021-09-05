@@ -22,9 +22,11 @@ type HandleType = 'inspect_file' | 'inject_comp' | '';
 const data = reactive<{
   type: HandleType;
   block: 'ant';
+  component?: string;
 }>({
   type: '',
   block: 'ant',
+  component: '',
 });
 
 let previosDom: HTMLElement | null = null;
@@ -37,15 +39,17 @@ const handleAimClick = (e: SVGElementEventMap['click']) => {
   document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
 };
 
-const handleInjectFileClick = (e: any) => {
-  e.stopPropagation();
+const handleInjectFileClick = (componentName: string) => {
   data.type = 'inject_comp';
+  data.component = componentName;
   // 关闭弹窗，同时打开 瞄准模式
   emit('changeVisibile', { visibile: false, isAimStatus: true });
   document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
 };
 
+// document mouse 事件添加遮罩层样式
 const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
+  e.stopPropagation();
   const targetDom = e.target as HTMLElement | null;
   if (targetDom && targetDom !== previosDom) {
     previosDom?.classList.remove('__layer-dev-tool');
@@ -55,6 +59,7 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
 };
 
 const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
+  e.stopPropagation();
   try {
     const targetDom = e.target as HTMLElement | null;
     emit('changeVisibile', { visibile: false, isAimStatus: false });
@@ -75,11 +80,18 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ filePath, type: 'button' }),
+        body: JSON.stringify({
+          filePath,
+          type: 'button',
+          component: data.component,
+          componentType: 'ant',
+        }),
       });
     }
   } finally {
     previosDom?.classList.remove('__layer-dev-tool');
+    data.component = '';
+    data.type = '';
   }
 };
 
@@ -104,7 +116,7 @@ watchEffect(() => {
         </li>
       </ul>
       <div class="inner-content">
-        <ReactAntContent />
+        <ReactAntContent @handleInjectFileClick="handleInjectFileClick" />
       </div>
     </div>
     <div class="footer">
@@ -116,11 +128,11 @@ watchEffect(() => {
 <style scoped>
 #dev-tools-drawer {
   position: fixed;
-  top: 150px;
-  left: calc(50% - 250px);
+  bottom: 150px;
+  left: 20px;
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 500px;
   height: 300px;
   color: rgba (255, 255, 255, 0.65);
   font-size: 14px;
@@ -136,6 +148,7 @@ watchEffect(() => {
   color: #fff;
   line-height: 30px;
   background-color: #30303d;
+  user-select: none;
 }
 .footer {
   text-align: right;
