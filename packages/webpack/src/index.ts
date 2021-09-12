@@ -21,7 +21,7 @@ export const WebpackDevtoolPlugin: Plugin = class {
   }
   apply(compiler: Compiler) {
     compiler.options.module?.rules.push({
-      test: /\.(j|t)sx?$/,
+      test: /\.(j|t)sx$/,
       use: {
         loader: path.resolve(__dirname, './loader.js'),
       },
