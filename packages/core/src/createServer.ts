@@ -3,23 +3,10 @@ import fs from 'fs-extra';
 import cors from 'cors';
 import launchEditor from '@umijs/launch-editor';
 import { parse } from '@babel/parser';
-import traverse from '@babel/traverse';
-import template from '@babel/template';
-import * as t from '@babel/types';
+import { transformFromAst } from '@babel/core';
 import { SERVER_PORT } from './index';
-import generate from '@babel/generator';
 import { parsePath } from './utils';
-import { findLastIndex } from 'lodash';
-
-function addImport(node: any, id: string) {
-  const { body } = node;
-  const lastImportSit = findLastIndex(body, (item: any) => t.isImportDeclaration(item));
-  const newImport = t.importDeclaration(
-    [t.importSpecifier(t.identifier(id), t.identifier(id))],
-    t.stringLiteral('antd'),
-  );
-  body.splice(lastImportSit + 1, 0, newImport);
-}
+import { injectCoponent } from './babel';
 
 export const createServer = () => {
   const app = express();
@@ -35,7 +22,9 @@ export const createServer = () => {
 
   app.post('/web-devtools/injectFile', (req, res) => {
     const { filePath, column, line } = parsePath(req.body.filePath);
+
     let { component } = req.body as { component: string; componentType?: string };
+
     component = component.replace(/^./, ($1) => $1.toUpperCase());
 
     const absPath = process.cwd() + filePath;
@@ -50,32 +39,17 @@ export const createServer = () => {
       plugins: ['typescript', 'jsx'],
     });
 
-    traverse(ast as any, {
-      Program(path) {
-        addImport(path.node, component);
-      },
-      JSXOpeningElement: {
-        enter(path) {
-          const { line: currentLine, column: currentColumn } = path.node.loc?.start || {
-            line: 0,
-            column: 0,
-          };
-          if (line === currentLine && currentColumn === column) {
-            const parentNode: any = path.parent;
-            if (parentNode && parentNode.children) {
-              const newNode = template(`<${component}>1111</${component}>`, {
-                sourceType: 'module',
-                allowImportExportEverywhere: true,
-                plugins: ['typescript', 'jsx'],
-              })();
-              parentNode.children.unshift(newNode);
-            }
-          }
-        },
-      },
+    const { code = '' } = transformFromAst(ast as any, file, {
+      plugins: [
+        injectCoponent({
+          componentIdentifier: component,
+          moduleStringLiteral: 'antd',
+          column,
+          line,
+        }),
+      ],
     });
 
-    const { code } = generate(ast as any);
     fs.writeFileSync(absPath, code);
 
     res.send('ok');
