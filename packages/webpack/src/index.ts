@@ -1,9 +1,10 @@
-import type { Compiler, Plugin } from 'webpack';
 import path from 'path';
 import injectFile from './injectFile';
 import { createServer } from '@web-devtools/core';
+import type { ServerOptions } from '@web-devtools/core';
+import type { Compiler, Plugin } from 'webpack';
 
-export interface Options {
+export interface Options extends ServerOptions {
   injectFile?: boolean;
 }
 
@@ -16,8 +17,8 @@ export { devtoolLoader } from './loader';
 export const WebpackDevtoolPlugin: Plugin = class {
   public options: Options;
 
-  constructor(options?: Options) {
-    this.options = options || defaultOptions;
+  constructor(options: Options) {
+    this.options = { ...defaultOptions, ...options };
   }
   apply(compiler: Compiler) {
     compiler.options.module?.rules.push({
@@ -31,7 +32,7 @@ export const WebpackDevtoolPlugin: Plugin = class {
       compiler.hooks.emit.tap('injectFile', injectFile);
     }
     compiler.hooks.environment.tap('createServer', () => {
-      createServer();
+      return createServer(this.options);
     });
   }
 };

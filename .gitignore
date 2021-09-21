@@ -7,3 +7,4 @@ explorations
 *.local
 .vscode/
 webpack-devtool-plugin/dev-ui
+packages/webpack/dev-ui

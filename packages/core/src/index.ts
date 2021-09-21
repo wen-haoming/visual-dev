@@ -1,5 +1,5 @@
 export * from './httpProxy';
-export * from './createServer';
+export * from './server';
 export * from './babel';
 
 export const ASSETS_DIR = 'assets';

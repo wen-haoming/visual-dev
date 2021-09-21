@@ -1,3 +1,4 @@
+export * from './resolvePath';
 export const parsePath = (
   path: string,
 ): { raw: string; filePath: string; column: number; line: number } => {

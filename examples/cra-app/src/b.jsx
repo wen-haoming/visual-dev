@@ -1,9 +1,9 @@
+import ant, { Button } from "antd";
 import React from 'react';
-import { Row, Col } from "antd";
 
 const B = () => {
   return <div>
-    <div><Row><Col>Col</Col>;Row</Row>;123;123</div>
+    <div><Button>Button</Button>;<Button>Button</Button>;;123;123</div>
   </div>;
 };
 

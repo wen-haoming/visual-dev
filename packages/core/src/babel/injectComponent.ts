@@ -1,5 +1,5 @@
-import type { Visitor } from '@babel/core';
 import * as t from '@babel/types';
+import type { Visitor } from '@babel/core';
 import template from '@babel/template';
 
 interface Props {
@@ -46,7 +46,8 @@ export const injectCoponent = (props: Props): (() => { visitor: Visitor }) => {
           const targetNode: any = body[targetIndex];
           // 检查是否有已经引用过的 组件进来
           const componentIdentifierIndex = targetNode.specifiers.findIndex(
-            (node: any) => t.isImportSpecifier(node) && node.imported.name === componentIdentifier,
+            (node: any) =>
+              t.isImportSpecifier(node) && (node.imported as any).name === componentIdentifier,
           );
 
           if (componentIdentifierIndex === -1) {

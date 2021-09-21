@@ -27,3 +27,5 @@ declare module '@babel/template' {
 
   export default template;
 }
+
+declare module 'slash2';

@@ -1,9 +1,7 @@
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Button, Avatar } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import './index.less';
 import TableColspanRowspan from './TableColspanRowspan';
-import { Button } from "antd";
-
 const {
   SubMenu
 } = Menu;
@@ -13,7 +11,6 @@ const {
   Sider
 } = Layout;
 export default (() => {
-  console.log('-123123--');
   return <Layout style={{
     height: '100%'
   }}>
@@ -57,7 +54,7 @@ export default (() => {
       }}>
           <Breadcrumb style={{
           margin: '16px 0'
-        }}>
+        }}><Button>Button</Button>;
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
@@ -66,7 +63,7 @@ export default (() => {
           padding: 24,
           margin: 0,
           minHeight: 280
-        }}><Button>1111</Button>;
+        }}><Button>Button</Button>;<Avatar>Avatar</Avatar>;<Button>Button</Button>;<Button>Button</Button>;<Button>Button</Button>;
             Content
           </Content>
         </Layout>
