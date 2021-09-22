@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import { defineComponent, onMounted } from 'vue';
 import AimIcon from '../../IconCompents/Aim.vue';
 import ReactAntContent from '../ReactAntContent/index.vue';
 import AntIcon from '../../IconCompents/Ant.vue';
-
 import { watchEffect, reactive } from 'vue';
+import { locationOrigin } from '../../utils';
 
 const props = defineProps({
   isAimStatus: {
@@ -15,9 +16,17 @@ const emit = defineEmits({
   changeVisibile: (flag: { visibile: boolean; isAimStatus: boolean }) => true,
 });
 
+type HandleType = 'inspect_file' | 'inject_comp' | '';
+
 //@ts-nocheck
 
-type HandleType = 'inspect_file' | 'inject_comp' | '';
+onMounted(() => {
+  fetch(`${locationOrigin}/web-devtools/getMenu`)
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res, '==');
+    });
+});
 
 const data = reactive<{
   type: HandleType;
@@ -67,7 +76,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     const filePath = targetDom?.getAttribute('__p');
 
     if (data.type === 'inspect_file') {
-      await fetch(`http://localhost:10078/web-devtools/launchEditor`, {
+      await fetch(`${locationOrigin}/web-devtools/launchEditor`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +84,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
         body: JSON.stringify({ filePath }),
       });
     } else {
-      await fetch(`http://localhost:10078/web-devtools/injectFile`, {
+      await fetch(`${locationOrigin}/web-devtools/injectFile`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -112,11 +121,11 @@ watchEffect(() => {
     <div class="content">
       <ul class="slides">
         <li :class="`slide-menu ${data.block === 'ant' && 'active'}`" @click="data.block = 'ant'">
-          <AntIcon />
+          <AntIcon></AntIcon>
         </li>
       </ul>
       <div class="inner-content">
-        <ReactAntContent @handleInjectFileClick="handleInjectFileClick" />
+        <ReactAntContent @handleInjectFileClick="handleInjectFileClick"></ReactAntContent>
       </div>
     </div>
     <div class="footer">

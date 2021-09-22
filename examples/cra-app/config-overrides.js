@@ -5,5 +5,6 @@ const WebpackDevToolPLugin = require('../../packages/webpack').default
 module.exports = override(addWebpackPlugin(new WebpackDevToolPLugin({
     resolve:{
         includes:['components']
-    }
+    },
+    injectFile:false
 })))

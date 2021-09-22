@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "dev:client": "cd packages && cd dev-ui && yarn dev",
+    "dev:client2": "cd packages && cd dev-ui && yarn build",
     "dev:core": "cd packages && cd core && yarn dev",
     "dev:umi": "cd packages && cd umi && yarn dev",
     "build:before": "node ./scripts/clear.js",

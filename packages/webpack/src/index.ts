@@ -32,7 +32,7 @@ export const WebpackDevtoolPlugin: Plugin = class {
       compiler.hooks.emit.tap('injectFile', injectFile);
     }
     compiler.hooks.environment.tap('createServer', () => {
-      return createServer(this.options);
+      createServer(this.options);
     });
   }
 };

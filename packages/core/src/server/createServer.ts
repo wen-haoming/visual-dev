@@ -2,8 +2,8 @@ import express, { json } from 'express';
 import cors from 'cors';
 import launchEditor from '@umijs/launch-editor';
 import { SERVER_PORT } from '../index';
-import { resolvePath } from '../utils';
 import injectFile from './MiddleWare/injectFile';
+import getMenu from './MiddleWare/getMenu';
 
 export interface ServerOptions {
   port?: number;
@@ -21,11 +21,11 @@ export const createServer = async (options: ServerOptions = {}) => {
   // @ts-ignore
   app.use(json());
 
-  const mdFile = resolvePath(resolve.includes, ['md']);
+  app.get('/web-devtools/getMenu', getMenu({ includes: resolve.includes }));
 
   app.post('/web-devtools/launchEditor', async (req, res) => {
     await launchEditor(process.cwd() + req.body.filePath);
-    res.send(JSON.stringify(mdFile));
+    res.send({});
   });
 
   app.post('/web-devtools/injectFile', injectFile);
