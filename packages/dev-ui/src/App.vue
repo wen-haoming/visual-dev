@@ -64,11 +64,11 @@ const handleClick = (e: any) => {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 .slide-enter-from,
 .slide-leave-to {
-  left: 0% !important;
+  top: 32% !important;
   min-width: 0 !important;
   min-height: 0 !important;
   opacity: 0 !important;

@@ -2,6 +2,7 @@
 import { defineComponent, onMounted } from 'vue';
 import AimIcon from '../../IconCompents/Aim.vue';
 import ReactAntContent from '../ReactAntContent/index.vue';
+import DocRender from '../DocRender/index.vue';
 import AntIcon from '../../IconCompents/Ant.vue';
 import { watchEffect, reactive } from 'vue';
 import { locationOrigin } from '../../utils';
@@ -20,22 +21,26 @@ type HandleType = 'inspect_file' | 'inject_comp' | '';
 
 //@ts-nocheck
 
-onMounted(() => {
-  fetch(`${locationOrigin}/web-devtools/getMenu`)
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res, '==');
-    });
-});
-
 const data = reactive<{
   type: HandleType;
   block: 'ant';
   component?: string;
+  docList: object;
+  docActiveKey: string;
 }>({
   type: '',
   block: 'ant',
   component: '',
+  docList: {},
+  docActiveKey: '',
+});
+
+onMounted(() => {
+  fetch(`${locationOrigin}/web-devtools/getMenu`)
+    .then(res => res.json())
+    .then(res => {
+      data.docList = res;
+    });
 });
 
 let previosDom: HTMLElement | null = null;
@@ -120,12 +125,18 @@ watchEffect(() => {
     <div class="header">Dev-plugin</div>
     <div class="content">
       <ul class="slides">
-        <li :class="`slide-menu ${data.block === 'ant' && 'active'}`" @click="data.block = 'ant'">
-          <AntIcon></AntIcon>
+        <li
+          v-for="(value, key, index) in data.docList"
+          :key="key"
+          :class="`slide-menu ${data.block === 'ant' && 'active'}`"
+          @click="data.docActiveKey = key"
+        >
+          {{ key }}
         </li>
       </ul>
       <div class="inner-content">
-        <ReactAntContent @handleInjectFileClick="handleInjectFileClick"></ReactAntContent>
+        <DocRender :docContent="data.docList[data.docActiveKey]" />
+        <!-- <ReactAntContent @handleInjectFileClick="handleInjectFileClick"></ReactAntContent> -->
       </div>
     </div>
     <div class="footer">
@@ -138,11 +149,13 @@ watchEffect(() => {
 #dev-tools-drawer {
   position: fixed;
   bottom: 150px;
-  left: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30%;
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 300px;
+  width: 700px;
+  min-height: 300px;
   color: rgba (255, 255, 255, 0.65);
   font-size: 14px;
   background-color: #23232e;
@@ -202,7 +215,6 @@ watchEffect(() => {
 }
 .inner-content {
   flex: 1;
-  height: 300px;
   overflow-y: auto;
 }
 </style>

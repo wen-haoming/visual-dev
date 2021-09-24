@@ -12,15 +12,17 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@types/markdown-it": "^12.2.1",
+    "markdown-it": "^12.2.0",
     "vue": "^3.2.6"
   },
   "license": "MIT",
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.6.0",
     "@vue/compiler-sfc": "^3.0.5",
+    "@web-devtools/core": "0.0.1",
     "typescript": "^4.3.2",
     "vite": "^2.5.1",
-    "@web-devtools/core": "0.0.1",
     "vue-tsc": "^0.2.2"
   }
 }
