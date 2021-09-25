@@ -1,11 +1,16 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   publicDir: 'web_devtools_assets',
+  css: {
+    preprocessorOptions: {
+      less: {},
+    },
+  },
   server: {
-    port: 1654
-  }
-})
+    port: 1654,
+  },
+});

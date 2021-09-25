@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
-import Drawer from './components/Drawer/index.vue';
+import Drawer from './Layout/index.vue';
 import { reactive, ref, onMounted, computed } from 'vue';
 
 const data = reactive<{
@@ -64,13 +64,11 @@ const handleClick = (e: any) => {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 .slide-enter-from,
 .slide-leave-to {
-  top: 32% !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
+  top: 35% !important;
   opacity: 0 !important;
 }
 </style>

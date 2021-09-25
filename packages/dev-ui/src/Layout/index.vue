@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import AimIcon from '../../IconCompents/Aim.vue';
-import DocRender from '../DocRender/index.vue';
 import { watchEffect, reactive } from 'vue';
-import { locationOrigin } from '../../utils';
+import { locationOrigin } from '../utils';
+import Menus from './components/Menus/index.vue';
+import Page from './components/Page/index.vue';
+import Slider from './components/Slider/index.vue';
 
 const props = defineProps({
   isAimStatus: {
@@ -11,6 +12,7 @@ const props = defineProps({
     type: Boolean,
   },
 });
+
 const emit = defineEmits({
   changeVisibile: (flag: { visibile: boolean; isAimStatus: boolean }) => true,
 });
@@ -112,24 +114,15 @@ watchEffect(() => {
 
 <template>
   <div id="dev-tools-drawer">
-    <div class="header">Dev-plugin</div>
-    <div class="content">
-      <ul class="slides">
-        <li
-          v-for="(value, key, index) in data.docList"
-          :key="index"
-          :class="`slide-menu ${data.block === 'ant' && 'active'}`"
-          @click="data.docActiveKey = key"
-        >
-          {{ key }}
-        </li>
-      </ul>
-      <div class="inner-content">
-        <DocRender :docContent="data.docList[data.docActiveKey]" />
-      </div>
+    <div class="header">
+      <div class="red"></div>
+      <div class="yellow"></div>
+      <div class="green"></div>
     </div>
-    <div class="footer">
-      <AimIcon class="aim-icon" title="组件定位" @click="handleAimClick"></AimIcon>
+    <div class="layout">
+      <Menus />
+      <Slider />
+      <Page />
     </div>
   </div>
 </template>
@@ -137,34 +130,52 @@ watchEffect(() => {
 <style scoped>
 #dev-tools-drawer {
   position: fixed;
-  top: 30%;
+  top: 20%;
   bottom: 150px;
   left: 50%;
   display: flex;
   transform: translateX(-50%);
   flex-direction: column;
-  width: 700px;
+  width: 800px;
   min-height: 300px;
   color: rgba (255, 255, 255, 0.65);
   font-size: 14px;
-  background-color: #23232e;
-  border-radius: 5px;
+  background-color: var(--c-bg);
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 20px 25px -5px, rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
-  will-change: transform;
+  will-change: top;
 }
-.header,
-.footer {
-  height: 30px;
-  padding: 5px 10px;
-  color: #fff;
-  line-height: 30px;
-  background-color: #30303d;
+.header {
+  display: flex;
+  align-items: center;
+  /* border-bottom: 1px solid rgba(0,0,0,.1); */
+  background-color: var(--c-bg);
   user-select: none;
+  padding: 0 2rem;
+  height: var(--top-header-height);
 }
-.footer {
-  text-align: right;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+.red {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: #ff716a;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.yellow {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: #fbc449;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.green {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: #48cd56;
+  border-radius: 50%;
 }
 .aim-icon {
   display: inline-block;
@@ -173,37 +184,9 @@ watchEffect(() => {
   cursor: pointer;
 }
 .header {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
-.content {
-  display: flex;
-  flex: 1;
-}
-.slides {
-  display: flex;
-  flex-direction: column;
-  width: 70px;
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  list-style: none;
-  border-right: 1px solid #30303d;
-}
-.slide-menu {
-  height: 40px;
-  font-size: 14px;
-  line-height: 40px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.slide-menu:hover,
-.active {
-  background-color: #30303d;
-}
-.inner-content {
-  flex: 1;
-  overflow-y: auto;
+.layout {
 }
 </style>

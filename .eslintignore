@@ -1,3 +1,4 @@
 dist
 examples
 webpack-devtool-plugin/dev-ui/
+packages/umi/dev-ui
