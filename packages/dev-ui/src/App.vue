@@ -68,7 +68,7 @@ const handleClick = (e: any) => {
 }
 .slide-enter-from,
 .slide-leave-to {
-  top: 35% !important;
+  top: 15% !important;
   opacity: 0 !important;
 }
 </style>

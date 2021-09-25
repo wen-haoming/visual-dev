@@ -3,7 +3,7 @@ import { onMounted } from 'vue';
 import AimIcon from '../../IconCompents/Aim.vue';
 import DocRender from '../DocRender/index.vue';
 import { watchEffect, reactive } from 'vue';
-import { locationOrigin } from '../../utils';
+import { prefix } from '../../utils';
 
 const props = defineProps({
   isAimStatus: {
@@ -34,7 +34,7 @@ const data = reactive<{
 });
 
 onMounted(() => {
-  fetch(`${locationOrigin}/web-devtools/getMenu`)
+  fetch(`${prefix}/web-devtools/getMenu`)
     .then(res => res.json())
     .then(res => {
       data.docList = res;
@@ -71,7 +71,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     const filePath = targetDom?.getAttribute('__p');
 
     if (data.type === 'inspect_file') {
-      await fetch(`${locationOrigin}/web-devtools/launchEditor`, {
+      await fetch(`${prefix}/web-devtools/launchEditor`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
         body: JSON.stringify({ filePath }),
       });
     } else {
-      await fetch(`${locationOrigin}/web-devtools/injectFile`, {
+      await fetch(`${prefix}/web-devtools/injectFile`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',

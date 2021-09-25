@@ -1,1 +1,3 @@
-export const locationOrigin = 'http://localhost:10078';
+export * from './api';
+
+export const prefix = 'http://localhost:10078';

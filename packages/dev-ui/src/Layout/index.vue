@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import { watchEffect, reactive } from 'vue';
-import { locationOrigin } from '../utils';
+import { watchEffect, reactive, provide } from 'vue';
+import { prefix } from '../utils';
 import Menus from './components/Menus/index.vue';
 import Page from './components/Page/index.vue';
 import Slider from './components/Slider/index.vue';
@@ -25,33 +25,29 @@ const data = reactive<{
   type: HandleType;
   block: 'ant';
   component?: string;
-  docList: any;
-  docActiveKey: any;
 }>({
   type: '',
   block: 'ant',
   component: '',
-  docList: {},
-  docActiveKey: '',
 });
 
-onMounted(() => {
-  fetch(`${locationOrigin}/web-devtools/getMenu`)
-    .then(res => res.json())
-    .then(res => {
-      data.docList = res;
-    });
-});
+provide(
+  'usePages',
+  reactive({
+    docList: {},
+    sliderKeys: '',
+  }),
+);
 
 let previosDom: HTMLElement | null = null;
 
-const handleAimClick = (e: SVGElementEventMap['click']) => {
-  e.stopPropagation();
-  data.type = 'inspect_file';
-  // 关闭弹窗，同时打开 瞄准模式
-  emit('changeVisibile', { visibile: false, isAimStatus: true });
-  document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
-};
+// const handleAimClick = (e: SVGElementEventMap['click']) => {
+//     e.stopPropagation();
+//     data.type = 'inspect_file';
+//     // 关闭弹窗，同时打开 瞄准模式
+//     emit('changeVisibile', { visibile: false, isAimStatus: true });
+//     document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
+// };
 
 // document mouse 事件添加遮罩层样式
 const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
@@ -73,7 +69,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     const filePath = targetDom?.getAttribute('__p');
 
     if (data.type === 'inspect_file') {
-      await fetch(`${locationOrigin}/web-devtools/launchEditor`, {
+      await fetch(`${prefix}/web-devtools/launchEditor`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +77,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
         body: JSON.stringify({ filePath }),
       });
     } else {
-      await fetch(`${locationOrigin}/web-devtools/injectFile`, {
+      await fetch(`${prefix}/web-devtools/injectFile`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -114,30 +110,28 @@ watchEffect(() => {
 
 <template>
   <div id="dev-tools-drawer">
-    <div class="header">
+    <div class="top-header">
       <div class="red"></div>
       <div class="yellow"></div>
       <div class="green"></div>
     </div>
-    <div class="layout">
-      <Menus />
-      <Slider />
-      <Page />
-    </div>
+    <Menus />
+    <Slider />
+    <Page />
   </div>
 </template>
 
 <style scoped>
 #dev-tools-drawer {
   position: fixed;
-  top: 20%;
+  top: 10%;
   bottom: 150px;
   left: 50%;
   display: flex;
   transform: translateX(-50%);
   flex-direction: column;
   width: 800px;
-  min-height: 300px;
+  min-height: 500px;
   color: rgba (255, 255, 255, 0.65);
   font-size: 14px;
   background-color: var(--c-bg);
@@ -145,14 +139,15 @@ watchEffect(() => {
   box-shadow: rgba(0, 0, 0, 0.1) 0 20px 25px -5px, rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
   will-change: top;
 }
-.header {
+.top-header {
   display: flex;
   align-items: center;
-  /* border-bottom: 1px solid rgba(0,0,0,.1); */
   background-color: var(--c-bg);
   user-select: none;
-  padding: 0 2rem;
+  padding: 0 1rem;
   height: var(--top-header-height);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .red {
   display: inline-block;
@@ -176,17 +171,5 @@ watchEffect(() => {
   height: 15px;
   background-color: #48cd56;
   border-radius: 50%;
-}
-.aim-icon {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-.header {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-.layout {
 }
 </style>
