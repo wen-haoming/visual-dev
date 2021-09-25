@@ -1,4 +1,6 @@
-<script setup></script>
+<script lang="ts" setup>
+import Aim from '../../../components/Aim/index.vue';
+</script>
 
 <template>
   <header class="h-header">
@@ -6,6 +8,7 @@
       <span class="t1">Dev</span>
       <span class="t2">tools</span>
     </div>
+    <Aim />
   </header>
 </template>
 
@@ -17,10 +20,12 @@
   top: var(--top-header-height);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: var(--header-height);
   border-bottom: 1px solid var(--c-divider);
   padding: 0 2rem;
   width: 100%;
+  z-index: var(--z-index);
   .h-tt {
     color: var(--c-brand);
     .t1 {

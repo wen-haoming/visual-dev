@@ -2,7 +2,7 @@
 import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
-import { reactive, ref, onMounted, computed } from 'vue';
+import { reactive, ref, provide, computed } from 'vue';
 
 const data = reactive<{
   visibile: boolean;
@@ -11,6 +11,30 @@ const data = reactive<{
   visibile: false,
   isAimStatus: false,
 });
+
+provide(
+  'usePages',
+  reactive({
+    docList: {},
+    sliderKeys: '',
+  }),
+);
+
+provide(
+  'useAim',
+  reactive({
+    type: '',
+    component: '',
+    getVisibile: () => data.visibile,
+    getIsAimStatus: () => data.isAimStatus,
+    changeVisibile(flag: boolean) {
+      data.visibile = flag;
+    },
+    changeIsAimStatus(flag: boolean) {
+      data.isAimStatus = flag;
+    },
+  }),
+);
 
 const iconRef = ref<HTMLDivElement>();
 

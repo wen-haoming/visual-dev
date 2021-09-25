@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, inject, watchEffect, reactive } from 'vue';
-import { getRequest } from '@/utils';
+import { getRequest } from '../../../utils';
 
 const pagesData: any = inject('usePages');
 const data = reactive({
@@ -8,16 +8,15 @@ const data = reactive({
   key2: '',
 });
 onMounted(() => {
-  getRequest('web-devtools/getMenu').then(res => {
+  getRequest('web-devtools/getMenu').then((res: any) => {
     pagesData.sliderObject = res;
   });
 });
 
 watchEffect(() => {
   const [key1, key2] = pagesData.sliderKeys.split('-');
-  data.key1 = key1 || null;
-  data.key2 = key2 || null;
-  console.log(key1, key2, '==');
+  data.key1 = key1;
+  data.key2 = key2;
 });
 </script>
 <template>
@@ -33,7 +32,7 @@ watchEffect(() => {
             @click="
               () => {
                 if (typeof value !== 'object') {
-                  pagesData.sliderKeys = `${key}`;
+                  pagesData.sliderKeys = `${String(key)}`;
                 }
               }
             "
@@ -49,7 +48,7 @@ watchEffect(() => {
             class="sidebar-item"
             :class="data.key1 === key && data.key2 === itemKey && 'sidebar-item-active'"
           >
-            <a @click="pagesData.sliderKeys = `${key}-${itemKey}`">{{ itemKey }}</a>
+            <a @click="pagesData.sliderKeys = `${String(key)}-${String(itemKey)}`">{{ itemKey }}</a>
           </li>
         </ul>
       </ul>
