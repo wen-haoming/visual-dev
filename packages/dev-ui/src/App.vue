@@ -57,7 +57,7 @@ const handleClick = (e: any) => {
     <Drawer
       v-show="data.visibile"
       @changeVisibile="
-        ({ isAimStatus, visibile }) => {
+        ({ isAimStatus, visibile }:any) => {
           data.isAimStatus = isAimStatus;
           data.visibile = visibile;
         }

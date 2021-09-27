@@ -10,7 +10,6 @@ const getMenu = (props: Props): RequestHandler => {
   const mdFile = resolvePath(includes, ['md']);
 
   return (req, res) => {
-    console.log(mdFile, 'mdFile');
     res.send(JSON.stringify(mdFile));
   };
 };

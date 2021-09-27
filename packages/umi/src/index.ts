@@ -32,6 +32,21 @@ class WriteAndCopy {
 }
 
 export default (api: IApi) => {
+  api.describe({
+    key: 'resolve',
+    config: {
+      schema(joi) {
+        return joi.object({
+          includes: joi.array().items(joi.string()),
+        });
+      },
+      default: {
+        includes: [],
+      },
+    },
+    enableBy: api.EnableBy.config,
+  });
+
   api.modifyBabelOpts((babelOptions) => {
     babelOptions.plugins.unshift([insertJSXElementPathPlugin]);
     return babelOptions;
@@ -48,6 +63,8 @@ export default (api: IApi) => {
   });
 
   api.onStart(() => {
-    createServer();
+    createServer({
+      resolve: api.config.resolve,
+    });
   });
 };
