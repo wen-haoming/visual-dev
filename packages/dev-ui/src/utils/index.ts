@@ -1,3 +1,3 @@
 export * from './api';
 
-export const prefix = 'http://localhost:10078';
+export const prefix = `http://localhost:10078`;

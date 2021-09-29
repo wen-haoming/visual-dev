@@ -1,6 +1,6 @@
 {
   "name": "@web-devtools/umi",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "",
   "main": "./dist/index.js",
   "files": [
@@ -20,8 +20,8 @@
   "author": "",
   "dependencies": {
     "typescript": "^4.4.2",
-    "@web-devtools/core": "0.0.3",
-    "@web-devtools/webpack": "0.0.3"
+    "@web-devtools/core": "0.0.6",
+    "@web-devtools/webpack": "0.0.6"
   },
   "license": "ISC"
 }

@@ -1547,33 +1547,6 @@
   resolved "https://registry.nlark.com/@vue/shared/download/@vue/shared-3.2.12.tgz?cache=0&sync_timestamp=1631890704715&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.2.12.tgz#304064a4b56fc6c7b9169d80e9ee62ecb4bf0a1c"
   integrity sha1-MEBkpLVvxse5Fp2A6e5i7LS/Chw=
 
-"@web-devtools/core@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.nlark.com/@web-devtools/core/download/@web-devtools/core-0.0.1.tgz#3ff2c54aba1b6fc999b1d132e59ec7e725d86bae"
-  integrity sha1-P/LFSrobb8mZsdEy5Z7H5yXYa64=
-  dependencies:
-    "@types/cors" "^2.8.12"
-    "@umijs/launch-editor" "^1.0.1"
-    body-parser "^1.19.0"
-    cors "^2.8.5"
-    express "^4.17.1"
-
-"@web-devtools/core@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@web-devtools/core/-/core-0.0.3.tgz#cc567d6d6f2abec6bcb5e21066455cea564a3607"
-  integrity sha512-Wi1oyyvJM1f+watPLuy0kmOZhR04dni3zbCc2IlhII1ViBQ9PZWYgZfCbWNY+EMcRdQ1qEN5yPPJZFmcTfXLxw==
-  dependencies:
-    "@types/cors" "^2.8.12"
-    "@umijs/launch-editor" "^1.0.1"
-    body-parser "^1.19.0"
-    cors "^2.8.5"
-    express "^4.17.1"
-
-"@web-devtools/webpack@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@web-devtools/webpack/-/webpack-0.0.3.tgz#b2720d57ca98276b765cfa1426892f5d41a4de18"
-  integrity sha512-2DfwqW76oOnV7+Us5f7wNvvYxgt6X6pIcjM2dgFenjM+Dy5JbEEdCHVXIsh8JXEnPMDfUtCRBu1XyUO7XSdXtA==
-
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.nlark.com/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
