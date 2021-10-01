@@ -29,11 +29,11 @@ watchEffect(() => {
 .l-page {
   position: absolute;
   top: 0;
-  left: 0;
-  bottom: 0;
   right: 0;
-  padding-left: var(--sider-bar);
+  bottom: 0;
+  left: 0;
   padding-top: calc(var(--top-header-height) + var(--header-height));
+  padding-left: var(--sider-bar);
   .l-content {
     padding: 0 1.5rem 2.25rem;
   }

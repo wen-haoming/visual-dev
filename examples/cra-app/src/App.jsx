@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import B from './b';
-import { Button } from "antd";
 
 function App() {
   return <div className="App">

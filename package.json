@@ -10,8 +10,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:ui": "cd packages && cd dev-ui && yarn dev",
-    "dev:visual-dev": "cd packages && cd visual-dev && yarn dev",
+    "dev:ui": "cd ./packages/dev-ui && yarn dev",
+    "dev:visual-dev": "cd ./packages/visual-dev && yarn dev",
     "build:before": "node ./scripts/clear.js",
     "build:ui": "cd ./packages/dev-ui && yarn build",
     "build:visual-dev": "cd ./packages/visual-dev  && yarn build",

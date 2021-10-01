@@ -1,25 +1,27 @@
 <script lang="ts" setup>
 import { postRequest } from '../../utils';
-import { watchEffect, inject } from 'vue';
+import { watchEffect, onMounted, onBeforeUnmount } from 'vue';
 import AimSvg from '../../IconCompents/Aim.vue';
+import { useAim } from '../../hooks';
+import { getHasFilePathParentNode } from '../../utils';
 
-const useAim: any = inject('useAim');
-
+const useAimData: any = useAim();
 let previosDom: HTMLElement | null = null;
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation();
-  useAim.type = 'inspect_file';
+  useAimData.type = 'inspect_file';
   // 关闭弹窗，同时打开 瞄准模式
-  useAim.changeVisibile(false);
-  useAim.changeIsAimStatus(true);
+  useAimData.changeVisibile(false);
+  useAimData.changeIsAimStatus(true);
   document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
 };
 
 // document mouse 事件添加遮罩层样式
 const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
   e.stopPropagation();
-  const targetDom = e.target as HTMLElement | null;
+  let targetDom = e.target as HTMLElement | null;
+  targetDom = getHasFilePathParentNode(targetDom);
   if (targetDom && targetDom !== previosDom) {
     previosDom?.classList.remove('__layer-dev-tool');
     targetDom.classList.add('__layer-dev-tool');
@@ -29,37 +31,28 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
 
 const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   e.stopPropagation();
+  e.preventDefault();
   try {
-    const targetDom = e.target as HTMLElement | null;
-    // emit('changeVisibile', { visibile: false, isAimStatus: false });
+    let targetDom = e.target as HTMLElement | null;
+    targetDom = getHasFilePathParentNode(targetDom);
     const filePath = targetDom?.getAttribute('__p');
-    if (useAim.type === 'inspect_file') {
-      await postRequest('web-devtools/launchEditor', { filePath });
-    } else {
-      await postRequest('web-devtools/injectFile', {
-        filePath,
-        type: 'button',
-        component: useAim.component,
-        componentType: 'ant',
-      });
-    }
+    postRequest('web-devtools/launchEditor', { filePath });
   } finally {
     previosDom?.classList.remove('__layer-dev-tool');
-    useAim.component = '';
-    useAim.type = '';
-    useAim.changeVisibile(false);
-    useAim.changeIsAimStatus(false);
+    useAimData.component = '';
+    useAimData.type = '';
+    useAimData.changeVisibile(false);
+    useAimData.changeIsAimStatus(false);
   }
 };
 
 watchEffect(() => {
-  console.log(useAim.getIsAimStatus(), '==');
-  if (useAim.getIsAimStatus()) {
+  if (useAimData.getIsAimStatus()) {
     document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
-    document.body.addEventListener<'click'>('click', documentHandleClick, false);
+    document.body.addEventListener<'click'>('click', documentHandleClick, true);
   } else {
     document.body.removeEventListener<'mousemove'>('mousemove', inspectComponent, false);
-    document.body.removeEventListener<'click'>('click', documentHandleClick, false);
+    document.body.removeEventListener<'click'>('click', documentHandleClick, true);
   }
 });
 </script>

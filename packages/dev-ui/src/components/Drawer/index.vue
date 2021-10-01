@@ -35,8 +35,8 @@ const data = reactive<{
 
 onMounted(() => {
   fetch(`${prefix}/web-devtools/getMenu`)
-    .then(res => res.json())
-    .then(res => {
+    .then((res) => res.json())
+    .then((res) => {
       data.docList = res;
     });
 });
@@ -141,7 +141,6 @@ watchEffect(() => {
   bottom: 150px;
   left: 50%;
   display: flex;
-  transform: translateX(-50%);
   flex-direction: column;
   width: 700px;
   min-height: 300px;
@@ -150,6 +149,7 @@ watchEffect(() => {
   background-color: #23232e;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 20px 25px -5px, rgba(0, 0, 0, 0.04) 0 10px 10px -5px;
+  transform: translateX(-50%);
   will-change: transform;
 }
 .header,

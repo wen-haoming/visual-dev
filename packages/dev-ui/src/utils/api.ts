@@ -1,7 +1,7 @@
 import { prefix } from './';
 
 export const getRequest = (path: string) => {
-  return fetch(`${prefix}/${path}`).then(res => res.json());
+  return fetch(`${prefix}/${path}`).then((res) => res.json());
 };
 
 export const postRequest = (path: string, body: any) => {
@@ -11,5 +11,5 @@ export const postRequest = (path: string, body: any) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then(res => res.json());
+  }).then((res) => res.json());
 };

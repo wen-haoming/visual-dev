@@ -2,7 +2,8 @@
 import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
-import { reactive, ref, provide, computed } from 'vue';
+import { reactive, ref, provide, computed, InjectionKey } from 'vue';
+import { usePagesNamespace, useAimNamespace } from './hooks';
 
 const data = reactive<{
   visibile: boolean;
@@ -13,7 +14,7 @@ const data = reactive<{
 });
 
 provide(
-  'usePages',
+  usePagesNamespace,
   reactive({
     docList: {},
     sliderKeys: '',
@@ -21,7 +22,7 @@ provide(
 );
 
 provide(
-  'useAim',
+  useAimNamespace,
   reactive({
     type: '',
     component: '',
@@ -57,10 +58,10 @@ const handleClick = (e: any) => {
     <Drawer
       v-show="data.visibile"
       @changeVisibile="
-        ({ isAimStatus, visibile }:any) => {
-          data.isAimStatus = isAimStatus;
-          data.visibile = visibile;
-        }
+      ({ isAimStatus, visibile }: any) => {
+        data.isAimStatus = isAimStatus;
+        data.visibile = visibile;
+      }
       "
       :is-aim-status="data.isAimStatus"
     />

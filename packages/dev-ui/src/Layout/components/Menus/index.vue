@@ -16,27 +16,27 @@ import Aim from '../../../components/Aim/index.vue';
 .h-header {
   position: absolute;
   top: 31px;
-  left: 0;
   top: var(--top-header-height);
+  left: 0;
+  z-index: var(--z-index);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--header-height);
-  border-bottom: 1px solid var(--c-divider);
-  padding: 0 2rem;
   width: 100%;
-  z-index: var(--z-index);
+  height: var(--header-height);
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--c-divider);
   .h-tt {
     color: var(--c-brand);
     .t1 {
+      color: rgba(32, 130, 166, 1);
       font-weight: 600;
       font-size: 1.3rem;
-      color: rgba(32, 130, 166, 1);
     }
     .t2 {
-      font-size: 1rem;
-      font-weight: 500;
       margin-left: 0.2rem;
+      font-weight: 500;
+      font-size: 1rem;
     }
   }
 }

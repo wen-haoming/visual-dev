@@ -60,75 +60,75 @@ watchEffect(() => {
 .l-aside {
   position: absolute;
   top: calc(var(--top-header-height) + var(--header-height));
-  left: 0;
-  width: var(--sider-bar);
   bottom: 0;
-  border-right: 1px solid var(--c-divider);
+  left: 0;
   z-index: var(--z-index);
+  width: var(--sider-bar);
+  border-right: 1px solid var(--c-divider);
 
   ul,
   li,
   p {
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
   .l-links {
     padding-top: 0.5rem;
   }
   .sidebar-link-item {
     padding: 0.2rem 0 0.2rem 0.75rem;
-    font-size: 1.2rem;
-    font-weight: 600;
     color: var(--c-text);
+    font-weight: 600;
+    font-size: 1.2rem;
   }
   .sidebar-link a,
   .sidebar-link2 a {
     position: relative;
-    padding-top: 1rem;
     padding: 0.2rem 0 0.2rem 1.4rem;
-    font-size: 1.1rem;
-    font-weight: 500;
+    padding-top: 1rem;
     color: var(--c-text);
+    font-weight: 500;
+    font-size: 1.1rem;
   }
   .sidebar-link2 a {
     cursor: auto;
   }
   .sidebar-item a {
     position: relative;
-    padding-top: 1rem;
     padding: 0.2rem 0 0.2rem 2.5rem;
-    font-size: 1rem;
-    font-weight: 500;
+    padding-top: 1rem;
     color: var(--c-text);
+    font-weight: 500;
+    font-size: 1rem;
   }
   .sidebar-link a,
   .sidebar-item a {
     &:hover {
       color: var(--c-brand-active);
       &::before {
-        content: '';
-        display: block;
         position: absolute;
-        left: 1px;
         top: 0;
-        height: 100%;
+        left: 1px;
+        display: block;
         width: 3px;
+        height: 100%;
         background-color: var(--c-brand-active);
+        content: '';
       }
     }
   }
   .sidebar-item-active a {
     color: var(--c-brand-active);
     &::before {
-      content: '';
-      display: block;
       position: absolute;
-      left: 1px;
       top: 0;
-      height: 100%;
+      left: 1px;
+      display: block;
       width: 3px;
+      height: 100%;
       background-color: var(--c-brand-active);
+      content: '';
     }
   }
 }
