@@ -6,7 +6,10 @@ export default defineConfig({
   },
   routes: [{ path: '/', component: '@/pages/index' }],
   fastRefresh: {},
-  plugins:[require.resolve('../../packages/umi/dist'),],
+  // plugins:[require.resolve('../../packages/umi/dist'),],
+
+  plugins:[require.resolve('./node_modules/visual-dev/dist/plugins/umi')],
+
   resolve:{
     includes:['components']
   },

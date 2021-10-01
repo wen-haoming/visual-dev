@@ -6,5 +6,5 @@ explorations
 .idea
 *.local
 .vscode/
-webpack-devtool-plugin/dev-ui
-packages/webpack/dev-ui
+packages/visual-dev/dev-ui
+packages/visual-dev/dist

@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 
 const staticDir = 'assets';
-const templateFile = path.resolve(__dirname, '../dev-ui/index.html');
-const assetsDir = path.resolve(__dirname, `../dev-ui/${staticDir}`);
+const templateFile = path.resolve(__dirname, '../../../dev-ui/index.html');
+const assetsDir = path.resolve(__dirname, `../../../dev-ui/${staticDir}`);
 
 const injectFile = (compilation: any) => {
   const mathchHtmlFile = Object.keys(compilation.assets).filter((filePath) =>
@@ -17,7 +17,6 @@ const injectFile = (compilation: any) => {
     compilation.assets[filePath] = {
       source() {
         const targetTemplate = fs.readFileSync(templateFile, 'utf-8');
-
         htmlContent = htmlContent.replace(/<body>([\s\S]*)<\/body>/g, ($1: string, $2: string) => {
           return $2 + targetTemplate;
         });

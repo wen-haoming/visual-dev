@@ -1,7 +1,7 @@
 import path from 'path';
 import injectFile from './injectFile';
-import { createServer } from '@web-devtools/core';
-import type { ServerOptions } from '@web-devtools/core';
+import { createServer } from '../../server';
+import type { ServerOptions } from '../../server';
 import type { Compiler, Plugin } from 'webpack';
 
 export interface Options extends ServerOptions {
