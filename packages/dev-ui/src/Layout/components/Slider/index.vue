@@ -3,6 +3,7 @@ import { onMounted, inject, watchEffect, reactive } from 'vue';
 import { getRequest } from '../../../utils';
 
 const pagesData: any = inject('usePages');
+
 const data = reactive({
   key1: '',
   key2: '',
@@ -10,6 +11,7 @@ const data = reactive({
 onMounted(() => {
   getRequest('web-devtools/getMenu').then((res: any) => {
     pagesData.sliderObject = res;
+    console.log(res, '==');
   });
 });
 

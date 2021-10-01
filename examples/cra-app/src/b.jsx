@@ -1,9 +1,9 @@
-import ant, { Button, Card } from "antd";
+import ant, { Button } from "antd";
 import React from 'react';
 
 const B = () => {
   return <div>
-    <div><Button>Button</Button>;<Button>Button</Button></div>
+    <div><Button>Button</Button><Button>Button</Button></div>
   </div>;
 };
 

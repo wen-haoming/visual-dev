@@ -78,19 +78,6 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
         },
         body: JSON.stringify({ filePath }),
       });
-    } else {
-      await fetch(`${prefix}/web-devtools/injectFile`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          filePath,
-          type: 'button',
-          component: data.component,
-          componentType: 'ant',
-        }),
-      });
     }
   } finally {
     previosDom?.classList.remove('__layer-dev-tool');
