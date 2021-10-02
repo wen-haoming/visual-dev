@@ -3,7 +3,14 @@ import path from 'path';
 
 const joinPath = (...args: string[]) => path.join(...args);
 
-export const resolvePath = (includes: string[], ext: string[]) => {
+interface Options {
+  ext?: string[];
+  dealString?: (content: string) => string;
+}
+
+export const resolvePath = (includes: string[], options?: Options) => {
+  const { ext = [], dealString } = options || {};
+
   const resultMapObj: any = {};
   includes.forEach((curPath) => {
     const isDirectory = fs.statSync(curPath).isDirectory();
@@ -14,10 +21,11 @@ export const resolvePath = (includes: string[], ext: string[]) => {
       const dirs = fs.readdirSync(curPath);
       resultMapObj[basename] = resolvePath(
         dirs.map((basePath) => joinPath(curPath, basePath)),
-        ext,
+        options,
       );
     } else if (isFile && ext.includes(path.extname(curPath).substr(1))) {
-      resultMapObj[basename] = fs.readFileSync(curPath, 'utf-8');
+      const content = fs.readFileSync(curPath, 'utf-8');
+      resultMapObj[basename] = dealString ? dealString(content) : content;
     }
   });
   return resultMapObj;

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import Menus from './components/Menus/index.vue';
-import Page from './components/Page/index.vue';
-import Slider from './components/Slider/index.vue';
+import Nav from './Nav.vue';
+import { useRoute } from '../hooks';
+
+const routes = useRoute();
 </script>
 <template>
   <div id="dev-tools-drawer">
@@ -10,9 +11,10 @@ import Slider from './components/Slider/index.vue';
       <div class="yellow"></div>
       <div class="green"></div>
     </div>
-    <Menus />
-    <Slider />
-    <Page />
+    <Nav />
+    <div class="l-page">
+      <Component :is="routes.currentRoute && routes.currentRoute.component" />
+    </div>
   </div>
 </template>
 
@@ -67,5 +69,14 @@ import Slider from './components/Slider/index.vue';
   height: 15px;
   background-color: #48cd56;
   border-radius: 50%;
+}
+.l-page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: calc(var(--top-header-height) + var(--header-height));
+  /* padding-left: var(--sider-bar); */
 }
 </style>

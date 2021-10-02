@@ -2,8 +2,11 @@
 import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
-import { reactive, ref, provide, computed, InjectionKey } from 'vue';
-import { usePagesNamespace, useAimNamespace } from './hooks';
+import { reactive, ref, provide, computed, defineAsyncComponent } from 'vue';
+import { usePagesNamespace, useAimNamespace, createRouteContext } from './hooks';
+
+// 创建路由
+createRouteContext();
 
 const data = reactive<{
   visibile: boolean;
@@ -78,6 +81,7 @@ const handleClick = (e: any) => {
   padding: 5px;
   border-radius: 2px;
   cursor: pointer;
+  user-select: none;
   .svg {
     width: 30px;
     height: 30px;
