@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Aim from '../components/Aim/index.vue';
+import Aim from '../components/Aim.vue';
 import { useRoute } from '../hooks';
 
 const router = useRoute();

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { postRequest } from '../../utils';
+import { postRequest } from '../utils';
 import { watchEffect, onMounted, onBeforeUnmount } from 'vue';
-import AimSvg from '../../IconCompents/Aim.vue';
-import { useAim } from '../../hooks';
-import { getHasFilePathParentNode } from '../../utils';
+import AimSvg from '../IconCompents/Aim.vue';
+import { useAim } from '../hooks';
+import { getHasFilePathParentNode } from '../utils';
 
 const useAimData: any = useAim();
 let previosDom: HTMLElement | null = null;

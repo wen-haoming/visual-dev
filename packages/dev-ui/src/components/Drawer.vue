@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import AimIcon from '../../IconCompents/Aim.vue';
+import AimIcon from '../IconCompents/Aim.vue';
 import DocRender from '../DocRender/index.vue';
 import { watchEffect, reactive } from 'vue';
-import { prefix } from '../../utils';
+import { prefix } from '../utils';
 
 const props = defineProps({
   isAimStatus: {

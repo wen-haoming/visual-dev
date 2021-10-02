@@ -29,6 +29,7 @@ const routeData = reactive({
 
 export const createRouteContext = () => {
   provide(useRouteNamespace, routeData);
+  routeData.currentRoute = routeData.routes[0] as any;
 };
 
 export const useRoute = () => {

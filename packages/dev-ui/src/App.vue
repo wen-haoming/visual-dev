@@ -2,8 +2,8 @@
 import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
-import { reactive, ref, provide, computed, defineAsyncComponent } from 'vue';
-import { usePagesNamespace, useAimNamespace, createRouteContext } from './hooks';
+import { reactive, ref, provide, computed } from 'vue';
+import { useAimNamespace, createRouteContext } from './hooks';
 
 // 创建路由
 createRouteContext();
@@ -15,14 +15,6 @@ const data = reactive<{
   visibile: false,
   isAimStatus: false,
 });
-
-provide(
-  usePagesNamespace,
-  reactive({
-    docList: {},
-    sliderKeys: '',
-  }),
-);
 
 provide(
   useAimNamespace,
