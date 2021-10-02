@@ -13,7 +13,7 @@ const routes = useRoute();
     </div>
     <Nav />
     <div class="l-page">
-      <Component :is="routes.currentRoute && routes.currentRoute.component" />
+      <Component :is="routes?.currentRoute.component" />
     </div>
   </div>
 </template>
