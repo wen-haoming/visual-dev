@@ -1,22 +1,17 @@
 <script lang="ts" setup>
-import { watchEffect } from 'vue';
 import { useDocs } from '../../hooks';
 import SliderLink from './SliderLink.vue';
 
 const docsData = useDocs();
-
-watchEffect(() => {
-  console.log(docsData?.sliderObject, '++');
-});
 </script>
 <template>
-  <ul class="l-aside">
+  <div class="l-aside">
     <SliderLink
       :slider-title="key"
       :slider-object="value"
       v-for="(value, key, index) in docsData?.sliderObject"
     />
-  </ul>
+  </div>
 </template>
 <style lang="less" scoped>
 .l-aside {
