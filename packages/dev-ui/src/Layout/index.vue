@@ -13,7 +13,9 @@ const routes = useRoute();
     </div>
     <Nav />
     <div class="l-page">
-      <Component :is="routes?.currentRoute.component" />
+      <KeepAlive>
+        <Component :is="routes?.currentRoute.component" />
+      </KeepAlive>
     </div>
   </div>
 </template>
@@ -77,6 +79,7 @@ const routes = useRoute();
   bottom: 0;
   left: 0;
   padding-top: calc(var(--top-header-height) + var(--header-height));
+  overflow-y: auto;
   /* padding-left: var(--sider-bar); */
 }
 </style>

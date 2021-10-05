@@ -15,6 +15,7 @@ const router = useRoute();
       <div
         @click="router?.changeCurrentRoute(route)"
         class="nav-item"
+        :class="router?.currentRoute.route === route.route && 'active'"
         :key="route.route"
         v-for="route in router?.routes"
       >
@@ -62,6 +63,9 @@ const router = useRoute();
     .nav-item {
       padding-left: 15px;
       line-height: 1;
+      &.active {
+        color: var(--c-brand-active);
+      }
       .nav-text {
         cursor: pointer;
       }

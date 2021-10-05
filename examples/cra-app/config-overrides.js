@@ -5,7 +5,7 @@ const path = require('path')
 
 module.exports = override(addWebpackPlugin(new WebpackDevToolPLugin({
     resolve:{
-        includes:[path.resolve(__dirname,'./components'),path.resolve(__dirname,'./components2')]
+        includes:[path.resolve(__dirname,'./components')]
     },
     injectFile:false
 })))
