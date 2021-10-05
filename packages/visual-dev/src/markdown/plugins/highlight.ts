@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import escapeHtml from 'escape-html';
 import prism from 'prismjs';
 
@@ -12,7 +11,7 @@ function wrap(code: string, lang: string): string {
   if (lang === 'text') {
     code = escapeHtml(code);
   }
-  return `<pre><code>${code}</code></pre>`;
+  return ` <div class="language-${lang}"><pre><code>${code}</code></pre></div>`;
 }
 
 export const highlight = (str: string, lang: string) => {
@@ -37,7 +36,7 @@ export const highlight = (str: string, lang: string) => {
     try {
       loadLanguages([lang]);
     } catch (e) {
-      console.warn(chalk.yellow(`Syntax highlight for language "${lang}" is not supported.`));
+      console.warn(`Syntax highlight for language "${lang}" is not supported.`);
     }
   }
   if (prism.languages[lang]) {

@@ -3,8 +3,6 @@
 
 ### 123123
 
-<code src="./index.jsx"/>
-
 ```ts
 const a = 123;
 const b = function(){
