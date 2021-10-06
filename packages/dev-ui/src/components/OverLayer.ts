@@ -28,38 +28,34 @@ const initialOverLayerStyle = {
 };
 
 interface InspectDivOptions {
-  marginWidth: number | string;
-  marginHeight: number | string;
-  width: number | string;
-  height: number | string;
-  contentWidth: number | string;
-  contentHeight: number | string;
+  left: string;
+  top: string;
 
-  left: number | string;
-  top: number | string;
+  contentWidth: string;
+  contentHeight: string;
 
-  marginLeft: number | string;
-  marginRight: number | string;
-  marginTop: number | string;
-  marginBottom: number | string;
+  marginLeft: string;
+  marginRight: string;
+  marginTop: string;
+  marginBottom: string;
 
-  borderLeftWidth: number | string;
-  borderRightWidth: number | string;
-  borderTopWidth: number | string;
-  borderBottomWidth: number | string;
+  borderLeftWidth: string;
+  borderRightWidth: string;
+  borderTopWidth: string;
+  borderBottomWidth: string;
 
-  paddingLeft: number | string;
-  paddingRight: number | string;
-  paddingTop: number | string;
-  paddingBottom: number | string;
+  paddingLeft: string;
+  paddingRight: string;
+  paddingTop: string;
+  paddingBottom: string;
 }
 
 export class OverLayer {
-  private overLayer: HTMLDivElement | null;
-  private inspectMarginDiv: HTMLDivElement | null;
-  private inspectPaddingDiv: HTMLDivElement | null;
-  private inspectborderDiv: HTMLDivElement | null;
-  private inspectContentDiv: HTMLDivElement | null;
+  overLayer: HTMLDivElement | null;
+  inspectMarginDiv: HTMLDivElement | null;
+  inspectPaddingDiv: HTMLDivElement | null;
+  inspectborderDiv: HTMLDivElement | null;
+  inspectContentDiv: HTMLDivElement | null;
 
   constructor() {
     this.overLayer = document.createElement('div');
@@ -82,13 +78,13 @@ export class OverLayer {
     document.body.appendChild(this.overLayer);
   }
 
-  update(inspectDivOptions: Partial<InspectDivOptions>) {
+  update(inspectDivOptions: InspectDivOptions) {
     const {
-      contentWidth,
-      contentHeight,
-
       left,
       top,
+
+      contentWidth,
+      contentHeight,
 
       marginLeft,
       marginRight,
@@ -106,7 +102,7 @@ export class OverLayer {
       paddingBottom,
     } = inspectDivOptions;
 
-    Object.assign(this.inspectMarginDiv?.style, initialInspectMarginStyle, {
+    Object.assign(this.inspectMarginDiv?.style, {
       left,
       top,
       'border-left-width': marginLeft,
@@ -135,11 +131,43 @@ export class OverLayer {
     });
   }
   unmount() {
+    this.overLayer?.parentElement?.removeChild(this.overLayer);
     this.inspectContentDiv = null;
     this.inspectborderDiv = null;
     this.inspectPaddingDiv = null;
     this.inspectMarginDiv = null;
-    document.body.removeChild(this.overLayer);
     this.overLayer = null;
   }
+}
+
+export function getElementDimensions(domElement: Element) {
+  const calculatedStyle = window.getComputedStyle(domElement);
+  return {
+    borderLeftWidth: `${parseInt(calculatedStyle.borderLeftWidth, 10)}px`,
+    borderRightWidth: `${parseInt(calculatedStyle.borderRightWidth, 10)}px`,
+    borderTopWidth: `${parseInt(calculatedStyle.borderTopWidth, 10)}px`,
+    borderBottomWidth: `${parseInt(calculatedStyle.borderBottomWidth, 10)}px`,
+    marginLeft: `${parseInt(calculatedStyle.marginLeft, 10)}px`,
+    marginRight: `${parseInt(calculatedStyle.marginRight, 10)}px`,
+    marginTop: `${parseInt(calculatedStyle.marginTop, 10)}px`,
+    marginBottom: `${parseInt(calculatedStyle.marginBottom, 10)}px`,
+    paddingLeft: `${parseInt(calculatedStyle.paddingLeft, 10)}px`,
+    paddingRight: `${parseInt(calculatedStyle.paddingRight, 10)}px`,
+    paddingTop: `${parseInt(calculatedStyle.paddingTop, 10)}px`,
+    paddingBottom: `${parseInt(calculatedStyle.paddingBottom, 10)}px`,
+    contentWidth: `${
+      parseInt(calculatedStyle.width, 10) -
+      parseInt(calculatedStyle.paddingLeft, 10) -
+      parseInt(calculatedStyle.paddingRight, 10) -
+      parseInt(calculatedStyle.borderLeftWidth, 10) -
+      parseInt(calculatedStyle.borderRightWidth, 10)
+    }px`,
+    contentHeight: `${
+      parseInt(calculatedStyle.height, 10) -
+      parseInt(calculatedStyle.paddingTop, 10) -
+      parseInt(calculatedStyle.paddingBottom, 10) -
+      parseInt(calculatedStyle.borderTopWidth, 10) -
+      parseInt(calculatedStyle.borderBottomWidth, 10)
+    }px`,
+  };
 }

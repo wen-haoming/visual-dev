@@ -10,7 +10,7 @@ function App() {
         <p>
            <B />
         </p>喔、、
-        <div id="div" style={{margin:100,padding:100,border:'100px solid #ccc',fontSize:20,color:'red'}}>
+        <div id="div" style={{margin:100,padding:100,border:'100px solid #fff',fontSize:20,color:'red'}}>
           我有margin，padding，border          
         </div>
         <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">

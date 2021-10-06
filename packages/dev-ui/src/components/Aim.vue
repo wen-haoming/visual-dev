@@ -4,15 +4,11 @@ import { watchEffect, ref, onBeforeUnmount } from 'vue';
 import AimSvg from '../IconCompents/Aim.vue';
 import { useAim } from '../hooks';
 import { getHasFilePathParentNode } from '../utils';
-import { OverLayer } from './OverLayer';
-
-function px2Num(str: string) {
-  return Number(str.slice(0, -2));
-}
+import { OverLayer, getElementDimensions } from './OverLayer';
 
 const useAimData: any = useAim();
 let previosDom: HTMLElement | null = null;
-const OverLayerRef = ref();
+const OverLayerRef = ref<OverLayer>();
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation();
@@ -26,65 +22,22 @@ const handleAimClick = (e: SVGElementEventMap['click']) => {
 };
 
 // document mouse 事件添加遮罩层样式
-const inspectComponent = async (e: HTMLElementEventMap['mousemove' | 'scroll']) => {
+const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
   requestAnimationFrame(() => {
     e.stopPropagation();
     let targetDom = e.target as HTMLElement | null;
+
     targetDom = getHasFilePathParentNode(targetDom);
-    if (OverLayerRef.value && OverLayerRef.value.update) {
-      const { width, height } = targetDom.getBoundingClientRect();
-      const left = targetDom?.offsetLeft;
-      const top = targetDom?.offsetTop;
-      const {
-        paddingLeft,
-        paddingTop,
-        paddingRight,
-        paddingBottom,
 
-        borderLeftWidth,
-        borderRightWidth,
-        borderTopWidth,
-        borderBottomWidth,
+    if (targetDom && OverLayerRef.value && previosDom !== targetDom) {
+      const dimensions = getElementDimensions(targetDom);
 
-        marginLeft,
-        marginTop,
-        marginBottom,
-        marginRight,
-      } = window.getComputedStyle(targetDom);
       OverLayerRef.value.update({
-        left: `${Number(left) - px2Num(marginLeft)}px`,
-        top: `${Number(top) - px2Num(marginTop)}px`,
-
-        contentWidth: `${
-          Number(width) -
-          px2Num(paddingLeft) -
-          px2Num(paddingRight) -
-          px2Num(borderLeftWidth) -
-          px2Num(borderRightWidth)
-        }px`,
-        contentHeight: `${
-          Number(height) -
-          px2Num(paddingTop) -
-          px2Num(paddingBottom) -
-          px2Num(borderTopWidth) -
-          px2Num(borderBottomWidth)
-        }px`,
-
-        paddingLeft,
-        paddingTop,
-        paddingRight,
-        paddingBottom,
-
-        borderLeftWidth,
-        borderRightWidth,
-        borderTopWidth,
-        borderBottomWidth,
-
-        marginLeft,
-        marginTop,
-        marginBottom,
-        marginRight,
+        left: `${parseInt(`${targetDom.offsetLeft}`, 10) - parseInt(dimensions.marginLeft)}px`,
+        top: `${parseInt(`${targetDom.offsetTop}`, 10) - parseInt(dimensions.marginTop)}px`,
+        ...dimensions,
       });
+      previosDom = targetDom;
     }
   });
 };
@@ -112,8 +65,8 @@ watchEffect(() => {
     document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
     document.body.addEventListener<'click'>('click', documentHandleClick, true);
   } else {
-    // OverLayerRef.value?.unmount();
     // 卸载事件
+    OverLayerRef.value?.unmount();
     document.body.removeEventListener<'mousemove'>('mousemove', inspectComponent, false);
     document.body.removeEventListener<'click'>('click', documentHandleClick, true);
   }
