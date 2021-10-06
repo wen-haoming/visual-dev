@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { postRequest } from '../utils';
-import { watchEffect, onMounted, onBeforeUnmount } from 'vue';
+import { watchEffect, ref, onBeforeUnmount } from 'vue';
 import AimSvg from '../IconCompents/Aim.vue';
 import { useAim } from '../hooks';
 import { getHasFilePathParentNode } from '../utils';
+import { OverLayer, px2Num } from './OverLayer';
 
 const useAimData: any = useAim();
 let previosDom: HTMLElement | null = null;
+const OverLayerRef = ref();
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation();
@@ -15,18 +17,71 @@ const handleAimClick = (e: SVGElementEventMap['click']) => {
   useAimData.changeVisibile(false);
   useAimData.changeIsAimStatus(true);
   document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
+
+  OverLayerRef.value = new OverLayer();
 };
 
 // document mouse 事件添加遮罩层样式
-const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
-  e.stopPropagation();
-  let targetDom = e.target as HTMLElement | null;
-  targetDom = getHasFilePathParentNode(targetDom);
-  if (targetDom && targetDom !== previosDom) {
-    previosDom?.classList.remove('__layer-dev-tool');
-    targetDom.classList.add('__layer-dev-tool');
-    previosDom = targetDom;
-  }
+const inspectComponent = async (e: HTMLElementEventMap['mousemove' | 'scroll']) => {
+  requestAnimationFrame(() => {
+    e.stopPropagation();
+    let targetDom = e.target as HTMLElement | null;
+    targetDom = getHasFilePathParentNode(targetDom);
+    if (OverLayerRef.value && OverLayerRef.value.update) {
+      const { width, height } = targetDom.getBoundingClientRect();
+      const left = targetDom?.offsetLeft;
+      const top = targetDom?.offsetTop;
+      const {
+        paddingLeft,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+
+        borderLeftWidth,
+        borderRightWidth,
+        borderTopWidth,
+        borderBottomWidth,
+
+        marginLeft,
+        marginTop,
+        marginBottom,
+        marginRight,
+      } = window.getComputedStyle(targetDom);
+
+      OverLayerRef.value.update({
+        left: Number(left) - px2Num(marginLeft),
+        top: Number(top) - px2Num(marginTop),
+
+        contentWidth:
+          Number(width) -
+          px2Num(paddingLeft) -
+          px2Num(paddingRight) -
+          px2Num(borderLeftWidth) -
+          px2Num(borderRightWidth),
+        contentHeight:
+          Number(height) -
+          px2Num(paddingTop) -
+          px2Num(paddingBottom) -
+          px2Num(borderTopWidth) -
+          px2Num(borderBottomWidth),
+
+        paddingLeft,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+
+        borderLeftWidth,
+        borderRightWidth,
+        borderTopWidth,
+        borderBottomWidth,
+
+        marginLeft,
+        marginTop,
+        marginBottom,
+        marginRight,
+      });
+    }
+  });
 };
 
 const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
@@ -38,7 +93,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     const filePath = targetDom?.getAttribute('__p');
     postRequest('web-devtools/launchEditor', { filePath });
   } finally {
-    previosDom?.classList.remove('__layer-dev-tool');
+    // previosDom?.classList.remove('__layer-dev-tool');
     useAimData.component = '';
     useAimData.type = '';
     useAimData.changeVisibile(false);
@@ -48,9 +103,12 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
 
 watchEffect(() => {
   if (useAimData.getIsAimStatus()) {
+    // 注册事件
     document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
     document.body.addEventListener<'click'>('click', documentHandleClick, true);
   } else {
+    OverLayerRef.value?.unmount();
+    // 卸载事件
     document.body.removeEventListener<'mousemove'>('mousemove', inspectComponent, false);
     document.body.removeEventListener<'click'>('click', documentHandleClick, true);
   }
