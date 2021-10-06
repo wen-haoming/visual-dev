@@ -1,22 +1,5 @@
-export function setStyle(...options: Record<string, string | number | undefined>[]) {
-  const obj = Object.assign(...options);
-
-  return Object.entries(obj).reduce((pre, [key, value]) => {
-    value = Number(value) ? `${Number(value)}px` : value;
-    if (value === 0 || !!value) {
-      pre += `${key}: ${value}; `;
-    }
-    return pre;
-  }, '');
-}
-
-export function px2Num(str: string) {
-  return Number(str.slice(0, -2));
-}
-
 const initialInspectMarginStyle = {
   position: 'absolute',
-  'z-index': 10000,
   'border-color': 'rgba(255, 155, 0, 0.3)',
   'pointer-events': 'none',
   'border-style': 'solid',
@@ -24,16 +7,24 @@ const initialInspectMarginStyle = {
 
 const initialInspectBorderStyle = {
   'border-color': 'rgba(255, 200, 50, 0.3)',
+  'pointer-events': 'none',
   'border-style': 'solid',
 };
 
 const initialInspectPaddingStyle = {
   'border-color': 'rgba(77, 200, 0, 0.3)',
+  'pointer-events': 'none',
   'border-style': 'solid',
 };
 
 const initialInspectContentStyle = {
   'background-color': 'rgba(120, 170, 210, 0.7)',
+  'pointer-events': 'none',
+};
+
+const initialOverLayerStyle = {
+  'z-index': 10000,
+  'pointer-events': 'none',
 };
 
 interface InspectDivOptions {
@@ -80,6 +71,13 @@ export class OverLayer {
     this.inspectPaddingDiv.appendChild(this.inspectContentDiv);
     this.inspectborderDiv.appendChild(this.inspectPaddingDiv);
     this.inspectMarginDiv.appendChild(this.inspectborderDiv);
+
+    Object.assign(this.inspectMarginDiv.style, initialInspectMarginStyle);
+    Object.assign(this.inspectborderDiv.style, initialInspectBorderStyle);
+    Object.assign(this.inspectPaddingDiv.style, initialInspectPaddingStyle);
+    Object.assign(this.inspectContentDiv.style, initialInspectContentStyle);
+    Object.assign(this.overLayer.style, initialOverLayerStyle);
+
     this.overLayer.appendChild(this.inspectMarginDiv);
     document.body.appendChild(this.overLayer);
   }
@@ -108,7 +106,7 @@ export class OverLayer {
       paddingBottom,
     } = inspectDivOptions;
 
-    this.inspectMarginDiv.style = setStyle(initialInspectMarginStyle, {
+    Object.assign(this.inspectMarginDiv?.style, initialInspectMarginStyle, {
       left,
       top,
       'border-left-width': marginLeft,
@@ -117,21 +115,21 @@ export class OverLayer {
       'border-bottom-width': marginBottom,
     });
 
-    this.inspectborderDiv.style = setStyle(initialInspectBorderStyle, {
+    Object.assign(this.inspectborderDiv?.style, {
       'border-left-width': borderLeftWidth,
       'border-right-width': borderRightWidth,
       'border-top-width': borderTopWidth,
       'border-bottom-width': borderBottomWidth,
     });
 
-    this.inspectPaddingDiv.style = setStyle(initialInspectPaddingStyle, {
+    Object.assign(this.inspectPaddingDiv?.style, {
       'border-left-width': paddingLeft,
       'border-right-width': paddingRight,
       'border-top-width': paddingTop,
       'border-bottom-width': paddingBottom,
     });
 
-    this.inspectContentDiv.style = setStyle(initialInspectContentStyle, {
+    Object.assign(this.inspectContentDiv?.style, {
       width: contentWidth,
       height: contentHeight,
     });

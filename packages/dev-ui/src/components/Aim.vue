@@ -4,7 +4,11 @@ import { watchEffect, ref, onBeforeUnmount } from 'vue';
 import AimSvg from '../IconCompents/Aim.vue';
 import { useAim } from '../hooks';
 import { getHasFilePathParentNode } from '../utils';
-import { OverLayer, px2Num } from './OverLayer';
+import { OverLayer } from './OverLayer';
+
+function px2Num(str: string) {
+  return Number(str.slice(0, -2));
+}
 
 const useAimData: any = useAim();
 let previosDom: HTMLElement | null = null;
@@ -47,23 +51,24 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove' | 'scroll']) 
         marginBottom,
         marginRight,
       } = window.getComputedStyle(targetDom);
-
       OverLayerRef.value.update({
-        left: Number(left) - px2Num(marginLeft),
-        top: Number(top) - px2Num(marginTop),
+        left: `${Number(left) - px2Num(marginLeft)}px`,
+        top: `${Number(top) - px2Num(marginTop)}px`,
 
-        contentWidth:
+        contentWidth: `${
           Number(width) -
           px2Num(paddingLeft) -
           px2Num(paddingRight) -
           px2Num(borderLeftWidth) -
-          px2Num(borderRightWidth),
-        contentHeight:
+          px2Num(borderRightWidth)
+        }px`,
+        contentHeight: `${
           Number(height) -
           px2Num(paddingTop) -
           px2Num(paddingBottom) -
           px2Num(borderTopWidth) -
-          px2Num(borderBottomWidth),
+          px2Num(borderBottomWidth)
+        }px`,
 
         paddingLeft,
         paddingTop,
@@ -107,7 +112,7 @@ watchEffect(() => {
     document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
     document.body.addEventListener<'click'>('click', documentHandleClick, true);
   } else {
-    OverLayerRef.value?.unmount();
+    // OverLayerRef.value?.unmount();
     // 卸载事件
     document.body.removeEventListener<'mousemove'>('mousemove', inspectComponent, false);
     document.body.removeEventListener<'click'>('click', documentHandleClick, true);
