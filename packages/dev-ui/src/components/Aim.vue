@@ -1,21 +1,20 @@
 <script lang="ts" setup>
 import { postRequest } from '../utils';
-import { watchEffect, ref, onBeforeUnmount } from 'vue';
+import { watchEffect, ref, watch } from 'vue';
 import AimSvg from '../IconCompents/Aim.vue';
 import { useAim } from '../hooks';
-import { getHasFilePathParentNode } from '../utils';
-import { OverLayer, getElementDimensions } from './OverLayer';
+import { getHasFilePathParentNode, getElementDimensions } from '../utils';
+import { OverLayer } from './OverLayer';
 
-const useAimData: any = useAim();
+const useAimData = useAim();
 let previosDom: HTMLElement | null = null;
 const OverLayerRef = ref<OverLayer>();
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation();
-  useAimData.type = 'inspect_file';
   // 关闭弹窗，同时打开 瞄准模式
-  useAimData.changeVisibile(false);
-  useAimData.changeIsAimStatus(true);
+  useAimData?.setVisibile(false);
+  useAimData?.setIsAimStatus(true);
   document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
 
   OverLayerRef.value = new OverLayer();
@@ -52,23 +51,31 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     postRequest('web-devtools/launchEditor', { filePath });
   } finally {
     // previosDom?.classList.remove('__layer-dev-tool');
-    useAimData.component = '';
-    useAimData.type = '';
-    useAimData.changeVisibile(false);
-    useAimData.changeIsAimStatus(false);
+    useAimData?.reset();
   }
 };
 
-watchEffect(() => {
-  if (useAimData.getIsAimStatus()) {
+const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
+  switch (e.key) {
+    case 'Escape':
+      useAimData?.reset();
+    default:
+      return '';
+  }
+};
+
+watch([useAimData?.isAimStatus], () => {
+  if (useAimData?.isAimStatus) {
     // 注册事件
-    document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
-    document.body.addEventListener<'click'>('click', documentHandleClick, true);
+    window.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
+    window.addEventListener<'click'>('click', documentHandleClick, true);
+    window.addEventListener<'keydown'>('keydown', handlekeydown, false);
   } else {
     // 卸载事件
     OverLayerRef.value?.unmount();
-    document.body.removeEventListener<'mousemove'>('mousemove', inspectComponent, false);
-    document.body.removeEventListener<'click'>('click', documentHandleClick, true);
+    window.removeEventListener<'mousemove'>('mousemove', inspectComponent, false);
+    window.removeEventListener<'click'>('click', documentHandleClick, true);
+    window.removeEventListener<'keydown'>('keydown', handlekeydown, false);
   }
 });
 </script>

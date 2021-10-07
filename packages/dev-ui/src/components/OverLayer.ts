@@ -1,3 +1,8 @@
+const initialOverLayerStyle = {
+  'z-index': 10000,
+  'pointer-events': 'none',
+};
+
 const initialInspectMarginStyle = {
   position: 'absolute',
   'border-color': 'rgba(255, 155, 0, 0.3)',
@@ -19,11 +24,6 @@ const initialInspectPaddingStyle = {
 
 const initialInspectContentStyle = {
   'background-color': 'rgba(120, 170, 210, 0.7)',
-  'pointer-events': 'none',
-};
-
-const initialOverLayerStyle = {
-  'z-index': 10000,
   'pointer-events': 'none',
 };
 
@@ -101,7 +101,13 @@ export class OverLayer {
       paddingTop,
       paddingBottom,
     } = inspectDivOptions;
-
+    if (
+      !this.inspectMarginDiv ||
+      !this.inspectborderDiv ||
+      !this.inspectPaddingDiv ||
+      !this.inspectContentDiv
+    )
+      return;
     Object.assign(this.inspectMarginDiv?.style, {
       left,
       top,
@@ -138,36 +144,4 @@ export class OverLayer {
     this.inspectMarginDiv = null;
     this.overLayer = null;
   }
-}
-
-export function getElementDimensions(domElement: Element) {
-  const calculatedStyle = window.getComputedStyle(domElement);
-  return {
-    borderLeftWidth: `${parseInt(calculatedStyle.borderLeftWidth, 10)}px`,
-    borderRightWidth: `${parseInt(calculatedStyle.borderRightWidth, 10)}px`,
-    borderTopWidth: `${parseInt(calculatedStyle.borderTopWidth, 10)}px`,
-    borderBottomWidth: `${parseInt(calculatedStyle.borderBottomWidth, 10)}px`,
-    marginLeft: `${parseInt(calculatedStyle.marginLeft, 10)}px`,
-    marginRight: `${parseInt(calculatedStyle.marginRight, 10)}px`,
-    marginTop: `${parseInt(calculatedStyle.marginTop, 10)}px`,
-    marginBottom: `${parseInt(calculatedStyle.marginBottom, 10)}px`,
-    paddingLeft: `${parseInt(calculatedStyle.paddingLeft, 10)}px`,
-    paddingRight: `${parseInt(calculatedStyle.paddingRight, 10)}px`,
-    paddingTop: `${parseInt(calculatedStyle.paddingTop, 10)}px`,
-    paddingBottom: `${parseInt(calculatedStyle.paddingBottom, 10)}px`,
-    contentWidth: `${
-      parseInt(calculatedStyle.width, 10) -
-      parseInt(calculatedStyle.paddingLeft, 10) -
-      parseInt(calculatedStyle.paddingRight, 10) -
-      parseInt(calculatedStyle.borderLeftWidth, 10) -
-      parseInt(calculatedStyle.borderRightWidth, 10)
-    }px`,
-    contentHeight: `${
-      parseInt(calculatedStyle.height, 10) -
-      parseInt(calculatedStyle.paddingTop, 10) -
-      parseInt(calculatedStyle.paddingBottom, 10) -
-      parseInt(calculatedStyle.borderTopWidth, 10) -
-      parseInt(calculatedStyle.borderBottomWidth, 10)
-    }px`,
-  };
 }

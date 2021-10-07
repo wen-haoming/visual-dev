@@ -3,34 +3,12 @@ import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
 import { reactive, ref, provide, computed } from 'vue';
-import { useAimNamespace, createRouteContext } from './hooks';
+import { useAimNamespace, createRouteContext, createAimContext } from './hooks';
 
 // 创建路由
 createRouteContext();
-
-const data = reactive<{
-  visibile: boolean;
-  isAimStatus: boolean;
-}>({
-  visibile: false,
-  isAimStatus: false,
-});
-
-provide(
-  useAimNamespace,
-  reactive({
-    type: '',
-    component: '',
-    getVisibile: () => data.visibile,
-    getIsAimStatus: () => data.isAimStatus,
-    changeVisibile(flag: boolean) {
-      data.visibile = flag;
-    },
-    changeIsAimStatus(flag: boolean) {
-      data.isAimStatus = flag;
-    },
-  }),
-);
+// 创建弹窗数据
+const data = createAimContext();
 
 const iconRef = ref<HTMLDivElement>();
 
@@ -40,8 +18,8 @@ const closeStatus = computed(() => {
 
 const handleClick = (e: any) => {
   e.stopPropagation();
-  data.isAimStatus = false;
-  data.visibile = !data.visibile;
+  data.setIsAimStatus(false);
+  data.setVisibile(!data.visibile);
 };
 </script>
 <template>
