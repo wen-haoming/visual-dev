@@ -1,8 +1,8 @@
-import { inject, reactive, provide } from 'vue';
+import { inject, reactive, provide, onMounted, onBeforeUnmount } from 'vue';
 
 export const useAimNamespace = 'useAim';
 
-const data = reactive({
+const rawData = {
   type: '',
   component: '',
   visibile: false,
@@ -19,13 +19,33 @@ const data = reactive({
     this.setVisibile(false);
     this.setIsAimStatus(false);
   },
-});
+};
 
 export const createAimContext = () => {
-  provide(useAimNamespace, data);
+  const data = reactive(rawData);
+
+  const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
+    switch (e.key) {
+      case 'Escape':
+        data?.reset();
+      // eslint-disable-next-line no-fallthrough
+      default:
+        return null;
+    }
+  };
+
+  onMounted(() => {
+    window.addEventListener<'keydown'>('keydown', handlekeydown, false);
+  });
+
+  onBeforeUnmount(() => {
+    window.removeEventListener<'keydown'>('keydown', handlekeydown, false);
+  });
+
+  provide(useAimNamespace, reactive(data));
   return data;
 };
 
 export const useAim = () => {
-  return inject<typeof data>(useAimNamespace);
+  return inject<typeof rawData>(useAimNamespace);
 };

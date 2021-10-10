@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { postRequest } from '../utils';
-import { watchEffect, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import AimSvg from '../IconCompents/Aim.vue';
 import { useAim } from '../hooks';
 import { getHasFilePathParentNode, getElementDimensions } from '../utils';
@@ -64,7 +64,7 @@ const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
   }
 };
 
-watch([useAimData?.isAimStatus], () => {
+watch([useAimData], () => {
   if (useAimData?.isAimStatus) {
     // 注册事件
     window.addEventListener<'mousemove'>('mousemove', inspectComponent, false);

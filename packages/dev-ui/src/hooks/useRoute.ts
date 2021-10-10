@@ -7,7 +7,7 @@ interface Route {
   component: any;
 }
 
-const routeData = reactive({
+const rawData = {
   routes: [
     {
       route: 'docs',
@@ -25,13 +25,15 @@ const routeData = reactive({
   changeCurrentRoute(route: Route) {
     this.currentRoute = route;
   },
-});
+};
 
 export const createRouteContext = () => {
-  provide(useRouteNamespace, routeData);
-  routeData.currentRoute = routeData.routes[0] as any;
+  const data = reactive(rawData);
+  data.currentRoute = data.routes[0] as any;
+  provide(useRouteNamespace, data);
+  return data;
 };
 
 export const useRoute = () => {
-  return inject<typeof routeData>(useRouteNamespace);
+  return inject<typeof rawData>(useRouteNamespace);
 };

@@ -3,25 +3,26 @@ import { getRequest } from '../utils';
 
 export const useDocsNamespace = 'useDocs';
 
-const docsData = reactive({
+const rawData = {
   sliderObject: {},
   currentSlider: {},
   docsContent: '',
   setDocsContent(content: string) {
     this.docsContent = content;
   },
-});
+};
 
 export const createDoscContext = () => {
+  const data = reactive(rawData);
   onMounted(() => {
     getRequest('web-devtools/getMenu').then((res: any) => {
-      docsData.sliderObject = res;
+      data.sliderObject = res;
     });
   });
-  provide(useDocsNamespace, docsData);
-  return docsData;
+  provide(useDocsNamespace, data);
+  return data;
 };
 
 export const useDocs = () => {
-  return inject<typeof docsData>(useDocsNamespace);
+  return inject<typeof rawData>(useDocsNamespace);
 };
