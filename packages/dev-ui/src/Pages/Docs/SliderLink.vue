@@ -1,9 +1,7 @@
-<script lang="ts" setup>
-import { reactive, watchEffect } from 'vue';
+<script setup lang="ts">
+import { reactive, watchEffect, defineProps } from 'vue';
 import { useDocs } from '../../hooks';
-import SliderLink from './SliderLink.vue';
 
-const docsData = useDocs();
 const props = defineProps({
   sliderTitle: {
     type: String,
@@ -13,6 +11,8 @@ const props = defineProps({
     type: Object,
   },
 });
+
+const docsData = useDocs();
 
 const data = reactive<{ sliderObject: any; activeDoc: any }>({
   sliderObject: {},
@@ -38,9 +38,9 @@ const handleClick = (menuValue: any) => {
   <ul class="l-ul">
     <span v-if="props.sliderTitle" class="l-tt">{{ props.sliderTitle }}</span>
     <li
-      :class="{ 'l-li': true, active: value === docsData.docsContent }"
+      :class="{ 'l-li': true, active: value === docsData?.docsContent }"
       v-for="(value, key, index) in data.sliderObject"
-      :key="key + (index || 0)"
+      :key="String(key) + String(index || 0)"
     >
       <div @click="() => handleClick(value)" :class="isFolder(value) ? 'l-folder' : 'l-text'">
         <span v-if="typeof value === 'string' || isFolder(value)">{{ key }}</span>

@@ -2,8 +2,8 @@
 import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
-import { reactive, ref, provide, computed } from 'vue';
-import { useAimNamespace, createRouteContext, createAimContext } from './hooks';
+import { ref, computed } from 'vue';
+import { createRouteContext, createAimContext } from './hooks';
 
 // 创建路由
 createRouteContext();

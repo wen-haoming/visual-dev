@@ -31,8 +31,8 @@ interface InspectDivOptions {
   left: string;
   top: string;
 
-  contentWidth: string;
-  contentHeight: string;
+  width: string;
+  height: string;
 
   marginLeft: string;
   marginRight: string;
@@ -83,9 +83,6 @@ export class OverLayer {
       left,
       top,
 
-      contentWidth,
-      contentHeight,
-
       marginLeft,
       marginRight,
       marginTop,
@@ -100,6 +97,9 @@ export class OverLayer {
       paddingRight,
       paddingTop,
       paddingBottom,
+
+      width,
+      height,
     } = inspectDivOptions;
     if (
       !this.inspectMarginDiv ||
@@ -115,6 +115,10 @@ export class OverLayer {
       'border-right-width': marginRight,
       'border-top-width': marginTop,
       'border-bottom-width': marginBottom,
+      width,
+      height,
+      display: 'flex',
+      'box-sizing': 'border-box',
     });
 
     Object.assign(this.inspectborderDiv?.style, {
@@ -122,6 +126,9 @@ export class OverLayer {
       'border-right-width': borderRightWidth,
       'border-top-width': borderTopWidth,
       'border-bottom-width': borderBottomWidth,
+      display: 'flex',
+      flex: 1,
+      'box-sizing': 'border-box',
     });
 
     Object.assign(this.inspectPaddingDiv?.style, {
@@ -129,11 +136,14 @@ export class OverLayer {
       'border-right-width': paddingRight,
       'border-top-width': paddingTop,
       'border-bottom-width': paddingBottom,
+      display: 'flex',
+      'box-sizing': 'border-box',
+      flex: 1,
     });
 
     Object.assign(this.inspectContentDiv?.style, {
-      width: contentWidth,
-      height: contentHeight,
+      'box-sizing': 'border-box',
+      flex: 1,
     });
   }
   unmount() {

@@ -31,11 +31,7 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
     if (targetDom && OverLayerRef.value && previosDom !== targetDom) {
       const dimensions = getElementDimensions(targetDom);
 
-      OverLayerRef.value.update({
-        left: `${parseInt(`${targetDom.offsetLeft}`, 10) - parseInt(dimensions.marginLeft)}px`,
-        top: `${parseInt(`${targetDom.offsetTop}`, 10) - parseInt(dimensions.marginTop)}px`,
-        ...dimensions,
-      });
+      OverLayerRef.value.update(dimensions);
       previosDom = targetDom;
     }
   });
@@ -55,27 +51,16 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   }
 };
 
-const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
-  switch (e.key) {
-    case 'Escape':
-      useAimData?.reset();
-    default:
-      return '';
-  }
-};
-
 watch([useAimData], () => {
   if (useAimData?.isAimStatus) {
     // 注册事件
     window.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
     window.addEventListener<'click'>('click', documentHandleClick, true);
-    window.addEventListener<'keydown'>('keydown', handlekeydown, false);
   } else {
     // 卸载事件
     OverLayerRef.value?.unmount();
     window.removeEventListener<'mousemove'>('mousemove', inspectComponent, false);
     window.removeEventListener<'click'>('click', documentHandleClick, true);
-    window.removeEventListener<'keydown'>('keydown', handlekeydown, false);
   }
 });
 </script>

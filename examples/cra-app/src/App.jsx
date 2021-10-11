@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import B from './b';
+import Form from './Form';
 
 function App() {
   return <div className="App">
@@ -9,7 +10,14 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
            <B />
-        </p>喔、、
+        </p>
+          <Form/>
+        <div style={{color:'red',position:'fixed',right:100,top:100,padding:10,border:'1px solid red'}}>
+          绝对定位
+        </div>
+        <div id="div" style={{padding:100,border:'100px solid #fff',fontSize:20,color:'red'}}>
+          我有margin，padding，border          
+        </div>
         <div id="div" style={{margin:100,padding:100,border:'100px solid #fff',fontSize:20,color:'red'}}>
           我有margin，padding，border          
         </div>

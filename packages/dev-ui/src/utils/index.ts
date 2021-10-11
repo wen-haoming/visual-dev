@@ -13,6 +13,8 @@ export const getHasFilePathParentNode = (ele: any) => {
 
 export function getElementDimensions(domElement: Element) {
   const calculatedStyle = window.getComputedStyle(domElement);
+  const Rect = domElement.getBoundingClientRect();
+
   return {
     borderLeftWidth: `${parseInt(calculatedStyle.borderLeftWidth, 10)}px`,
     borderRightWidth: `${parseInt(calculatedStyle.borderRightWidth, 10)}px`,
@@ -26,19 +28,17 @@ export function getElementDimensions(domElement: Element) {
     paddingRight: `${parseInt(calculatedStyle.paddingRight, 10)}px`,
     paddingTop: `${parseInt(calculatedStyle.paddingTop, 10)}px`,
     paddingBottom: `${parseInt(calculatedStyle.paddingBottom, 10)}px`,
-    contentWidth: `${
-      parseInt(calculatedStyle.width, 10) -
-      parseInt(calculatedStyle.paddingLeft, 10) -
-      parseInt(calculatedStyle.paddingRight, 10) -
-      parseInt(calculatedStyle.borderLeftWidth, 10) -
-      parseInt(calculatedStyle.borderRightWidth, 10)
+    left: `${Rect.left + window.scrollX - parseInt(calculatedStyle.marginLeft, 10)}px`,
+    top: `${Rect.top + window.scrollY - parseInt(calculatedStyle.marginTop, 10)}px`,
+    width: `${
+      Rect.width +
+      parseInt(calculatedStyle.marginLeft, 10) +
+      parseInt(calculatedStyle.marginRight, 10)
     }px`,
-    contentHeight: `${
-      parseInt(calculatedStyle.height, 10) -
-      parseInt(calculatedStyle.paddingTop, 10) -
-      parseInt(calculatedStyle.paddingBottom, 10) -
-      parseInt(calculatedStyle.borderTopWidth, 10) -
-      parseInt(calculatedStyle.borderBottomWidth, 10)
+    height: `${
+      Rect.height +
+      parseInt(calculatedStyle.marginTop, 10) +
+      parseInt(calculatedStyle.marginBottom, 10)
     }px`,
   };
 }
