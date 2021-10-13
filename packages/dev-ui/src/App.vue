@@ -3,10 +3,11 @@ import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
 import { ref, computed } from 'vue';
-import { createRouteContext, createAimContext } from './hooks';
+import { createRouteContext, createAimContext, useHotkeys } from './hooks';
 
 // 创建路由
 createRouteContext();
+
 // 创建弹窗数据
 const data = createAimContext();
 

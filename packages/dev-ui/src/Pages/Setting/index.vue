@@ -1,7 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useHotkeys } from '../../hooks';
+
+useHotkeys('command+b', () => {
+  alert('hhh');
+});
+</script>
 <template>
   <div class="l-setting">
-    <div class="keyboard-wrap"><input type="text" /> + <input type="text" /></div>
+    123
+    <!-- <div class="keyboard-wrap"><input type="text" /> + <input type="text" /></div> -->
   </div>
 </template>
 <style lang="less" scoped>

@@ -1,22 +1,17 @@
 {
-  "name": "@web-devtools/dev-ui",
+  "name": "dev-ui",
   "version": "0.0.8",
   "main": "vite.config.ts",
-  "files": [
-    "index.js",
-    "dist"
-  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
   "dependencies": {
+    "hotkeys-js": "^3.8.7",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
     "markdown-it": "^12.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "vue": "3.2.19"
   },
   "license": "MIT",
