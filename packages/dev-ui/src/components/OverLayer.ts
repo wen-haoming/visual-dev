@@ -1,9 +1,9 @@
 const initialOverLayerStyle = {
-  'z-index': 10000,
   'pointer-events': 'none',
 };
 
 const initialInspectMarginStyle = {
+  'z-index': 100000000,
   position: 'absolute',
   'border-color': 'rgba(255, 155, 0, 0.3)',
   'pointer-events': 'none',

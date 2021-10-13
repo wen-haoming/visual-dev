@@ -1,6 +1,6 @@
 {
   "name": "@web-devtools/dev-ui",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "vite.config.ts",
   "files": [
     "index.js",
