@@ -26,6 +26,7 @@ const routes = useRoute();
   top: 10%;
   bottom: 150px;
   left: 50%;
+  z-index: 99999999;
   display: flex;
   flex-direction: column;
   width: 800px;

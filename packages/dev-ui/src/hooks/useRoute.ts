@@ -30,6 +30,7 @@ const rawData = {
 export const createRouteContext = () => {
   const data = reactive(rawData);
   data.currentRoute = data.routes[0] as any;
+
   provide(useRouteNamespace, data);
   return data;
 };

@@ -13,7 +13,12 @@ const rawData = {
   setIsAimStatus(isAimStatus: boolean) {
     this.isAimStatus = isAimStatus;
   },
-  reset() {
+  openDrawer() {
+    this.component = '';
+    this.type = '';
+    this.setVisibile(true);
+  },
+  closeDrawer() {
     this.component = '';
     this.type = '';
     this.setVisibile(false);
@@ -21,13 +26,13 @@ const rawData = {
   },
 };
 
-export const createAimContext = () => {
+export const createDrawerContext = () => {
   const data = reactive(rawData);
 
   const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
     switch (e.key) {
       case 'Escape':
-        data?.reset();
+        data?.closeDrawer();
       // eslint-disable-next-line no-fallthrough
       default:
         return null;

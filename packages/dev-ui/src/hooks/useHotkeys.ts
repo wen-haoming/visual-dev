@@ -1,21 +1,39 @@
 import hotkeys from 'hotkeys-js';
-import type { HotkeysEvent } from 'hotkeys-js';
-import { reactive, onBeforeUnmount, watchEffect } from 'vue';
+import { onMounted } from 'vue';
+import type { KeyHandler } from 'hotkeys-js';
 
-export const useHotkeys = (
-  defaultHotkeysStr: string,
-  callback: (event: KeyboardEvent, handler: HotkeysEvent) => void,
-) => {
-  const data = reactive({
-    hotkeys: defaultHotkeysStr,
+export const scoped = {
+  toggle_drawer: 'toggleDrawer',
+  toggle_aim: 'toggleAim',
+  close_drawer: 'closeDrawer',
+  open_aim: 'openAim',
+  close_aim: 'closeAim',
+};
+
+type Options = Partial<
+  Record<
+    keyof typeof scoped,
+    {
+      keys: string[][];
+      callback: KeyHandler;
+    }
+  >
+>;
+
+export const useHotkeys = (options: Options) => {
+  onMounted(() => {
+    Object.entries(options).forEach(([, value]) => {
+      value.keys.forEach((keys) => {
+        hotkeys(keys.join('+'), value.callback);
+      });
+    });
   });
 
-  watchEffect(() => {
-    data.hotkeys = defaultHotkeysStr;
-    hotkeys(data.hotkeys, callback);
-  });
-
-  onBeforeUnmount(() => {
-    hotkeys.unbind(data.hotkeys);
-  });
+  return {
+    unbind() {
+      Object.entries(options).forEach(([scope, value]) => {
+        hotkeys.unbind(value.keys.join('+'), scope);
+      });
+    },
+  };
 };

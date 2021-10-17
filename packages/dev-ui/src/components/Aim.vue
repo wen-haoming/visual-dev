@@ -10,16 +10,6 @@ const useAimData = useAim();
 let previosDom: HTMLElement | null = null;
 const OverLayerRef = ref<OverLayer>();
 
-const handleAimClick = (e: SVGElementEventMap['click']) => {
-  e.stopPropagation();
-  // 关闭弹窗，同时打开 瞄准模式
-  useAimData?.setVisibile(false);
-  useAimData?.setIsAimStatus(true);
-  document.body.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
-
-  OverLayerRef.value = new OverLayer();
-};
-
 // document mouse 事件添加遮罩层样式
 const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
   requestAnimationFrame(() => {
@@ -47,13 +37,20 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     postRequest('web-devtools/launchEditor', { filePath });
   } finally {
     // previosDom?.classList.remove('__layer-dev-tool');
-    useAimData?.reset();
+    useAimData?.closeDrawer();
   }
+};
+
+const handleAimClick = (e: SVGElementEventMap['click']) => {
+  e.stopPropagation();
+  useAimData?.closeDrawer();
+  useAimData?.setIsAimStatus(true);
 };
 
 watch([useAimData], () => {
   if (useAimData?.isAimStatus) {
     // 注册事件
+    OverLayerRef.value = new OverLayer();
     window.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
     window.addEventListener<'click'>('click', documentHandleClick, true);
   } else {

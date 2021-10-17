@@ -3,13 +3,39 @@ import SvgIcon from './IconCompents/SvgIcon.vue';
 import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
 import { ref, computed } from 'vue';
-import { createRouteContext, createAimContext, useHotkeys } from './hooks';
+import { createRouteContext, createDrawerContext, useHotkeys } from './hooks';
 
 // 创建路由
 createRouteContext();
 
 // 创建弹窗数据
-const data = createAimContext();
+const data = createDrawerContext();
+
+// 初始化快捷键
+useHotkeys({
+  toggle_drawer: {
+    keys: [
+      ['command', 'shift', 'z'],
+      ['ctrl', 'shift', 'z'],
+    ],
+    callback() {
+      if (data.visibile) {
+        data.closeDrawer();
+      } else {
+        data.openDrawer();
+      }
+    },
+  },
+  toggle_aim: {
+    keys: [
+      ['command', 'shift', 'x'],
+      ['ctrl', 'shift', 'x'],
+    ],
+    callback() {
+      data.setIsAimStatus(!data.isAimStatus);
+    },
+  },
+});
 
 const iconRef = ref<HTMLDivElement>();
 

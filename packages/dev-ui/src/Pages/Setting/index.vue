@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { useHotkeys } from '../../hooks';
 
-useHotkeys('command+b', () => {
-  alert('hhh');
+onMounted(() => {
+  console.log('onMounted');
 });
+
+// useHotkeys('command+b', () => {
+//   alert('hhh');
+// });
 </script>
 <template>
   <div class="l-setting">
