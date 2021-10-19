@@ -2,7 +2,7 @@ import path from 'path';
 import injectFile from './injectFile';
 import { createServer } from '../../server';
 import type { ServerOptions } from '../../server';
-import type { Compiler, Plugin } from 'webpack';
+import type { Compiler } from 'webpack';
 
 export interface Options extends ServerOptions {
   injectFile?: boolean;
@@ -14,7 +14,7 @@ const defaultOptions = {
 
 export { devtoolLoader } from './loader';
 
-export const WebpackDevtoolPlugin: Plugin = class {
+export const WebpackDevtoolPlugin = class {
   public options: Options;
 
   constructor(options: Options) {

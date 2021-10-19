@@ -1,4 +1,3 @@
-export * from './httpProxy';
 export * from './server';
 export * from './babel';
 

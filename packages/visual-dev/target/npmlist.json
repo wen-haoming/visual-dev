@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.9",
   "name": "visual-dev",
   "dependencies": {
     "@babel/core": { "version": "7.15.5" },
@@ -16,6 +16,8 @@
     "fs-extra": { "version": "10.0.0" },
     "glob": { "version": "7.2.0" },
     "http-proxy-middleware": { "version": "2.0.1" },
+    "markdown-it": { "version": "12.2.0" },
+    "prismjs": { "version": "1.25.0" },
     "slash2": { "version": "2.0.0" }
   }
 }

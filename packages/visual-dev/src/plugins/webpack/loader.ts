@@ -1,9 +1,8 @@
-import type { loader } from 'webpack';
 import { parse } from '@babel/parser';
 import { transformFromAst } from '@babel/core';
 import { insertJSXElementPathPlugin, insertParametersPlugin } from '../../babel';
 
-export const devtoolLoader: loader.Loader = function webpackLoader(this, source) {
+export const devtoolLoader = function webpackLoader(this: any, source: any) {
   const { rootContext: rootPath, resourcePath: filePath } = this;
 
   const ast = parse(source.toString(), {
