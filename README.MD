@@ -1,4 +1,4 @@
-<h1 align="center"><i style="color:#2082a6">visual</i><i style="color:#3ab9d4">dev</i> </h1>
+<h1 align="center"><i style="color:#2082a6">visual</i>-<i style="color:#3ab9d4">dev</i> </h1>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/visual-dev" target="_blank" rel="noopener noreferrer"><img src="https://badgen.net/npm/v/visual-dev" alt="NPM Version" /></a>
@@ -12,6 +12,7 @@
 Tools to facilitate project maintenance, provide document rendering, and the ability to locate components to ide
 
 ## Preview
+ ![Oct-22-2021 01-17-26](https://user-images.githubusercontent.com/42735363/138326264-bd3d51f4-27ae-42f9-aef9-cd06793cec53.gif)
 
 ## Installation
 
@@ -38,3 +39,7 @@ umi
 // .umiirc.ts
 plugins: [require.resolve('visual-dev/umi')];
 ```
+
+## License
+
+[MIT LICENSE](./LICENSE)
