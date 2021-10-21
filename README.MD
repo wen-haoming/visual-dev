@@ -9,7 +9,7 @@
 
 ## Introduction
 
-Tools to facilitate project maintenance, provide document rendering, and the ability to locate components to ide
+plugin to facilitate project maintenance, provide document rendering, and the ability to locate components to ide
 
 ## Preview
  ![Oct-22-2021 01-17-26](https://user-images.githubusercontent.com/42735363/138326264-bd3d51f4-27ae-42f9-aef9-cd06793cec53.gif)
