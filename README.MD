@@ -40,6 +40,28 @@ umi
 plugins: [require.resolve('visual-dev/umi')];
 ```
 
+## Options
+
+webpack
+```js
+module.exports = {
+  plugins: [new WebpackDevToolPLugin({
+    resolve:{
+        includes:[path.resolve(__dirname,'./components')] // components dir
+    })],
+};
+```
+
+umi
+```js
+// .umiirc.ts
+plugins: [require.resolve('visual-dev/umi')];
+ resolve:{
+    includes:[path.resolve(__dirname,'./components')] // components dir
+  },
+```
+
+
 ## License
 
 [MIT LICENSE](./LICENSE)
