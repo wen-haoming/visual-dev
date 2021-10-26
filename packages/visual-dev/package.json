@@ -51,7 +51,7 @@
     "slash2": "^2.0.0"
   },
   "peerDependencies": {
-    "webpack": "4.x|5.x"
+    "webpack": ">4.x"
   },
   "devDependencies": {
     "@types/babel-core": "^6.25.7",

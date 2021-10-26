@@ -2,6 +2,16 @@ const initialOverLayerStyle = {
   'pointer-events': 'none',
 };
 
+const initialDetailLayerStyle = {
+  'z-index': 100000000,
+  position: 'absolute',
+  'background-color': 'rgba(51, 55, 64,.5)',
+  'font-family': 'SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace',
+  'font-weight': 'bold',
+  padding: '10px 20px',
+  'pointer-events': 'none',
+};
+
 const initialInspectMarginStyle = {
   'z-index': 100000000,
   position: 'absolute',
@@ -56,6 +66,7 @@ export class OverLayer {
   inspectPaddingDiv: HTMLDivElement | null;
   inspectborderDiv: HTMLDivElement | null;
   inspectContentDiv: HTMLDivElement | null;
+  detailLayer: HTMLDivElement | null;
 
   constructor() {
     this.overLayer = document.createElement('div');
@@ -63,6 +74,8 @@ export class OverLayer {
     this.inspectborderDiv = document.createElement('div');
     this.inspectPaddingDiv = document.createElement('div');
     this.inspectContentDiv = document.createElement('div');
+
+    this.detailLayer = document.createElement('div');
 
     this.inspectPaddingDiv.appendChild(this.inspectContentDiv);
     this.inspectborderDiv.appendChild(this.inspectPaddingDiv);
@@ -73,8 +86,11 @@ export class OverLayer {
     Object.assign(this.inspectPaddingDiv.style, initialInspectPaddingStyle);
     Object.assign(this.inspectContentDiv.style, initialInspectContentStyle);
     Object.assign(this.overLayer.style, initialOverLayerStyle);
+    Object.assign(this.detailLayer.style, initialDetailLayerStyle);
 
     this.overLayer.appendChild(this.inspectMarginDiv);
+    this.overLayer.appendChild(this.detailLayer);
+
     document.body.appendChild(this.overLayer);
   }
 
@@ -108,6 +124,11 @@ export class OverLayer {
       !this.inspectContentDiv
     )
       return;
+    Object.assign(this.detailLayer?.style, {
+      left,
+      top: `${parseInt(top, 10) + parseInt(height, 10) + 10}px`,
+    });
+
     Object.assign(this.inspectMarginDiv?.style, {
       left,
       top,
@@ -152,6 +173,7 @@ export class OverLayer {
     this.inspectborderDiv = null;
     this.inspectPaddingDiv = null;
     this.inspectMarginDiv = null;
+    this.detailLayer = null;
     this.overLayer = null;
   }
 }
