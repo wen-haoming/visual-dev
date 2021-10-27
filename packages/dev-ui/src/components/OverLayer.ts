@@ -5,11 +5,27 @@ const initialOverLayerStyle = {
 const initialDetailLayerStyle = {
   'z-index': 100000000,
   position: 'absolute',
-  'background-color': 'rgba(51, 55, 64,.5)',
+  display: 'flex',
+  'align-items': 'center',
   'font-family': 'SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace',
   'font-weight': 'bold',
-  padding: '10px 20px',
+  padding: '6px 8px',
   'pointer-events': 'none',
+  'background-color': 'rgb(51, 55, 64)',
+  'border-radius': '2px',
+};
+
+const initialDetailLeft = {
+  display: 'flex',
+  'flex-direction': 'column',
+  color: 'rgb(238, 120, 230)',
+  'border-right': '1px solid rgb(170, 170, 170)',
+  'margin-right': '10px',
+  'padding-right': '10px',
+};
+
+const initialDetailRight = {
+  color: 'rgb(215, 215, 215)',
 };
 
 const initialInspectMarginStyle = {
@@ -60,6 +76,12 @@ interface InspectDivOptions {
   paddingBottom: string;
 }
 
+interface DomDetail {
+  domType: string;
+  componentName: string;
+  srcPath: string;
+}
+
 export class OverLayer {
   overLayer: HTMLDivElement | null;
   inspectMarginDiv: HTMLDivElement | null;
@@ -67,26 +89,38 @@ export class OverLayer {
   inspectborderDiv: HTMLDivElement | null;
   inspectContentDiv: HTMLDivElement | null;
   detailLayer: HTMLDivElement | null;
+  detailLeft: HTMLSpanElement | null;
+  detailRight: HTMLSpanElement | null;
 
   constructor() {
+    // layer
     this.overLayer = document.createElement('div');
     this.inspectMarginDiv = document.createElement('div');
     this.inspectborderDiv = document.createElement('div');
     this.inspectPaddingDiv = document.createElement('div');
     this.inspectContentDiv = document.createElement('div');
 
-    this.detailLayer = document.createElement('div');
-
     this.inspectPaddingDiv.appendChild(this.inspectContentDiv);
     this.inspectborderDiv.appendChild(this.inspectPaddingDiv);
     this.inspectMarginDiv.appendChild(this.inspectborderDiv);
 
+    // detail
+    this.detailLayer = document.createElement('div');
+    this.detailLeft = document.createElement('span');
+    this.detailRight = document.createElement('span');
+    this.detailLayer.appendChild(this.detailLeft);
+    this.detailLayer.appendChild(this.detailRight);
+
+    // style
     Object.assign(this.inspectMarginDiv.style, initialInspectMarginStyle);
     Object.assign(this.inspectborderDiv.style, initialInspectBorderStyle);
     Object.assign(this.inspectPaddingDiv.style, initialInspectPaddingStyle);
     Object.assign(this.inspectContentDiv.style, initialInspectContentStyle);
     Object.assign(this.overLayer.style, initialOverLayerStyle);
+
     Object.assign(this.detailLayer.style, initialDetailLayerStyle);
+    Object.assign(this.detailLeft.style, initialDetailLeft);
+    Object.assign(this.detailRight.style, initialDetailRight);
 
     this.overLayer.appendChild(this.inspectMarginDiv);
     this.overLayer.appendChild(this.detailLayer);
@@ -94,7 +128,7 @@ export class OverLayer {
     document.body.appendChild(this.overLayer);
   }
 
-  update(inspectDivOptions: InspectDivOptions) {
+  update(inspectDivOptions: InspectDivOptions, domDetail: DomDetail) {
     const {
       left,
       top,
@@ -124,6 +158,11 @@ export class OverLayer {
       !this.inspectContentDiv
     )
       return;
+    const { domType, componentName, srcPath } = domDetail;
+    console.log(componentName, '==');
+    this.detailLeft!.innerHTML = `<div>${domType} in ${componentName}</div><div>${srcPath}</div>`;
+    this.detailRight!.innerHTML = `<div> ${width} x ${height} </div>`;
+
     Object.assign(this.detailLayer?.style, {
       left,
       top: `${parseInt(top, 10) + parseInt(height, 10) + 10}px`,

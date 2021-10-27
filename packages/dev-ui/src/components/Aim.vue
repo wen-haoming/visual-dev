@@ -3,7 +3,11 @@ import { postRequest } from '../utils';
 import { ref, watch } from 'vue';
 import AimSvg from '../IconCompents/Aim.vue';
 import { useAim } from '../hooks';
-import { getHasFilePathParentNode, getElementDimensions } from '../utils';
+import {
+  getHasFilePathParentNode,
+  getElementDimensions,
+  getCompNameFromStringPath,
+} from '../utils';
 import { OverLayer } from './OverLayer';
 
 const useAimData = useAim();
@@ -17,11 +21,14 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
     let targetDom = e.target as HTMLElement | null;
 
     targetDom = getHasFilePathParentNode(targetDom);
-
-    if (targetDom && OverLayerRef.value && previosDom !== targetDom) {
+    const path = targetDom?.getAttribute('__p');
+    if (targetDom && OverLayerRef.value && previosDom !== targetDom && path) {
       const dimensions = getElementDimensions(targetDom);
-
-      OverLayerRef.value.update(dimensions);
+      OverLayerRef.value.update(dimensions, {
+        domType: targetDom.nodeName.toLowerCase(),
+        componentName: getCompNameFromStringPath(path),
+        srcPath: path,
+      });
       previosDom = targetDom;
     }
   });

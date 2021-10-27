@@ -42,3 +42,10 @@ export function getElementDimensions(domElement: Element) {
     }px`,
   };
 }
+
+// '/src/App.jsx:5:4' --> App.jsx || '\\src\\App.jsx:5:4' --> App.jsx
+export const getCompNameFromStringPath = (srcPath: string) => {
+  const path = srcPath.split(':')[0];
+  const pathNames = path.split(/[/\\]/);
+  return pathNames[pathNames.length - 1];
+};
