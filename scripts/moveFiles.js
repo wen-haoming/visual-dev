@@ -7,3 +7,5 @@ fs.copy(resolve('../packages/dev-ui/dist'), resolve('../packages/visual-dev/dev-
   if (err) return console.error(err);
   console.log('dev-ui dir moved successfully!');
 });
+
+fs.copy(resolve('../packages/visual-dev/dist/plugins'), resolve('../packages/visual-dev/plugins'));

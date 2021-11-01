@@ -8,3 +8,4 @@ explorations
 .vscode/
 packages/visual-dev/dev-ui
 packages/visual-dev/dist
+packages/visual-dev/plugins
