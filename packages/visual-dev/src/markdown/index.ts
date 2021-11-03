@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it';
+
 import { highlight } from './plugins/highlight';
 
 export const createMarkdownRenderer = (source: string): string => {
@@ -6,6 +7,5 @@ export const createMarkdownRenderer = (source: string): string => {
     html: true,
     highlight,
   });
-
   return md.render(source);
 };

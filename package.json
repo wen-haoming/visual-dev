@@ -1,7 +1,6 @@
 {
   "name": "visual-dev",
   "private": true,
-  "version": "0.1.0",
   "engines": {
     "node": ">=10.0.0"
   },
@@ -10,6 +9,7 @@
     "packages/*"
   ],
   "scripts": {
+    "dev:before": "yarn clean",
     "dev:ui": "cd ./packages/dev-ui && yarn dev",
     "dev:visual-dev": "cd ./packages/visual-dev && yarn dev",
     "build:before": "node ./scripts/clear.js",
@@ -19,7 +19,7 @@
     "build": " run-s build:*",
     "dev": "run-p dev:*",
     "start": "cd examples && cd cra-app && yarn start",
-    "clean": "lerna clean",
+    "clean": "node ./scripts/clear.js",
     "format": "prettier --write ./packages && npm run lint",
     "lint": "eslint ./packages --ext js,jsx,ts,tsx --fix --color"
   },

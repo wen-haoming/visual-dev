@@ -1,32 +1,17 @@
 {
   "name": "visual-dev",
-  "version": "0.1.6",
-  "description": "",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "version": "0.1.8",
+  "description": "plugin to facilitate project maintenance, provide document rendering, and the ability to locate components to ide",
+  "main": "./plugins/index.js",
+  "types": "./plugins/index.d.ts",
   "scripts": {
     "dev": "tsc -w -p ./",
     "build": "tsc"
   },
-  "exports": {
-    ".": {
-      "node:": "./dist/index.js",
-      "default": "./dist/index.js"
-    },
-    "./umi": {
-      "import": "./dist/plugins/umi/index.js",
-      "require": "./dist/plugins/umi/index.js"
-    },
-    "./webpack": {
-      "import": "./dist/plugins/webpack/index.js",
-      "require": "./dist/plugins/webpack/index.js"
-    }
-  },
   "files": [
-    "dist",
+    "plugins",
     "dev-ui",
     "LICENSE",
-    "plugins",
     "package.json"
   ],
   "keywords": [],
@@ -52,6 +37,7 @@
     "slash2": "^2.0.0"
   },
   "peerDependencies": {
+    "umi": ">=3.x",
     "webpack": ">4.x"
   },
   "devDependencies": {

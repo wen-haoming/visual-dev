@@ -23,7 +23,8 @@ watchEffect(() => {
   data.sliderObject = props.sliderObject;
 });
 
-const isFolder = (valueData: any) => typeof valueData === 'object';
+const isFolder = (valueData: any) =>
+  typeof valueData === 'object' && Object.keys(valueData).length > 0;
 
 const handleClick = (menuValue: any) => {
   if (isFolder(menuValue)) {

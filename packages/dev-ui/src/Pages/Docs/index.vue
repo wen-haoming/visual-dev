@@ -5,7 +5,7 @@ const docsData = createDoscContext();
 </script>
 <template>
   <SliderBar />
-  <div class="l-content" v-html="docsData?.docsContent || ''" />
+  <div class="l-content markdown" v-html="docsData?.docsContent || ''" />
 </template>
 <style scoped lang="less">
 .l-content {
@@ -19,5 +19,20 @@ const docsData = createDoscContext();
   padding: 1rem 1.5rem;
   overflow-y: auto;
   border-right: 1px solid var(--c-divider);
+
+  /deep/ table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ebedf1;
+    th {
+      font-weight: 600;
+      background: #f9fafb;
+    }
+    th,
+    td {
+      padding: 10px 24px;
+      border: 1px solid #ebedf1;
+    }
+  }
 }
 </style>

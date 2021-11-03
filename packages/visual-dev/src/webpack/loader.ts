@@ -1,6 +1,6 @@
 import { parse } from '@babel/parser';
 import { transformFromAst } from '@babel/core';
-import { insertJSXElementPathPlugin, insertParametersPlugin } from '../../babel';
+import { insertJSXElementPathPlugin, insertParametersPlugin } from '../babel';
 
 export const devtoolLoader = function webpackLoader(this: any, source: any) {
   const { rootContext: rootPath, resourcePath: filePath } = this;

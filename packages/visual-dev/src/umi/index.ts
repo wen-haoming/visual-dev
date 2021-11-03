@@ -1,15 +1,15 @@
 import type { IApi } from 'umi';
 import type { Compiler } from 'webpack';
-import { createServer } from '../../server';
-import { insertJSXElementPathPlugin } from '../../babel';
+import { createServer } from '../server';
+import { insertJSXElementPathPlugin } from '../babel';
 
 import fs from 'fs';
 import path from 'path';
 
 const staticDir = 'assets';
-const assetsDir = path.resolve(__dirname, `../../../dev-ui/${staticDir}`);
+const assetsDir = path.resolve(__dirname, `../../dev-ui/${staticDir}`);
 
-const htmlTplPath = path.resolve(__dirname, '../../../dev-ui/index.html');
+const htmlTplPath = path.resolve(__dirname, '../../dev-ui/index.html');
 class WriteAndCopy {
   public apply(compiler: Compiler) {
     compiler.hooks.emit.tap('writeFileAndCopyFile', (compilation: any) => {

@@ -17,7 +17,7 @@ export const resolvePath = (includes: string[], options?: Options) => {
     const isFile = fs.statSync(curPath).isFile();
     const basename = path.basename(curPath);
 
-    if (isDirectory) {
+    if (isDirectory && fs.readdirSync(curPath).length) {
       const dirs = fs.readdirSync(curPath);
       resultMapObj[basename] = resolvePath(
         dirs.map((basePath) => joinPath(curPath, basePath)),
