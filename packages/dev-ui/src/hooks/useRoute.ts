@@ -10,12 +10,8 @@ interface Route {
 const rawData = {
   routes: [
     {
-      route: 'docs',
+      route: 'Docs',
       component: shallowRef(defineAsyncComponent(() => import('../Pages/Docs/index.vue'))),
-    },
-    {
-      route: 'setting',
-      component: shallowRef(defineAsyncComponent(() => import('../Pages/Setting/index.vue'))),
     },
   ],
   currentRoute: {

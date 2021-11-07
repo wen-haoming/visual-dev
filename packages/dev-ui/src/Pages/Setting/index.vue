@@ -6,13 +6,19 @@
 // });
 </script>
 <template>
-  <div class="l-setting">
-    <!-- <div class="keyboard-wrap"><input type="text" /> + <input type="text" /></div> -->
+  <div className="l-setting">
+    <div class="l-tt">设置快捷键</div>
+    <div class="hot-key-wrap">代码定位： <input type="text" /></div>
   </div>
 </template>
 <style lang="less" scoped>
 .l-setting {
   padding: 1rem;
+  .l-tt {
+    color: var(--c-text-light-1);
+    font-weight: 500;
+    font-size: 16px;
+  }
   .keyboard-wrap {
   }
 }
