@@ -23,7 +23,7 @@ export const resolvePath = (includes: string[], options?: Options) => {
         dirs.map((basePath) => joinPath(curPath, basePath)),
         options,
       );
-    } else if (isFile && ext.includes(path.extname(curPath).substr(1))) {
+    } else if (isFile && ext.includes(path.extname(curPath).substr(1).toLocaleLowerCase())) {
       const content = fs.readFileSync(curPath, 'utf-8');
       resultMapObj[basename] = dealString ? dealString(content) : content;
     }

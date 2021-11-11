@@ -6,11 +6,7 @@ const docsData = useDocs();
 </script>
 <template>
   <div class="l-aside">
-    <SliderLink
-      :slider-title="key"
-      :slider-object="value"
-      v-for="(value, key, index) in docsData?.sliderObject"
-    />
+    <SliderLink :slider-object-or-content="docsData?.sliderObject" />
   </div>
 </template>
 <style lang="less" scoped>

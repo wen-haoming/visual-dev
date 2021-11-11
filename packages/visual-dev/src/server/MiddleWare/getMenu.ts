@@ -1,6 +1,7 @@
 import type { RequestHandler } from 'express';
 import { resolvePath } from '../../utils';
 import { createMarkdownRenderer } from '../../markdown';
+import path from 'path';
 
 interface Props {
   includes: string[];
@@ -8,7 +9,7 @@ interface Props {
 
 const getMenu = (props: Props): RequestHandler => {
   const { includes } = props;
-  const mdFile = resolvePath(includes, {
+  const mdFile = resolvePath([path.resolve(process.cwd(), './README.MD'), ...includes], {
     ext: ['md'],
     dealString: (conrent) => createMarkdownRenderer(conrent),
   });
