@@ -159,7 +159,7 @@ export class OverLayer {
     )
       return;
     const { domType, componentName, srcPath } = domDetail;
-    console.log(componentName, '==');
+
     this.detailLeft!.innerHTML = `<div>${domType} in ${componentName}</div><div>${srcPath}</div>`;
     this.detailRight!.innerHTML = `<div> ${width} x ${height} </div>`;
 

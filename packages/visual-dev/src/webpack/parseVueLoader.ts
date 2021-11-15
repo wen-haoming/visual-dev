@@ -5,7 +5,7 @@ export const parseVueLoader = function webpackLoader(this: any, source: string) 
   const { resourcePath: filePath } = this;
 
   const ast = parse(source);
-  const s = new MagicString(source);
+  const s: any = new MagicString(source);
 
   const tplAst: any = ast.children.find((item: any) => item.tag === 'template');
 
@@ -17,9 +17,8 @@ export const parseVueLoader = function webpackLoader(this: any, source: string) 
             const { start } = node.loc;
             const tagLen = node.tag.length;
             const idx = start.offset + tagLen;
-            s.overwrite(
+            s.insertLeft(
               idx + 1,
-              idx + 2,
               ` __p="${`${filePath.replace(
                 process.cwd(),
                 '',
