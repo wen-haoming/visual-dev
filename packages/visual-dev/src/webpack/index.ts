@@ -12,8 +12,6 @@ const defaultOptions = {
   injectFile: true,
 };
 
-export { devtoolLoader } from './loader';
-
 export const WebpackDevtoolPlugin = class {
   public options: Options;
 
@@ -24,7 +22,14 @@ export const WebpackDevtoolPlugin = class {
     compiler.options.module?.rules.push({
       test: /\.(j|t)sx$/,
       use: {
-        loader: path.resolve(__dirname, './loader.js'),
+        loader: path.resolve(__dirname, './parseReactLoader.js'),
+      },
+    });
+
+    compiler.options.module?.rules.push({
+      test: /\.vue$/,
+      use: {
+        loader: path.resolve(__dirname, './parseVueLoader.js'),
       },
     });
 

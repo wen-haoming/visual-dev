@@ -1,9 +1,11 @@
-const WebpackDevToolPLugin = require('@web-devtools/webpack').default
+const WebpackDevToolPLugin = require('../../packages/visual-dev/plugins/webpack').default
 
 module.exports = {
     configureWebpack: {
       plugins: [
-        new WebpackDevToolPLugin()
+        new WebpackDevToolPLugin({
+          injectFile:false
+        })
       ]
     }
   }

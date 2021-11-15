@@ -4,11 +4,11 @@ import { createMarkdownRenderer } from '../../markdown';
 import path from 'path';
 
 interface Props {
-  includes: string[];
+  includes: string[]; // file or dir
 }
 
 const getMenu = (props: Props): RequestHandler => {
-  const { includes } = props;
+  const { includes = [] } = props;
   const mdFile = resolvePath([path.resolve(process.cwd(), './README.MD'), ...includes], {
     ext: ['md'],
     dealString: (conrent) => createMarkdownRenderer(conrent),

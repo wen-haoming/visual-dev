@@ -1,6 +1,6 @@
 {
   "name": "visual-dev",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "plugin to facilitate project maintenance, provide document rendering, and the ability to locate components to ide",
   "main": "./plugins/index.js",
   "types": "./plugins/index.d.ts",
@@ -26,6 +26,8 @@
     "@babel/types": "^7.15.0",
     "@types/cors": "^2.8.12",
     "@umijs/launch-editor": "^1.0.1",
+    "@vue/compiler-dom": "^3.2.21",
+    "@vue/component-compiler-utils": "^3.3.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -34,7 +36,9 @@
     "http-proxy-middleware": "^2.0.1",
     "markdown-it": "^12.0.6",
     "prismjs": "^1.23.0",
-    "slash2": "^2.0.0"
+    "slash2": "^2.0.0",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14"
   },
   "peerDependencies": {
     "umi": ">=3.x",

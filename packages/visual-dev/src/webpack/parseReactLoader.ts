@@ -1,6 +1,6 @@
 import { parse } from '@babel/parser';
 import { transformFromAst } from '@babel/core';
-import { insertJSXElementPathPlugin, insertParametersPlugin } from '../babel';
+import { insertJSXElementPathPlugin } from '../babel';
 
 export const devtoolLoader = function webpackLoader(this: any, source: any) {
   const { rootContext: rootPath, resourcePath: filePath } = this;
@@ -12,7 +12,7 @@ export const devtoolLoader = function webpackLoader(this: any, source: any) {
     plugins: ['typescript', 'jsx'],
   });
   const { code } = transformFromAst(ast as any, source.toString(), {
-    plugins: [insertParametersPlugin, insertJSXElementPathPlugin],
+    plugins: [insertJSXElementPathPlugin],
     filename: filePath,
     filenameRelative: rootPath,
   });

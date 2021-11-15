@@ -13,6 +13,7 @@ export const resolvePath = (includes: string[], options?: Options) => {
 
   const resultMapObj: any = {};
   includes.forEach((curPath) => {
+    if (!curPath) return;
     const isDirectory = fs.statSync(curPath).isDirectory();
     const isFile = fs.statSync(curPath).isFile();
     const basename = path.basename(curPath);
