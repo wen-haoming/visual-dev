@@ -1,6 +1,6 @@
 {
   "name": "visual-dev",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "plugin to facilitate project maintenance, provide document rendering, and the ability to locate components to ide",
   "main": "./plugins/index.js",
   "types": "./plugins/index.d.ts",
@@ -9,6 +9,7 @@
     "build": "tsc"
   },
   "files": [
+    "README.md",
     "plugins",
     "dev-ui",
     "LICENSE",

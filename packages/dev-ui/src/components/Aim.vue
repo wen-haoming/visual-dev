@@ -21,7 +21,9 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
     let targetDom = e.target as HTMLElement | null;
 
     targetDom = getHasFilePathParentNode(targetDom);
-    const path = targetDom?.getAttribute('__p');
+
+    const path = targetDom?.getAttribute && targetDom?.getAttribute('__p');
+
     if (targetDom && OverLayerRef.value && previosDom !== targetDom && path) {
       const dimensions = getElementDimensions(targetDom);
       OverLayerRef.value.update(dimensions, {
@@ -29,8 +31,9 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
         componentName: getCompNameFromStringPath(path),
         srcPath: path,
       });
-      previosDom = targetDom;
     }
+
+    previosDom = targetDom;
   });
 };
 
@@ -42,6 +45,8 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     targetDom = getHasFilePathParentNode(targetDom);
     const filePath = targetDom?.getAttribute('__p');
     postRequest('web-devtools/launchEditor', { filePath });
+  } catch (e) {
+    //
   } finally {
     // previosDom?.classList.remove('__layer-dev-tool');
     useAimData?.closeDrawer();

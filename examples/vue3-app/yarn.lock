@@ -8384,10 +8384,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-visual-dev@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmmirror.com/visual-dev/download/visual-dev-0.2.0.tgz?cache=0&sync_timestamp=1636997016603&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvisual-dev%2Fdownload%2Fvisual-dev-0.2.0.tgz#1ce18550555949c581a5485141bd921831b7ebd4"
-  integrity sha512-k3fbOIRhDqr36z3zvgGFMY5k7whQrmkufZbWrqns1V1uvzcuh5zlrGl0i5qWC1gs7xNptFPUvpfvSuZLjlyJPw==
+visual-dev@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/visual-dev/-/visual-dev-0.2.1.tgz#ca5c00bc9683a91c4404086bb0ffd9bb1ef32d1d"
+  integrity sha512-BkzPbEpXuTyOqKurOJRuWEOePMQFCDiBkT9DNfrQkDwuQa1dJrquvb4UiU0D07BZoapFbrYcBnSqflWoMx9BzA==
   dependencies:
     "@babel/core" "^7.15.0"
     "@babel/generator" "^7.15.4"

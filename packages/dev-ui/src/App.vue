@@ -71,14 +71,19 @@ const handleClick = (e: any) => {
 <style lang="less" scoped>
 #dev-tools-icon {
   position: fixed;
-  bottom: 30px;
-  left: 0;
+  bottom: 50px;
+  left: -20px;
   width: 30px;
   height: 30px;
   padding: 5px;
   border-radius: 2px;
   cursor: pointer;
   user-select: none;
+  transition: left 0.2s;
+  z-index: 99999999999;
+  &:hover {
+    left: 0;
+  }
   .svg {
     width: 30px;
     height: 30px;

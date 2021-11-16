@@ -39,6 +39,7 @@ const routes = useRoute();
   box-shadow: var(--shadow-3);
   transform: translateX(-50%);
   will-change: top;
+  font-size: 14px;
 }
 .top-header {
   display: flex;
