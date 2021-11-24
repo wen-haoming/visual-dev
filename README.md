@@ -38,7 +38,7 @@ umi
 
 ```js
 // .umiirc.ts
-plugins: [require.resolve('visual-dev/plugins/umi')];
+plugins: ['visual-dev/plugins/umi'];
 ```
 
 ## Options
@@ -58,7 +58,7 @@ umi
 
 ```js
 // .umiirc.ts
-plugins: [require.resolve('visual-dev/plugins/umi')];
+plugins: ['visual-dev/plugins/umi'];
  resolve:{
     includes:[path.resolve(__dirname,'./components')] // components dir
   },
