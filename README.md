@@ -27,7 +27,7 @@ webpack
 
 ```js
 // webpack.config.js
-const WebpackDevToolPLugin = require('visual-dev/webpack').default;
+const WebpackDevToolPLugin = require('visual-dev/plugins/webpack').default;
 
 module.exports = {
   plugins: [new WebpackDevToolPLugin()],
@@ -38,7 +38,7 @@ umi
 
 ```js
 // .umiirc.ts
-plugins: [require.resolve('visual-dev/umi')];
+plugins: ['visual-dev/plugins/umi'];
 ```
 
 ## Options
@@ -58,7 +58,7 @@ umi
 
 ```js
 // .umiirc.ts
-plugins: [require.resolve('visual-dev/umi')];
+plugins: ['visual-dev/plugins/umi'];
  resolve:{
     includes:[path.resolve(__dirname,'./components')] // components dir
   },
