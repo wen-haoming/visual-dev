@@ -5,7 +5,7 @@ import { transformFromAst } from '@babel/core';
 import { injectCoponent } from '../../babel';
 import type { RequestHandler } from 'express';
 
-const injectFile: RequestHandler = (req, res) => {
+export const injectFile: RequestHandler = (req, res) => {
   const { filePath, column, line } = parsePath(req.body.filePath);
 
   let { component } = req.body as { component: string; componentType?: string };

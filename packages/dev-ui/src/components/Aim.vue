@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { postRequest } from '../utils';
+import { postRequest, prefix } from '../utils';
 import { ref, watch } from 'vue';
 import AimSvg from '../IconCompents/Aim.vue';
 import { useAim } from '../hooks';
@@ -13,6 +13,13 @@ import { OverLayer } from './OverLayer';
 const useAimData = useAim();
 let previosDom: HTMLElement | null = null;
 const OverLayerRef = ref<OverLayer>();
+const mapPathRef = ref();
+
+fetch(`${prefix}/web-devtools/pathMap`)
+  .then((res) => res.json())
+  .then((res) => {
+    mapPathRef.value = res;
+  });
 
 // document mouse 事件添加遮罩层样式
 const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
@@ -22,14 +29,14 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
 
     targetDom = getHasFilePathParentNode(targetDom);
 
-    const path = targetDom?.getAttribute && targetDom?.getAttribute('__p');
+    const path = targetDom?.getAttribute && targetDom?.getAttribute('_p');
 
     if (targetDom && OverLayerRef.value && previosDom !== targetDom && path) {
       const dimensions = getElementDimensions(targetDom);
       OverLayerRef.value.update(dimensions, {
         domType: targetDom.nodeName.toLowerCase(),
-        componentName: getCompNameFromStringPath(path),
-        srcPath: path,
+        componentName: getCompNameFromStringPath(mapPathRef.value[path]),
+        srcPath: mapPathRef.value[path],
       });
     }
 
@@ -43,8 +50,8 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   try {
     let targetDom = e.target as HTMLElement | null;
     targetDom = getHasFilePathParentNode(targetDom);
-    const filePath = targetDom?.getAttribute('__p');
-    postRequest('web-devtools/launchEditor', { filePath });
+    const filePath = targetDom?.getAttribute('_p');
+    postRequest('web-devtools/launchEditor', { filePath: mapPathRef.value[filePath] });
   } catch (e) {
     //
   } finally {

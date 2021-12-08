@@ -2,8 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 import launchEditor from '@umijs/launch-editor';
 import { SERVER_PORT } from '../index';
-import injectFile from './MiddleWare/injectFile';
-import getMenu from './MiddleWare/getMenu';
+import { getMenu, injectFile, pathMapMid } from './MiddleWare';
 
 export interface ServerOptions {
   port?: number;
@@ -20,6 +19,8 @@ export const createServer = async (options: ServerOptions = {}) => {
   app.use(cors());
   // @ts-ignore
   app.use(json());
+
+  app.get('/web-devtools/pathMap', pathMapMid());
 
   app.get('/web-devtools/getMenu', getMenu({ includes: resolve.includes }));
 

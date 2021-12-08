@@ -4,7 +4,7 @@ export const prefix = `http://localhost:10078`;
 
 export const getHasFilePathParentNode = (ele: any) => {
   if (!ele) return null;
-  while (ele.getAttribute && !ele.getAttribute('__p') && ele !== document.body) {
+  while (ele.getAttribute && !ele.getAttribute('_p') && ele !== document.body) {
     // eslint-disable-next-line no-param-reassign
     ele = ele.parentNode;
   }

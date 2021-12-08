@@ -7,7 +7,7 @@ interface Props {
   includes: string[]; // file or dir
 }
 
-const getMenu = (props: Props): RequestHandler => {
+export const getMenu = (props: Props): RequestHandler => {
   const { includes = [] } = props;
   const mdFile = resolvePath([path.resolve(process.cwd(), './README.MD'), ...includes], {
     ext: ['md'],

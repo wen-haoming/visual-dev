@@ -4,6 +4,7 @@ import CloseIcon from './IconCompents/Close.vue';
 import Drawer from './Layout/index.vue';
 import { ref, computed } from 'vue';
 import { createRouteContext, createDrawerContext, useHotkeys } from './hooks';
+import { prefix } from './utils';
 
 // 创建路由
 createRouteContext();

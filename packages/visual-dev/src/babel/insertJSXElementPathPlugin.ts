@@ -1,5 +1,8 @@
 import type { Visitor } from '@babel/core';
 import { jsxIdentifier, jsxAttribute, stringLiteral } from '@babel/types';
+import { uid } from '../utils/uid';
+
+export const pathMap: Record<string, string> = {};
 
 export const insertJSXElementPathPlugin = (): { visitor: Visitor } => {
   return {
@@ -7,20 +10,21 @@ export const insertJSXElementPathPlugin = (): { visitor: Visitor } => {
       JSXOpeningElement: {
         enter(path, state) {
           const filePath = state?.file?.opts?.filename;
+
           if (filePath.match(/node_modules/g) || !filePath) return;
 
           const { line, column } = path.node.loc?.start || { line: 0, column: 0 };
-          const relativePath: any = jsxAttribute(
-            jsxIdentifier('__p'),
-            stringLiteral(
-              `${state.filename.replace(
-                process.cwd(),
-                '',
-              )}:${line.toString()}:${column.toString()}`,
-            ),
-          );
 
-          (path.node as any).attributes.unshift(relativePath);
+          const val = uid(6);
+
+          const relativePath: any = jsxAttribute(jsxIdentifier(`_p`), stringLiteral(val));
+
+          pathMap[val] = `${state.filename.replace(
+            process.cwd(),
+            '',
+          )}:${line.toString()}:${column.toString()}`;
+
+          (path.node as any).attributes.push(relativePath);
         },
       },
     },
