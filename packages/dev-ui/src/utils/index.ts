@@ -2,6 +2,10 @@ export * from './api';
 
 export const prefix = `http://localhost:10078`;
 
+export const getFetch = (url: string) => {
+  return fetch(`${prefix}/web-devtools/${url}`).then((res) => res.json());
+};
+
 export const getHasFilePathParentNode = (ele: any) => {
   if (!ele) return null;
   while (ele.getAttribute && !ele.getAttribute('_p') && ele !== document.body) {
