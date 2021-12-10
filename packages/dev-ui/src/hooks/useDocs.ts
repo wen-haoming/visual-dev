@@ -1,5 +1,5 @@
 import { reactive, provide, inject, onMounted } from 'vue';
-import { getRequest } from '../utils';
+import { useRequest } from './';
 
 export const useDocsNamespace = 'useDocs';
 
@@ -15,7 +15,7 @@ const rawData = {
 export const createDoscContext = () => {
   const data = reactive(rawData);
   onMounted(() => {
-    getRequest('web-devtools/getMenu').then((res: any) => {
+    useRequest('getMenu').then((res: any) => {
       data.sliderObject = res;
     });
   });

@@ -15,7 +15,7 @@
 .l-setting {
   padding: 1rem;
   .l-tt {
-    color: var(--c-text-light-1);
+    color: var(--v-text-light-1);
     font-weight: 500;
     font-size: 16px;
   }

@@ -21,7 +21,7 @@ function App() {
         <div id="div" style={{margin:100,padding:100,border:'100px solid #fff',fontSize:20,color:'red'}}>
           我有margin，padding，border          
         </div>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" >
           Learn React
         </a>
       </header>

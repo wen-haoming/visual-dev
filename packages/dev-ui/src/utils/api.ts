@@ -1,11 +1,11 @@
-import { prefix } from './';
+export const urlPrefix = `http://localhost:10078/web-devtools`;
 
 export const getRequest = (path: string) => {
-  return fetch(`${prefix}/${path}`).then((res) => res.json());
+  return fetch(`${urlPrefix}/${path}`).then((res) => res.json());
 };
 
 export const postRequest = (path: string, body: any) => {
-  return fetch(`${prefix}/${path}`, {
+  return fetch(`${urlPrefix}/${path}`, {
     method: 'post',
     body: JSON.stringify(body),
     headers: {

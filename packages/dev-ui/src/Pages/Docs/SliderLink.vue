@@ -95,7 +95,7 @@ const handleClick = (menuValue: any) => {
   font-weight: 500;
   cursor: pointer;
   &.active {
-    color: var(--c-brand);
+    color: var(--v-brand);
   }
 }
 .l-ul,
@@ -110,14 +110,14 @@ const handleClick = (menuValue: any) => {
   .l-text {
     user-select: none;
     &:hover {
-      color: var(--c-brand);
+      color: var(--v-brand);
     }
   }
   .active-doc {
     color: red;
   }
   &.active {
-    color: var(--c-brand);
+    color: var(--v-brand);
   }
 }
 .l-ul {

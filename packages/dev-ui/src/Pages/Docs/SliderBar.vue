@@ -19,6 +19,6 @@ const docsData = useDocs();
   width: var(--sider-bar);
   margin: 0;
   padding: 0;
-  border-right: 1px solid var(--c-divider);
+  border-right: 1px solid var(--v-divider);
 }
 </style>

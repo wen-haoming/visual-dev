@@ -18,6 +18,6 @@ const docsData = createDoscContext();
   margin: 0;
   padding: 1rem 1.5rem;
   overflow-y: auto;
-  border-right: 1px solid var(--c-divider);
+  border-right: 1px solid var(--v-divider);
 }
 </style>

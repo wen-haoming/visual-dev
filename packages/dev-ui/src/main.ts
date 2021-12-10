@@ -1,6 +1,8 @@
+import './style/vars.less';
 import { createApp } from 'vue';
+// import './style/overLayer.less';
 import App from './App.vue';
-import './style/global.less';
-import './style/overLayer.less';
+
+//
 
 createApp(App).mount('#dev-tools');

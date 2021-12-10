@@ -41,9 +41,9 @@ const router = useRoute();
   justify-content: space-between;
   height: var(--header-height);
   padding: 0 2rem;
-  border-bottom: 1px solid var(--c-divider);
+  border-bottom: 1px solid var(--v-divider);
   .h-tt {
-    color: var(--c-brand);
+    color: var(--v-brand);
     user-select: none;
     .t1 {
       color: rgba(32, 130, 166, 1);
@@ -59,12 +59,12 @@ const router = useRoute();
   .h-nav {
     display: flex;
     align-items: center;
-    color: var(--c-text);
+    color: var(--v-text);
     .nav-item {
       padding-left: 15px;
       line-height: 1;
       &.active {
-        color: var(--c-brand-active);
+        color: var(--v-brand-active);
       }
       .nav-text {
         cursor: pointer;

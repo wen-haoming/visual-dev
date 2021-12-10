@@ -1,7 +1,7 @@
 code {
   margin: 0;
   padding: 0.25rem 0.5rem;
-  color: var(--c-text-light);
+  color: var(--v-text-light);
   font-size: 14px;
   font-family: var(--code-font-family);
   background-color: var(--code-inline-bg-color);
@@ -13,7 +13,7 @@ code .token.deleted {
 }
 
 code .token.inserted {
-  color: var(--c-brand);
+  color: var(--v-brand);
 }
 
 div[class*='language-'] {
