@@ -1,4 +1,4 @@
-import { inject, reactive, provide, onMounted, onBeforeUnmount } from 'vue';
+import { inject, reactive, provide, onMounted, onUnmounted } from 'vue';
 
 export const useAimNamespace = 'useAim';
 
@@ -32,7 +32,7 @@ export const createDrawerContext = () => {
   const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
     switch (e.key) {
       case 'Escape':
-        data?.closeDrawer();
+        data.setIsAimStatus(false);
       // eslint-disable-next-line no-fallthrough
       default:
         return null;
@@ -43,7 +43,7 @@ export const createDrawerContext = () => {
     window.addEventListener<'keydown'>('keydown', handlekeydown, false);
   });
 
-  onBeforeUnmount(() => {
+  onUnmounted(() => {
     window.removeEventListener<'keydown'>('keydown', handlekeydown, false);
   });
 

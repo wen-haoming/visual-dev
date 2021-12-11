@@ -7,21 +7,17 @@ const initialDetailLayerStyle = {
   position: 'absolute',
   display: 'flex',
   'align-items': 'center',
-  'font-family': 'SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace',
+  'font-family': `"SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;`,
   'font-weight': 'bold',
   padding: '6px 8px',
   'pointer-events': 'none',
-  'background-color': 'rgb(51, 55, 64)',
-  'border-radius': '2px',
+  'border-radius': '3px',
+  'background-color': 'var(--v-inspect-bg)',
+  'box-shadow': `var(--v-inspect-box-shadow)`,
 };
-
 const initialDetailLeft = {
   display: 'flex',
   'flex-direction': 'column',
-  color: 'rgb(238, 120, 230)',
-  'border-right': '1px solid rgb(170, 170, 170)',
-  'margin-right': '10px',
-  'padding-right': '10px',
 };
 
 const initialDetailRight = {
@@ -158,10 +154,15 @@ export class OverLayer {
       !this.inspectContentDiv
     )
       return;
-    const { domType, componentName, srcPath } = domDetail;
+    const { domType, srcPath } = domDetail;
 
-    this.detailLeft!.innerHTML = `<div>${domType} in ${componentName}</div><div>${srcPath}</div>`;
-    this.detailRight!.innerHTML = `<div> ${width} x ${height} </div>`;
+    this.detailLeft!.innerHTML = `
+    <div  style="color:var(--v-inspect-tt);">
+      ${domType}
+    </div>
+    <div style="color:var(--v-inspect-sub-tt)">
+      ${srcPath}
+    </div>`;
 
     Object.assign(this.detailLayer?.style, {
       left,

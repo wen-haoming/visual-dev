@@ -26,7 +26,6 @@ onMounted(() => {
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation();
-  useAimData?.closeDrawer();
   useAimData?.setIsAimStatus(true);
 };
 
@@ -40,7 +39,13 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
 
     const path = targetDom?.getAttribute && targetDom?.getAttribute('_p');
 
-    if (targetDom && OverLayerRef.value && previosDom !== targetDom && path) {
+    if (
+      targetDom &&
+      OverLayerRef.value &&
+      previosDom !== targetDom &&
+      path &&
+      mapPathRef.value[path]
+    ) {
       const dimensions = getElementDimensions(targetDom);
       OverLayerRef.value.update(dimensions, {
         domType: targetDom.nodeName.toLowerCase(),
@@ -64,7 +69,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     //
   } finally {
     // previosDom?.classList.remove('__layer-dev-tool');
-    useAimData?.closeDrawer();
+    useAimData?.setIsAimStatus(false);
   }
 };
 

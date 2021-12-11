@@ -26,7 +26,6 @@ const AdvancedSearch = (props) => {
             </span>))}
         </div>
       </div>
-
       <Tabs defaultActiveKey={defaultType} onChange={onTypeChange} tabBarExtraContent={<a className={styles.filterTrigger} onClick={() => {
                 setShowFilter(!showFilter);
             }}>
