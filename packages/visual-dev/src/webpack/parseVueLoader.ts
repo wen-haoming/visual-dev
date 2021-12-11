@@ -17,13 +17,13 @@ export const parseVueLoader = function webpackLoader(this: any, source: string) 
             const { start } = node.loc;
             const tagLen = node.tag.length;
             const idx = start.offset + tagLen;
-            s.insertLeft(
-              idx + 1,
-              ` __p="${`${filePath.replace(
-                process.cwd(),
-                '',
-              )}:${start.line.toString()}:${start.column.toString()}`}" `,
-            );
+
+            const pathVal = `${filePath.replace(
+              process.cwd(),
+              '',
+            )}:${start.line.toString()}:${start.column.toString()}`;
+
+            s.insertLeft(idx + 1, ` data-v-p="${pathVal}|${node.tag}|vue" `);
           }
         },
       ],

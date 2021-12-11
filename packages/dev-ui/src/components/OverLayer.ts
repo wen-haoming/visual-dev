@@ -73,8 +73,9 @@ interface InspectDivOptions {
 }
 
 interface DomDetail {
+  frame: string;
   domType: string;
-  componentName: string;
+  componentName?: string;
   srcPath: string;
 }
 
@@ -154,12 +155,29 @@ export class OverLayer {
       !this.inspectContentDiv
     )
       return;
-    const { domType, srcPath } = domDetail;
+    const { domType, srcPath, componentName, frame } = domDetail;
 
-    this.detailLeft!.innerHTML = `
-    <div  style="color:var(--v-inspect-tt);">
-      ${domType}
+    let renderTitle = '';
+    // 如果是大写的证明并且是有值那就是组件本身
+    if (/^[A-Z]/.test(String(componentName))) {
+      const frameBrandColor =
+        frame === 'react' ? '--v-inspect-frame-react' : '--v-inspect-frame-vue';
+
+      renderTitle = ` <div  style="color:var(--v-inspect-tt);">
+      <span style="display:inline-block;color:#fff;border-radius:2px;background:var(${frameBrandColor});padding: 0 4px">
+        ${componentName}
+      </span>
+       ${domType}
+      </div>`;
+    } else {
+      renderTitle = `
+      <div  style="color:var(--v-inspect-tt);">
+       ${domType}
     </div>
+    `;
+    }
+    this.detailLeft!.innerHTML = `
+    ${renderTitle}
     <div style="color:var(--v-inspect-sub-tt)">
       ${srcPath}
     </div>`;

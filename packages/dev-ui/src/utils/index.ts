@@ -6,9 +6,10 @@ export const getFetch = (url: string) => {
   return fetch(`${prefix}/web-devtools/${url}`).then((res) => res.json());
 };
 
-export const getHasFilePathParentNode = (ele: any) => {
+export const getParentNode = (ele: Element, cb: (ele: Element) => boolean) => {
   if (!ele) return null;
-  while (ele.getAttribute && !ele.getAttribute('_p') && ele !== document.body) {
+
+  while (!cb(ele) && ele.parentNode && ele !== document.body) {
     // eslint-disable-next-line no-param-reassign
     ele = ele.parentNode;
   }

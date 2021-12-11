@@ -4,24 +4,45 @@ import { usePrefix, useAim } from '../hooks';
 import SvgIcon from '../IconCompents/SvgIcon.vue';
 import { OverLayer } from './OverLayer';
 import {
-  getHasFilePathParentNode,
+  getParentNode,
   getElementDimensions,
   getCompNameFromStringPath,
   postRequest,
   getRequest,
 } from '../utils';
 
+interface MapPathdata {
+  [key: string]: { path: string; componentName: string; frame: string };
+}
+
 const useAimData = useAim();
 
 const prefix = usePrefix();
 const OverLayerRef = ref<OverLayer>();
-const mapPathRef = ref<Partial<any>>({});
-let previosDom: HTMLElement | null = null;
+const domMap = ref(new Map<Element, string>());
+
+let previosDom: Element | null = null;
 
 onMounted(() => {
-  getRequest('pathMap').then((res: any) => {
-    mapPathRef.value = res;
+  // 收集全局带有 data-v-p 属性的 Dom
+  const collectElement = () => {
+    const arr = document.querySelectorAll('[data-v-p]');
+    if (arr.length === 0) return;
+    domMap.value.clear();
+    document.querySelectorAll('[data-v-p]').forEach((ele) => {
+      const attr = ele.getAttribute('data-v-p');
+      if (attr) {
+        domMap.value.set(ele, attr);
+      }
+      ele.removeAttribute('data-v-p');
+    });
+    console.log(domMap.value);
+  };
+  collectElement();
+  const observer = new MutationObserver(() => {
+    collectElement();
   });
+  observer.observe(document.body, { attributes: false, childList: true, subtree: true });
 });
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
@@ -33,24 +54,19 @@ const handleAimClick = (e: SVGElementEventMap['click']) => {
 const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
   requestAnimationFrame(() => {
     e.stopPropagation();
-    let targetDom = e.target as HTMLElement | null;
-
-    targetDom = getHasFilePathParentNode(targetDom);
-
-    const path = targetDom?.getAttribute && targetDom?.getAttribute('_p');
-
-    if (
-      targetDom &&
-      OverLayerRef.value &&
-      previosDom !== targetDom &&
-      path &&
-      mapPathRef.value[path]
-    ) {
+    //  获取对应的dom
+    const targetDom = getParentNode(e.target as Element, (ele) => !!domMap.value.get(ele));
+    if (!targetDom) return;
+    const targetDomData = domMap.value.get(targetDom);
+    if (targetDomData && targetDom && OverLayerRef.value && previosDom !== targetDom) {
       const dimensions = getElementDimensions(targetDom);
+      const [srcPath, componentName, frame] = targetDomData.split('|');
+
       OverLayerRef.value.update(dimensions, {
+        frame,
+        componentName,
         domType: targetDom.nodeName.toLowerCase(),
-        componentName: getCompNameFromStringPath(mapPathRef.value[path]),
-        srcPath: mapPathRef.value[path],
+        srcPath: getCompNameFromStringPath(srcPath),
       });
     }
     previosDom = targetDom;
@@ -61,14 +77,15 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   e.stopPropagation();
   e.preventDefault();
   try {
-    let targetDom = e.target as HTMLElement | null;
-    targetDom = getHasFilePathParentNode(targetDom);
-    const filePath = targetDom?.getAttribute('_p');
-    await postRequest('launchEditor', { filePath: mapPathRef.value[filePath] });
-  } catch (e) {
-    //
+    const targetDom = getParentNode(e.target as Element, (ele) => !!domMap.value.get(ele));
+    if (!targetDom) return;
+    const targetDomData = domMap.value.get(targetDom);
+    if (targetDomData) {
+      const [srcPath] = targetDomData.split('|');
+      console.log(srcPath);
+      await postRequest('launchEditor', { filePath: srcPath });
+    }
   } finally {
-    // previosDom?.classList.remove('__layer-dev-tool');
     useAimData?.setIsAimStatus(false);
   }
 };

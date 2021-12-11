@@ -1,8 +1,7 @@
 import type { Visitor } from '@babel/core';
 import { jsxIdentifier, jsxAttribute, stringLiteral } from '@babel/types';
-import { uid } from '../utils/uid';
 
-export const pathMap: Record<string, string> = {};
+export const pathMap: Record<string, { path: string; componentName: string; frame: string }> = {};
 
 export const insertJSXElementPathPlugin = (): { visitor: Visitor } => {
   return {
@@ -12,29 +11,19 @@ export const insertJSXElementPathPlugin = (): { visitor: Visitor } => {
           const filePath = state?.file?.opts?.filename;
 
           if (filePath.match(/node_modules/g) || !filePath) return;
-          let componentName = ((path.node as any)?.name?.name || '') as string;
-
-          if (!/^[A-Z]/.test(componentName)) {
-            componentName = '';
-          } else {
-            componentName = `:${componentName}`;
-          }
+          const componentName = ((path.node as any)?.name?.name || '') as string;
 
           const { line, column } = path.node.loc?.start || { line: 0, column: 0 };
 
-          const val = uid(6);
-
-          const relativePath: any = jsxAttribute(jsxIdentifier(`_p`), stringLiteral(val));
           const pathVal = `${state.filename.replace(
             process.cwd(),
             '',
-          )}:${line.toString()}:${column.toString()}${componentName}`;
+          )}:${line.toString()}:${column.toString()}`;
 
-          if (!pathMap[val]) {
-            pathMap[val] = pathVal;
-          } else {
-            pathMap[uid(6)] = pathVal;
-          }
+          const relativePath: any = jsxAttribute(
+            jsxIdentifier(`data-v-p`),
+            stringLiteral(`${pathVal}|${componentName}|react`),
+          );
 
           (path.node as any).attributes.push(relativePath);
         },
