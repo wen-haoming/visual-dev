@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import escapeHtml from 'escape-html';
 import prism from 'prismjs';
 

@@ -13,3 +13,4 @@ examples
 public
 *.png
 assets
+.npmrc
