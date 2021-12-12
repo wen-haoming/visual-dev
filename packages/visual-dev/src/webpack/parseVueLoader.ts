@@ -18,12 +18,16 @@ export const parseVueLoader = function webpackLoader(this: any, source: string) 
             const tagLen = node.tag.length;
             const idx = start.offset + tagLen;
 
-            const pathVal = `${filePath.replace(
-              process.cwd(),
-              '',
-            )}:${start.line.toString()}:${start.column.toString()}`;
+            const absolutePath = `${filePath}:${start.line.toString()}:${start.column.toString()}`;
 
-            s.insertLeft(idx + 1, ` data-v-p="${pathVal}|${node.tag}|vue" `);
+            const relativePath = `${absolutePath.replace(process.cwd(), '')}`;
+
+            const attr = ` data-v-p="${absolutePath}|${relativePath}|${node.tag}|vue" `;
+
+            // `${absolutePath}|${relativePath}|${componentName}|react`
+            // const pathVal = `${filePath}:${start.line.toString()}:${start.column.toString()}`;
+
+            s.insertLeft(idx + 1, attr);
           }
         },
       ],

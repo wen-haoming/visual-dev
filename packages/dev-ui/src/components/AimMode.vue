@@ -8,7 +8,7 @@ import {
   getElementDimensions,
   getCompNameFromStringPath,
   postRequest,
-  getRequest,
+  launchEditor,
 } from '../utils';
 
 interface MapPathdata {
@@ -36,7 +36,6 @@ onMounted(() => {
       }
       ele.removeAttribute('data-v-p');
     });
-    console.log(domMap.value);
   };
   collectElement();
   const observer = new MutationObserver(() => {
@@ -60,13 +59,13 @@ const inspectComponent = async (e: HTMLElementEventMap['mousemove']) => {
     const targetDomData = domMap.value.get(targetDom);
     if (targetDomData && targetDom && OverLayerRef.value && previosDom !== targetDom) {
       const dimensions = getElementDimensions(targetDom);
-      const [srcPath, componentName, frame] = targetDomData.split('|');
+      const [, replatePath, componentName, frame] = targetDomData.split('|');
 
       OverLayerRef.value.update(dimensions, {
         frame,
         componentName,
         domType: targetDom.nodeName.toLowerCase(),
-        srcPath: getCompNameFromStringPath(srcPath),
+        srcPath: replatePath,
       });
     }
     previosDom = targetDom;
@@ -81,9 +80,11 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
     if (!targetDom) return;
     const targetDomData = domMap.value.get(targetDom);
     if (targetDomData) {
-      const [srcPath] = targetDomData.split('|');
-      console.log(srcPath);
-      await postRequest('launchEditor', { filePath: srcPath });
+      const [absolutePath] = targetDomData.split('|');
+      const [srcPath, line, column] = absolutePath.split(':');
+
+      const url = launchEditor({ srcPath, line, column, editor: 'vscode' });
+      window.location.href = url;
     }
   } finally {
     useAimData?.setIsAimStatus(false);
@@ -112,8 +113,7 @@ watch([useAimData], () => {
 </template>
 
 <style lang="less">
-@import '../style/vars.less';
-
-.@{prefix-cls}-aim {
-}
+// @import '../style/vars.less';
+// .@{prefix-cls}-aim {
+// }
 </style>

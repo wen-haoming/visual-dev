@@ -167,7 +167,6 @@ export class OverLayer {
       <span style="display:inline-block;color:#fff;border-radius:2px;background:var(${frameBrandColor});padding: 0 4px">
         ${componentName}
       </span>
-       ${domType}
       </div>`;
     } else {
       renderTitle = `

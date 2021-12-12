@@ -15,17 +15,16 @@ export const insertJSXElementPathPlugin = (): { visitor: Visitor } => {
 
           const { line, column } = path.node.loc?.start || { line: 0, column: 0 };
 
-          const pathVal = `${state.filename.replace(
-            process.cwd(),
-            '',
-          )}:${line.toString()}:${column.toString()}`;
+          const absolutePath = `${state.filename}:${line.toString()}:${column.toString()}`;
 
-          const relativePath: any = jsxAttribute(
+          const relativePath = `${absolutePath.replace(process.cwd(), '')}`;
+
+          const attr: any = jsxAttribute(
             jsxIdentifier(`data-v-p`),
-            stringLiteral(`${pathVal}|${componentName}|react`),
+            stringLiteral(`${absolutePath}|${relativePath}|${componentName}|react`),
           );
 
-          (path.node as any).attributes.push(relativePath);
+          (path.node as any).attributes.push(attr);
         },
       },
     },

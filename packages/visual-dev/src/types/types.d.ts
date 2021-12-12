@@ -28,8 +28,6 @@ declare module '@babel/template' {
   export default template;
 }
 
-declare module 'slash2';
-
 declare module 'prismjs';
 
 declare module 'escape-html';

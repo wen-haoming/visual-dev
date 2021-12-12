@@ -1,4 +1,5 @@
 export * from './api';
+export * from './launchEditor';
 
 export const prefix = `http://localhost:10078`;
 
