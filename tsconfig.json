@@ -1,5 +1,4 @@
 {
-  "exclude": ["node_modules"],
   "compilerOptions": {
     "typeRoots": ["node_modules/@types"],
     "target": "ES2018",
@@ -10,5 +9,6 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["node_modules", "**/__test?__", "**/dist"]
 }

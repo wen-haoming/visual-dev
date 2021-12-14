@@ -52,7 +52,7 @@ const handleClick = (menuValue: any) => {
         v-for="(value, key, index) in data.sliderObjectOrContent"
         :key="String(key) + String(index || 0)"
       >
-        <li
+        <!-- <li
           :class="{ 'l-li': true, active: value === docsData?.docsContent }"
           v-if="key !== '__open'"
         >
@@ -69,7 +69,7 @@ const handleClick = (menuValue: any) => {
               :slider-object-or-content="value"
             />
           </transition>
-        </li>
+        </li> -->
       </template>
     </ul>
   </div>

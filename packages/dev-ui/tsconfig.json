@@ -1,18 +1,26 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "allowJs": true,
     "strict": true,
+    "target": "ES2018",
+    "module": "ESNext",
+    "noImplicitAny": false,
+    "declaration": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "jsx": "preserve",
     "sourceMap": true,
+    "lib": ["ES2018", "DOM"],
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "lib": ["esnext", "dom"],
+    "baseUrl": "./src",
+    "rootDir": ".",
+    "typeRoots": ["node_modules/@types"],
     "paths": {
       "@": ["./src/*"]
     }
   },
+  "exclude": ["node_modules", "**/__test?__", "**/dist"],
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

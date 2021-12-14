@@ -6,7 +6,7 @@ export const getConfig = (props: ServerOptions): RequestHandler => {
 
   if (props.resolve) {
     // 窗口模式
-    mode = 'drawer';
+    mode = 'aim';
   } else {
     // 仅显示瞄准
     mode = 'aim';

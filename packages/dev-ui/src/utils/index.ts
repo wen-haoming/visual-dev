@@ -12,7 +12,7 @@ export const getParentNode = (ele: Element, cb: (ele: Element) => boolean) => {
 
   while (!cb(ele) && ele.parentNode && ele !== document.body) {
     // eslint-disable-next-line no-param-reassign
-    ele = ele.parentNode;
+    (ele as any) = ele.parentNode;
   }
   return ele;
 };

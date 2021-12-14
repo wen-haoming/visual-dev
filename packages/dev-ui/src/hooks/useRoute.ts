@@ -1,4 +1,4 @@
-import { defineAsyncComponent, reactive, provide, inject, shallowRef } from 'vue';
+import { reactive, provide, inject } from 'vue';
 
 export const useRouteNamespace = 'useRoute';
 
@@ -11,7 +11,7 @@ const rawData = {
   routes: [
     {
       route: 'Docs',
-      component: shallowRef(defineAsyncComponent(() => import('../Pages/Docs/index.vue'))),
+      // component: shallowRef(defineAsyncComponent(() => import('../Pages/Docs/index.vue'))),
     },
   ],
   currentRoute: {

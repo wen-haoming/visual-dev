@@ -6,13 +6,9 @@ export default defineConfig({
   },
   routes: [{ path: '/', component: '@/pages/index' }],
   fastRefresh: {},
-  // plugins:[require.resolve('./node_modules/visual-dev/dist/plugins/umi'),],
-
-  plugins:['visual-dev/plugins/umi'],
-
-  resolve:{
-    includes:['components']
-  },
+  plugins:[require.resolve('../../packages/visual-dev/src/plugins/umi/index.ts'),],
+  // visualDev:{}
+  // plugins:['visual-dev/plugins/umi'],
   // chainWebpack(memo) {
   //   memo.plugin('web-devtools').use(WebpackDevtoolPlugin);
   // },

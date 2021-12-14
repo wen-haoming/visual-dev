@@ -3,13 +3,7 @@ import { ref, watch, onMounted } from 'vue';
 import { usePrefix, useAim } from '../hooks';
 import SvgIcon from '../IconCompents/SvgIcon.vue';
 import { OverLayer } from './OverLayer';
-import {
-  getParentNode,
-  getElementDimensions,
-  getCompNameFromStringPath,
-  postRequest,
-  launchEditor,
-} from '../utils';
+import { getParentNode, getElementDimensions, launchEditor } from '../utils';
 
 interface MapPathdata {
   [key: string]: { path: string; componentName: string; frame: string };
@@ -19,16 +13,13 @@ const useAimData = useAim();
 
 const prefix = usePrefix();
 const OverLayerRef = ref<OverLayer>();
-const domMap = ref(new Map<Element, string>());
+const domMap = ref(new WeakMap<Element, string>());
 
 let previosDom: Element | null = null;
 
 onMounted(() => {
   // 收集全局带有 data-v-p 属性的 Dom
   const collectElement = () => {
-    const arr = document.querySelectorAll('[data-v-p]');
-    if (arr.length === 0) return;
-    domMap.value.clear();
     document.querySelectorAll('[data-v-p]').forEach((ele) => {
       const attr = ele.getAttribute('data-v-p');
       if (attr) {

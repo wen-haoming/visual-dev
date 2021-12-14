@@ -1,6 +1,5 @@
 import express, { json } from 'express';
 import cors from 'cors';
-import launchEditor from '@umijs/launch-editor';
 import { SERVER_PORT } from '../index';
 import { getMenu, injectFile, pathMapMid, getConfig } from './MiddleWare';
 
@@ -26,15 +25,10 @@ export const createServer = async (options: ServerOptions = {}) => {
 
   app.get('/web-devtools/getMenu', getMenu({ includes: resolve.includes }));
 
-  app.post('/web-devtools/launchEditor', async (req, res) => {
-    await launchEditor(process.cwd() + req.body.filePath);
-    res.send({});
-  });
-
   app.post('/web-devtools/injectFile', injectFile);
 
   app.listen(port, () => {
     // eslint-disable-next-line
-    console.log(`dev-plugin is listening ${port}`);
+    console.log(`visual-dev is listening on port : ${port}`);
   });
 };

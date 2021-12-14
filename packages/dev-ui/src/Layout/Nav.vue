@@ -13,7 +13,7 @@ const router = useRoute();
     </div>
     <nav class="h-nav">
       <div
-        @click="router?.changeCurrentRoute(route)"
+        @click="router?.changeCurrentRoute(route as any)"
         class="nav-item"
         :class="router?.currentRoute.route === route.route && 'active'"
         :key="route.route"

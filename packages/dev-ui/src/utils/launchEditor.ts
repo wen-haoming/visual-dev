@@ -24,13 +24,13 @@ export function launchEditor({
   line?: number | string;
   column?: number | string;
 }): string {
-  return EDITORS[editor].replace(/{(.*?)}/g, (_$, $1) => {
+  return EDITORS[editor].replace(/{(.*?)}/g, (_$: any, $1: any): string => {
     if ($1 === 'path') {
       return srcPath;
     }
     if ($1 === 'line') {
-      return line;
+      return String(line);
     }
-    return column;
+    return String(column);
   });
 }

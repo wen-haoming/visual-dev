@@ -1,12 +1,38 @@
 <script setup lang="ts">
 import { onMounted, ref, shallowRef, defineAsyncComponent, h } from 'vue';
-import { createPrefixContext, createDrawerContext } from './hooks';
+import { createPrefixContext, createDrawerContext, useHotkeys } from './hooks';
 import { getRequest } from './utils';
 
-createDrawerContext();
+const data = createDrawerContext();
 const prefix = createPrefixContext('vd');
 
 const AsyncApp = shallowRef<any>(h('span', {}));
+
+// 初始化快捷键
+useHotkeys({
+  toggle_drawer: {
+    keys: [
+      ['command', 'shift', 'z'],
+      ['ctrl', 'shift', 'z'],
+    ],
+    callback() {
+      if (data.visibile) {
+        data.closeDrawer();
+      } else {
+        data.openDrawer();
+      }
+    },
+  },
+  toggle_aim: {
+    keys: [
+      ['command', 'shift', 'x'],
+      ['ctrl', 'shift', 'x'],
+    ],
+    callback() {
+      data.setIsAimStatus(!data.isAimStatus);
+    },
+  },
+});
 
 onMounted(async () => {
   const { mode } = await getRequest('getConfig');
@@ -36,6 +62,7 @@ onMounted(async () => {
   transition: all 0.2s;
   cursor: pointer;
   color: var(--v-brand);
+  z-index: 999999999;
   &:hover {
     transform: rotateZ(90deg);
     left: 5px;
