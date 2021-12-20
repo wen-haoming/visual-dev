@@ -2,7 +2,7 @@ import { parsePath } from '../../utils';
 import { parse } from '@babel/parser';
 import fs from 'fs-extra';
 import { transformFromAst } from '@babel/core';
-import { injectCoponent } from '../../babel';
+import { injectCoponent } from '../../ast';
 import type { RequestHandler } from 'express';
 
 export const injectFile: RequestHandler = (req, res) => {

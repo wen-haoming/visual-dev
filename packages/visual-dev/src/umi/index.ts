@@ -1,7 +1,7 @@
 import type { IApi } from 'umi';
 import type { Compiler } from 'webpack';
 import { createServer } from '../server';
-import { insertJSXElementPathPlugin } from '../babel';
+import { insertJSXElementPathPlugin } from '../ast';
 
 import fs from 'fs';
 import path from 'path';
