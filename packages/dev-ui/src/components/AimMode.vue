@@ -68,7 +68,10 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   e.preventDefault();
   try {
     const targetDom = getParentNode(e.target as Element, (ele) => !!domMap.value.get(ele));
-    if (!targetDom) return;
+    if (!targetDom) {
+      OverLayerRef.value?.unmount();
+      return;
+    }
     const targetDomData = domMap.value.get(targetDom);
     if (targetDomData) {
       const [absolutePath] = targetDomData.split('|');

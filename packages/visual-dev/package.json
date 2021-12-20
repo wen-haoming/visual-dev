@@ -1,6 +1,6 @@
 {
   "name": "visual-dev",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "plugin to facilitate project maintenance, provide document rendering, and the ability to locate components to ide",
   "main": "./plugins/index.js",
   "types": "./plugins/index.d.ts",
@@ -34,7 +34,8 @@
   },
   "peerDependencies": {
     "umi": ">=3.x",
-    "webpack": ">4.x"
+    "webpack": ">4.x",
+    "vite": ">2.x"
   },
   "devDependencies": {
     "@types/babel-core": "^6.25.7",

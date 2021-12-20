@@ -1,22 +1,9 @@
-import { parse } from '@babel/parser';
-import { transformFromAst } from '@babel/core';
-import { insertJSXElementPathPlugin } from '../babel';
+import { insertReactAttr } from '../ast/insertReactAttr';
 
 export const devtoolLoader = function webpackLoader(this: any, source: any) {
-  const { rootContext: rootPath, resourcePath: filePath } = this;
+  const { resourcePath: filePath } = this;
 
-  const ast = parse(source.toString(), {
-    sourceType: 'unambiguous',
-    allowUndeclaredExports: true,
-    allowImportExportEverywhere: true,
-    plugins: ['typescript', 'jsx'],
-  });
-  const { code } = transformFromAst(ast as any, source.toString(), {
-    plugins: [insertJSXElementPathPlugin],
-    filename: filePath,
-    filenameRelative: rootPath,
-  });
-  return code;
+  return insertReactAttr(source, filePath);
 };
 
 export default devtoolLoader;
