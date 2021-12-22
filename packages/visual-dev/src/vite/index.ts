@@ -1,5 +1,11 @@
 import type { PluginOption } from 'vite';
 import { insertVueAttr, insertReactAttr } from '../ast';
+import path from 'path';
+import fs from 'fs';
+import { createServer } from '../server';
+
+const assetsDir = path.resolve(__dirname, `../../dev-ui/assets`);
+const templateFile = path.resolve(__dirname, '../../dev-ui/index.html');
 
 const vitePlugin = (): PluginOption => {
   return {
@@ -13,6 +19,19 @@ const vitePlugin = (): PluginOption => {
         return insertVueAttr(code, id);
       }
       return code;
+    },
+    transformIndexHtml(html) {
+      let targetTemplate = fs.readFileSync(templateFile, 'utf-8');
+
+      targetTemplate = targetTemplate.replace(/\/assets/g, assetsDir);
+
+      html = html.replace(/<body>([\s\S]*)<\/body>/g, ($1: string, $2: string) => {
+        return $2 + targetTemplate;
+      });
+      return html;
+    },
+    buildStart() {
+      createServer({});
     },
   };
 };

@@ -35,7 +35,6 @@ const AdvancedSearch = (props) => {
         <TabPane tab="项目" key="projects"/>
         <TabPane tab="应用" key="applications"/>
       </Tabs>
-
       <QueryFilter submitter={false} span={24} labelWidth="auto" split onChange={onFilterChange} className={styles.filter}>
         <ProForm.Group title="姓名">
           <ProFormText name="name"/>
