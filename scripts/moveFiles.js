@@ -23,7 +23,7 @@ fs.writeFileSync(transformFlePath, newContent);
 
 const transformFlePath2 = resolve('../demo/plugins/ast/insertReactAttr.ts');
 
-let newContent2 = fs.readFileSync(transformFlePath, 'utf-8');
+let newContent2 = fs.readFileSync(transformFlePath2, 'utf-8');
 
 newContent2 = newContent2.replace(
   'stringLiteral(`${absolutePath}|${relativePath}|${componentName}|react`),',
