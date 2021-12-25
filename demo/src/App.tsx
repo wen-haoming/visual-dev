@@ -1,42 +1,19 @@
-import { useState } from 'react';
-import logo from './logo.svg';
+import Header from './header';
+import List from './List';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
+      <img src="/visual-dev/logo.png" alt="" />
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
+        <Header />
+        <p className="title">
+          Quick jump to local IDE source code directly from browser React component by just a simple
+          click!
         </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <List />
+        <code className="code"> npm i -D visual-dev</code>
       </header>
     </div>
   );
