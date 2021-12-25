@@ -78,7 +78,8 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
       const [srcPath, line, column] = absolutePath.split(':');
 
       const url = launchEditor({ srcPath, line, column, editor: 'vscode' });
-      window.location.href = url;
+      // window.location.href = url;
+      window.open(url);
     }
   } finally {
     useAimData?.setIsAimStatus(false);

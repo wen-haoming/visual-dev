@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import VisualDev from '../packages/visual-dev/src/vite';
+import VisualDev from './plugins/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({

@@ -23,7 +23,7 @@ export const insertJSXElementPathPlugin = (): { visitor: Visitor } => {
 
           const attr: any = jsxAttribute(
             jsxIdentifier(`data-v-p`),
-            stringLiteral(`${absolutePath}|${relativePath}|${componentName}|react`),
+            stringLiteral(`${relativePath}|${relativePath}|${componentName}|react`),
           );
 
           (path.node as any).attributes.push(attr);

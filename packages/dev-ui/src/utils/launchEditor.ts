@@ -11,6 +11,8 @@ const EDITORS = {
   atom: 'atom://core/open/file?filename={path}&line={line}&column={column}',
 };
 
+const openGithub = `https://github.com/wen-haoming/visual-dev/blob/master/demo{path}#L{line}`;
+
 export type Editor = keyof typeof EDITORS;
 
 export function launchEditor({
@@ -24,13 +26,16 @@ export function launchEditor({
   line?: number | string;
   column?: number | string;
 }): string {
-  return EDITORS[editor].replace(/{(.*?)}/g, (_$: any, $1: any): string => {
-    if ($1 === 'path') {
-      return srcPath;
-    }
-    if ($1 === 'line') {
-      return String(line);
-    }
-    return String(column);
-  });
+  return (window.isDemo ? openGithub : EDITORS[editor]).replace(
+    /{(.*?)}/g,
+    (_$: any, $1: any): string => {
+      if ($1 === 'path') {
+        return srcPath;
+      }
+      if ($1 === 'line') {
+        return String(line);
+      }
+      return String(column);
+    },
+  );
 }

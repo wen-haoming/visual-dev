@@ -16,11 +16,12 @@
     "build:ui": "cd ./packages/dev-ui && yarn build",
     "build:visual-dev": "cd ./packages/visual-dev  && yarn build",
     "build:end": "node ./scripts/moveFiles.js",
-    "build": " run-s build:*",
+    "build": "run-s build:*",
     "dev": "run-p dev:*",
     "start": "cd examples && cd cra-app && yarn start",
     "clean": "node ./scripts/clear.js",
     "format": "prettier --write ./packages && npm run lint",
+    "build-demo": "cd demo && yarn build",
     "lint": "eslint ./packages --ext js,jsx,ts,tsx,vue --fix --color"
   },
   "repository": {

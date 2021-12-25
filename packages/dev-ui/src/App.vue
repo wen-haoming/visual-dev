@@ -35,6 +35,10 @@ useHotkeys({
 });
 
 onMounted(async () => {
+  if (window.isDemo) {
+    AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
+    return;
+  }
   const { mode } = await getRequest('getConfig');
 
   if (mode === 'aim') {
