@@ -9,19 +9,20 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:before": "yarn clean",
-    "dev:ui": "cd ./packages/dev-ui && yarn dev",
-    "dev:visual-dev": "cd ./packages/visual-dev && yarn dev",
+    "dev:before": "pnpm clean",
+    "dev:ui": "cd ./packages/dev-ui && pnpm dev",
+    "dev:visual-dev": "cd ./packages/visual-dev && pnpm dev",
     "build:before": "node ./scripts/clear.js",
-    "build:ui": "cd ./packages/dev-ui && yarn build",
-    "build:visual-dev": "cd ./packages/visual-dev  && yarn build",
+    "build:ui": "cd ./packages/dev-ui && pnpm build",
+    "build:visual-dev": "cd ./packages/visual-dev  && pnpm build",
     "build:end": "node ./scripts/moveFiles.js",
+    "build:demo": "cd ./demo  && pnpm build",
+    "build:demo-move-file": "node ./scripts/demo.js",
     "build": "run-s build:*",
     "dev": "run-p dev:*",
-    "start": "cd examples && cd cra-app && yarn start",
+    "start": "cd examples && cd cra-app && pnpm start",
     "clean": "node ./scripts/clear.js",
     "format": "prettier --write ./packages && npm run lint",
-    "build-demo": "cd demo && yarn build",
     "lint": "eslint ./packages --ext js,jsx,ts,tsx,vue --fix --color"
   },
   "repository": {

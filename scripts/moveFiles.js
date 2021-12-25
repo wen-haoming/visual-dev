@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs-extra');
-const { execSync } = require('child_process');
 
 const resolve = (str) => path.resolve(__dirname, str);
 
@@ -20,7 +19,3 @@ newContent = newContent.replace(
 newContent = newContent.replace('createServer({});', '');
 
 fs.writeFileSync(transformFlePath, newContent);
-
-execSync('pnpm run build-demo');
-
-fs.copySync(resolve('../demo/dev-ui/assets'), resolve('../demo/dist/assets'));

@@ -34,6 +34,25 @@ importers:
       typescript: 4.5.4
       yorkie: 2.0.0
 
+  demo:
+    specifiers:
+      '@types/react': ^17.0.33
+      '@types/react-dom': ^17.0.10
+      '@vitejs/plugin-react': ^1.0.7
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      typescript: ^4.4.4
+      vite: ^2.7.2
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    devDependencies:
+      '@types/react': 17.0.38
+      '@types/react-dom': 17.0.11
+      '@vitejs/plugin-react': 1.1.3
+      typescript: 4.5.4
+      vite: 2.7.6
+
   examples/cra-app:
     specifiers:
       '@ant-design/icons': ^4.7.0
@@ -2930,6 +2949,32 @@ packages:
       '@babel/core': 7.16.5
       '@babel/plugin-transform-react-jsx': 7.16.5_@babel+core@7.16.5
 
+  /@babel/plugin-transform-react-jsx-self/7.16.5_@babel+core@7.16.5:
+    resolution:
+      {
+        integrity: sha512-fvwq+jir1Vn4f5oBS0H/J/gD5CneTD53MHs+NMjlHcha4Sq35fwxI5RtmJGEBXO+M93f/eeD9cAhRPhmLyJiVw==,
+      }
+    engines: { node: '>=6.9.0' }
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.16.5
+      '@babel/helper-plugin-utils': 7.16.5
+    dev: true
+
+  /@babel/plugin-transform-react-jsx-source/7.16.5_@babel+core@7.16.5:
+    resolution:
+      {
+        integrity: sha512-/eP+nZywJntGLjSPjksAnM9/ELIs3RbiEuTu2/zAOzwwBcfiu+m/iptEq1lERUUtSXubYSHVnVHMr13GR+TwPw==,
+      }
+    engines: { node: '>=6.9.0' }
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.16.5
+      '@babel/helper-plugin-utils': 7.16.5
+    dev: true
+
   /@babel/plugin-transform-react-jsx/7.16.5_@babel+core@7.12.3:
     resolution:
       {
@@ -4529,6 +4574,17 @@ packages:
       picomatch: 2.3.0
       rollup: 1.32.1
     dev: false
+
+  /@rollup/pluginutils/4.1.2:
+    resolution:
+      {
+        integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==,
+      }
+    engines: { node: '>= 8.0.0' }
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.0
+    dev: true
 
   /@sindresorhus/is/0.14.0:
     resolution:
@@ -6835,6 +6891,25 @@ packages:
     dependencies:
       '@umijs/deps': 3.5.20
 
+  /@vitejs/plugin-react/1.1.3:
+    resolution:
+      {
+        integrity: sha512-xv8QujX/uR4ti8qpt0hMriM2bdpxX4jm4iU6GAZfCwHjh/ewkX/8DJgnmQpE0HSJmgz8dixyUnRJKi2Pf1nNoQ==,
+      }
+    engines: { node: '>=12.0.0' }
+    dependencies:
+      '@babel/core': 7.16.5
+      '@babel/plugin-transform-react-jsx': 7.16.5_@babel+core@7.16.5
+      '@babel/plugin-transform-react-jsx-development': 7.16.5_@babel+core@7.16.5
+      '@babel/plugin-transform-react-jsx-self': 7.16.5_@babel+core@7.16.5
+      '@babel/plugin-transform-react-jsx-source': 7.16.5_@babel+core@7.16.5
+      '@rollup/pluginutils': 4.1.2
+      react-refresh: 0.11.0
+      resolve: 1.20.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /@vitejs/plugin-vue/1.10.2_vite@2.7.6:
     resolution:
       {
@@ -7192,7 +7267,7 @@ packages:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
       eslint: '>= 1.6.0 < 7.0.0'
     dependencies:
-      '@vue/cli-service': 4.5.15_886efc292b16b81b9899e9ea241a73a2
+      '@vue/cli-service': 4.5.15_55067fb16970f9036b67d4c0999ef758
       '@vue/cli-shared-utils': 4.5.15
       eslint: 6.8.0
       eslint-loader: 2.2.1_eslint@6.8.0+webpack@4.46.0
@@ -7213,7 +7288,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
     dependencies:
-      '@vue/cli-service': 4.5.15_886efc292b16b81b9899e9ea241a73a2
+      '@vue/cli-service': 4.5.15_55067fb16970f9036b67d4c0999ef758
       '@vue/cli-shared-utils': 4.5.15
     dev: true
 
@@ -7225,7 +7300,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
     dependencies:
-      '@vue/cli-service': 4.5.15_886efc292b16b81b9899e9ea241a73a2
+      '@vue/cli-service': 4.5.15_55067fb16970f9036b67d4c0999ef758
     dev: true
 
   /@vue/cli-service/4.5.15_55067fb16970f9036b67d4c0999ef758:
@@ -24254,6 +24329,14 @@ packages:
         integrity: sha512-PgidR3wST3dDYKr6b4pJoqQFpPGNKDSCDx4cZoshjXipw3LzO7mG1My2pwEzz2JVkF+inx3xRpDeQLFQGH/hsQ==,
       }
     engines: { node: '>=0.10.0' }
+
+  /react-refresh/0.11.0:
+    resolution:
+      {
+        integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==,
+      }
+    engines: { node: '>=0.10.0' }
+    dev: true
 
   /react-refresh/0.8.3:
     resolution:
