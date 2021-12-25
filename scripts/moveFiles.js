@@ -16,6 +16,7 @@ newContent = newContent.replace(
   'targetTemplate = targetTemplate.replace(/\\/assets/g, assetsDir);',
   '',
 );
+
 newContent = newContent.replace('createServer({});', '');
 
 fs.writeFileSync(transformFlePath, newContent);
