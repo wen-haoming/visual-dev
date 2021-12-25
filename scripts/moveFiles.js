@@ -13,8 +13,8 @@ const transformFlePath = resolve('../demo/plugins/vite/index.ts');
 let newContent = fs.readFileSync(transformFlePath, 'utf-8');
 
 newContent = newContent.replace(
-  'targetTemplate = targetTemplate.replace(/\\/assets/g, assetsDir);',
-  '',
+  `targetTemplate.replace(/\\/assets/g, assetsDir);`,
+  `targetTemplate.replace(/\\/assets/g, '/visual-dev/assets');`,
 );
 
 newContent = newContent.replace('createServer({});', '');

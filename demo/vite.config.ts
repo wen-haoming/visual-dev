@@ -5,4 +5,5 @@ import VisualDev from './plugins/vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [VisualDev(), react()],
+  base: '/visual-dev/',
 });
