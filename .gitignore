@@ -10,3 +10,5 @@ packages/visual-dev/package-lock.json
 packages/visual-dev/dev-ui
 packages/visual-dev/plugins
 packages/visual-dev/target
+demo/dev-ui
+demo/plugins
