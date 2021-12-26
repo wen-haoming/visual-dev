@@ -6,4 +6,7 @@ import VisualDev from './plugins/vite';
 export default defineConfig({
   plugins: [VisualDev(), react()],
   base: '/visual-dev',
+  build: {
+    sourcemap: 'hidden',
+  },
 });
