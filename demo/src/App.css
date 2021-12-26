@@ -1,19 +1,19 @@
+:root {
+  --brand: #57a9fb;
+  --brand-font-color: #86909c;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
 .logo {
@@ -25,7 +25,7 @@
 
 .logo-hl {
   margin-right: 1rem;
-  background-color: #57a9fb;
+  background-color: var(--brand);
   padding: 2px 10px;
   color: #fff;
   border-radius: 5px;
@@ -36,25 +36,83 @@
 }
 
 .logo-shl {
-  color: #57a9fb;
+  color: var(--brand);
 }
 
 .App-link {
-  color: #57a9fb;
+  color: var(--brand);
 }
 
 .title {
-  color: #86909c;
+  max-width: 980px;
+  padding: 0 50px;
+  color: var(--brand-font-color);
 }
 
 li {
-  color: #86909c;
+  color: var(--brand-font-color);
 }
 
 .code {
   font-size: 18px;
-  background-color: #57a9fb;
+  background-color: var(--brand);
   color: #fff;
-  padding: 5px 10px;
+  padding: 5px 15px;
   border-radius: 3px;
+  font-weight: 600;
+}
+
+.container {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: var(--brand-font-color);
+  font-size: 22px;
+}
+
+.container .text {
+  display: inline-block;
+  margin-right: 20px;
+  animation: twinkling 2s ease-in-out infinite;
+}
+
+.vd-aim {
+}
+
+@keyframes twinkling {
+  0% {
+    opacity: 0.5;
+    filter: alpha(opacity=20);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: alpha(opacity=50);
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 0.5;
+    filter: alpha(opacity=20);
+    transform: scale(1);
+  }
+}
+
+.footer {
+  margin: 50px auto;
+  font-size: 25px;
+}
+
+.footer .about-me {
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0 20px;
+  color: var(--brand-font-color);
+}
+
+.footer .anticon-github {
+  color: #000;
 }
