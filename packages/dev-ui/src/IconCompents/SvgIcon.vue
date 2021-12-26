@@ -1,18 +1,110 @@
+<script setup lang="ts">
+import { usePrefix } from '../hooks';
+
+const prefix = usePrefix('aim-icon');
+</script>
 <template>
-  <svg
-    t="1630214667810"
-    class="icon"
-    viewBox="0 0 1024 1024"
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    p-id="8910"
-    width="200"
-    height="200"
-  >
-    <path
-      d="M615.901867 0a519.406933 519.406933 0 0 1 184.661333 76.526933 104.3456 104.3456 0 0 0 6.929067 139.9808 104.482133 104.482133 0 0 0 139.9808 7.031467A518.656 518.656 0 0 1 1024 408.098133a104.482133 104.482133 0 0 0 0 207.872 519.0656 519.0656 0 0 1-76.526933 184.593067 104.3456 104.3456 0 0 0-139.9808 6.929067 104.482133 104.482133 0 0 0-7.031467 139.9808A518.656 518.656 0 0 1 615.901867 1024a104.482133 104.482133 0 0 0-207.872 0 519.0656 519.0656 0 0 1-184.593067-76.526933 104.3456 104.3456 0 0 0-6.929067-139.9808 104.482133 104.482133 0 0 0-139.9808-7.031467A518.656 518.656 0 0 1 0 615.901867a104.482133 104.482133 0 0 0 0-207.872 519.2704 519.2704 0 0 1 76.526933-184.593067 104.3456 104.3456 0 0 0 139.9808-6.929067 104.482133 104.482133 0 0 0 7.031467-139.9808A518.656 518.656 0 0 1 408.098133 0a104.482133 104.482133 0 1 0 207.6672 1.8432zM512 320.477867a191.522133 191.522133 0 1 0 0 383.044266A191.522133 191.522133 0 0 0 512 320.512z"
-      fill="var(--v-brand)"
-      p-id="8911"
-    />
-  </svg>
+  <div :class="prefix">
+    <div :class="`${prefix}-top`"></div>
+    <div :class="`${prefix}-right`"></div>
+    <div :class="`${prefix}-bottom`"></div>
+    <div :class="`${prefix}-left`"></div>
+    <div :class="`${prefix}-center`"></div>
+  </div>
 </template>
+<style lang="less" scoped>
+@import '../style/vars.less';
+
+.@{prefix-cls}-aim-icon {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  > div {
+    position: absolute;
+    background-color: #ccc;
+    transition: all 0.3s;
+  }
+
+  &-top {
+    left: 50%;
+    margin-left: -1.5px;
+    top: -6px;
+    width: 3px;
+    height: 6px;
+  }
+  &-right {
+    right: -6px;
+    margin-top: 7.5px;
+    width: 6px;
+    height: 3px;
+  }
+  &-bottom {
+    width: 3px;
+    height: 6px;
+    left: 50%;
+    margin-left: -1.5px;
+    bottom: -6px;
+  }
+  &-left {
+    left: -6px;
+    margin-top: 7.5px;
+    width: 6px;
+    height: 3px;
+  }
+  &-center {
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-left: -2.5px;
+    margin-top: -2.5px;
+  }
+  &:hover {
+    border-color: var(--v-brand);
+    .@{prefix-cls}-aim-icon {
+      &-top {
+        background-color: var(--v-brand);
+      }
+      &-right {
+        background-color: var(--v-brand);
+      }
+      &-bottom {
+        background-color: var(--v-brand);
+      }
+      &-left {
+        background-color: var(--v-brand);
+      }
+      &-center {
+        background-color: var(--v-brand);
+      }
+    }
+  }
+  &:active {
+    border-color: var(--v-brand-active);
+    .@{prefix-cls}-aim-icon {
+      &-top {
+        height: 10px;
+        background-color: var(--v-brand-active);
+      }
+      &-right {
+        width: 10px;
+        background-color: var(--v-brand-active);
+      }
+      &-bottom {
+        height: 10px;
+        background-color: var(--v-brand-active);
+      }
+      &-left {
+        width: 10px;
+        background-color: var(--v-brand-active);
+      }
+      &-center {
+        background-color: var(--v-brand-active);
+      }
+    }
+  }
+}
+</style>

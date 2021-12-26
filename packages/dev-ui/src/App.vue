@@ -68,7 +68,6 @@ onMounted(async () => {
   color: var(--v-brand);
   z-index: 999999999;
   &:hover {
-    transform: rotateZ(90deg);
     left: 5px;
   }
 }

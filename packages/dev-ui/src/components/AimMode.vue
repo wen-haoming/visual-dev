@@ -1,17 +1,14 @@
 <script lang="ts" setup>
 import { ref, watch, onMounted } from 'vue';
-import { usePrefix, useAim } from '../hooks';
+import { useAim, usePrefix } from '../hooks';
 import SvgIcon from '../IconCompents/SvgIcon.vue';
+import Outline from '../IconCompents/Outline.vue';
 import { OverLayer } from './OverLayer';
 import { getParentNode, getElementDimensions, launchEditor } from '../utils';
 
-interface MapPathdata {
-  [key: string]: { path: string; componentName: string; frame: string };
-}
+const prefix = usePrefix('aim');
 
 const useAimData = useAim();
-
-const prefix = usePrefix();
 const OverLayerRef = ref<OverLayer>();
 const domMap = ref(new WeakMap<Element, string>());
 
@@ -102,9 +99,10 @@ watch([useAimData], () => {
 </script>
 
 <template>
-  <div :class="`${prefix}-aim`" @click="handleAimClick">
-    <SvgIcon class="svg" width="100%" height="100%" />
+  <div :class="prefix" @click="handleAimClick">
+    <SvgIcon v-if="!useAimData?.isAimStatus" />
   </div>
+  <Outline v-if="useAimData?.isAimStatus" />
 </template>
 
 <style lang="less">

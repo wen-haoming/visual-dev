@@ -1,7 +1,6 @@
 import { inject, reactive, provide, onMounted, onUnmounted } from 'vue';
 
 export const useAimNamespace = 'useAim';
-
 const rawData = {
   type: '',
   component: '',
@@ -28,12 +27,11 @@ const rawData = {
 
 export const createDrawerContext = () => {
   const data = reactive(rawData);
-
   const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
     switch (e.key) {
       case 'Escape':
         data.setIsAimStatus(false);
-      // eslint-disable-next-line no-fallthrough
+        return null;
       default:
         return null;
     }

@@ -9,6 +9,6 @@ export const createPrefixContext = (prefix: string) => {
   return prefixData.value;
 };
 
-export const usePrefix = () => {
-  return inject<string>(usePrefixNamespace);
+export const usePrefix = (prefix: string) => {
+  return `${inject<string>(usePrefixNamespace)}-${prefix}`;
 };
