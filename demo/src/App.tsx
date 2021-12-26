@@ -7,10 +7,12 @@ function App() {
   const wrapper = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const aimDom = document.querySelector('.vd-aim-icon');
-    if (aimDom) {
-      wrapper.current.appendChild(aimDom);
-    }
+    setTimeout(() => {
+      const aimDom = document.querySelector('.vd-aim');
+      if (aimDom) {
+        wrapper.current.appendChild(aimDom);
+      }
+    }, 100);
   }, []);
   return (
     <div className="App">
