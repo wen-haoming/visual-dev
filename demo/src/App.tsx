@@ -6,14 +6,14 @@ import './App.css';
 function App() {
   const wrapper = useRef<HTMLDivElement>();
 
-  useEffect(() => {
-    setTimeout(() => {
-      const aimDom = document.querySelector('.vd-aim');
-      if (aimDom) {
-        wrapper.current.appendChild(aimDom);
-      }
-    }, 100);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     const aimDom = document.querySelector('.vd-aim');
+  //     if (aimDom) {
+  //       wrapper.current.appendChild(aimDom);
+  //     }
+  //   }, 100);
+  // }, []);
   return (
     <div className="App">
       <img src="/visual-dev/logo.png" alt="" />
