@@ -2,7 +2,7 @@
 import { onMounted, ref, shallowRef, defineAsyncComponent, h } from 'vue';
 import { createPrefixContext, createDrawerContext, useHotkeys } from './hooks';
 import { getRequest } from './utils';
-
+import AimMode from './components/AimMode.vue';
 const data = createDrawerContext();
 const prefix = createPrefixContext('vd');
 
@@ -35,24 +35,26 @@ useHotkeys({
 });
 
 onMounted(async () => {
-  if (window.isDemo) {
-    AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
-    return;
-  }
+  if (window.isDemo) return;
+  // if (window.isDemo) {
+  //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
+  //   return;
+  // }
   const { mode } = await getRequest('getConfig');
 
-  if (mode === 'aim') {
-    AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
-  } else {
-  }
+  // if (mode === 'aim') {
+  //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
+  // } else {
+  // }
 });
 </script>
 
 <template>
   <div :class="`${prefix}-pos`">
-    <suspense>
+    <AimMode />
+    <!-- <suspense>
       <Component :is="AsyncApp" />
-    </suspense>
+    </suspense>-->
   </div>
 </template>
 <style lang="less">
