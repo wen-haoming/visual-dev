@@ -9,7 +9,7 @@
 
 ## Introduction
 
-plugin to facilitate project maintenance, provide document rendering, and the ability to locate components to ide
+Just one click, you can jump directly to the local IDE source code!
 
 ## Preview
 
