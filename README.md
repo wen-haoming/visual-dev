@@ -64,6 +64,19 @@ plugins: ['visual-dev/plugins/umi'];
   },
 ```
 
+vite
+
+```js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import VisualDev from ''visual-dev/plugins/vite''
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue(),VisualDev()]
+})
+```
+
 ## License
 
 [MIT LICENSE](./LICENSE)
