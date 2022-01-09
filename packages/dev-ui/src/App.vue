@@ -1,26 +1,17 @@
 <script setup lang="ts">
-import { onMounted, ref, shallowRef, defineAsyncComponent, h } from 'vue';
+import { onMounted } from 'vue';
 import { createPrefixContext, createDrawerContext, useHotkeys } from './hooks';
 import { getRequest } from './utils';
 import AimMode from './components/AimMode.vue';
 const data = createDrawerContext();
 const prefix = createPrefixContext('vd');
 
-const AsyncApp = shallowRef<any>(h('span', {}));
-
 // 初始化快捷键
 useHotkeys({
-  toggle_drawer: {
-    keys: [
-      ['command', 'shift', 'z'],
-      ['ctrl', 'shift', 'z'],
-    ],
+  close_all: {
+    keys: [['esc']],
     callback() {
-      if (data.visibile) {
-        data.closeDrawer();
-      } else {
-        data.openDrawer();
-      }
+      data.closeAll();
     },
   },
   toggle_aim: {
@@ -40,7 +31,7 @@ onMounted(async () => {
   //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
   //   return;
   // }
-  const { mode } = await getRequest('getConfig');
+  // const { mode } = await getRequest('getConfig');
 
   // if (mode === 'aim') {
   //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));

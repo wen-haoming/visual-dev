@@ -17,7 +17,7 @@ const rawData = {
     this.type = '';
     this.setVisibile(true);
   },
-  closeDrawer() {
+  closeAll() {
     this.component = '';
     this.type = '';
     this.setVisibile(false);

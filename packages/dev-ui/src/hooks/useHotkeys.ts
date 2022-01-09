@@ -8,6 +8,7 @@ export const scoped = {
   close_drawer: 'closeDrawer',
   open_aim: 'openAim',
   close_aim: 'closeAim',
+  close_all: 'closeAll',
 };
 
 type Options = Partial<
