@@ -4,5 +4,5 @@ const path = require('path')
 const WebpackDevToolPLugin = require('../../packages/visual-dev/plugins/webpack').default
 
 module.exports = override(addWebpackPlugin(new WebpackDevToolPLugin({
-    injectFile:false
+    injectFile:false,
 })))

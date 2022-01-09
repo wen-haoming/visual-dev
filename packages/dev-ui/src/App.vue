@@ -3,6 +3,7 @@ import { onMounted } from 'vue';
 import { createPrefixContext, createDrawerContext, useHotkeys } from './hooks';
 import { getRequest } from './utils';
 import AimMode from './components/AimMode.vue';
+
 const data = createDrawerContext();
 const prefix = createPrefixContext('vd');
 
@@ -31,8 +32,8 @@ onMounted(async () => {
   //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
   //   return;
   // }
-  // const { mode } = await getRequest('getConfig');
-
+  const devConfig = await getRequest('getConfig');
+  data.devConfig = devConfig;
   // if (mode === 'aim') {
   //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
   // } else {

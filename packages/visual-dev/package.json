@@ -34,8 +34,8 @@
   },
   "peerDependencies": {
     "umi": ">=3.x",
-    "webpack": ">4.x",
-    "vite": ">2.x"
+    "vite": ">2.x",
+    "webpack": ">4.x"
   },
   "devDependencies": {
     "@types/babel-core": "^6.25.7",

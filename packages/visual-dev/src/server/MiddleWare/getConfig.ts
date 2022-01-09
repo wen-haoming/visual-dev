@@ -1,7 +1,9 @@
 import type { RequestHandler } from 'express';
-import type { ServerOptions } from '../createServer';
+import type { PluginOptions } from '../../';
 
-export const getConfig = (props: ServerOptions): RequestHandler => {
+export const domConfigMap: Record<string, { launcher: string }> = {};
+
+export const getConfig = (props: PluginOptions): RequestHandler => {
   let mode = '';
 
   if (props.resolve) {
@@ -15,6 +17,7 @@ export const getConfig = (props: ServerOptions): RequestHandler => {
   return (req, res) => {
     res.send({
       mode,
+      editor: props.editor || 'vscode',
     });
   };
 };

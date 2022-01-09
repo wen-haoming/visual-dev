@@ -2,15 +2,9 @@ import express, { json } from 'express';
 import cors from 'cors';
 import { SERVER_PORT } from '../index';
 import { getMenu, injectFile, pathMapMid, getConfig } from './MiddleWare';
+import type { PluginOptions } from '../';
 
-export interface ServerOptions {
-  port?: number;
-  resolve?: {
-    includes: string[];
-  };
-}
-
-export const createServer = async (options: ServerOptions = {}) => {
+export const createServer = async (options: PluginOptions = {}) => {
   const { port = SERVER_PORT, resolve = { includes: [''] } } = options;
 
   const app = express();

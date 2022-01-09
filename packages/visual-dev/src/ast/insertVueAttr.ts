@@ -1,5 +1,7 @@
 import { parse, transform } from '@vue/compiler-dom';
 import MagicString from 'magic-string';
+import { domConfigMap } from '../server/MiddleWare';
+import { nanoid } from 'nanoid';
 
 export const insertVueAttr = (source: string, filePath: string): string => {
   const ast = parse(source);
@@ -11,17 +13,27 @@ export const insertVueAttr = (source: string, filePath: string): string => {
     transform(tplAst, {
       nodeTransforms: [
         (node) => {
-          // node.type === 1  is NodeTypes.Element
+          //  1  is NodeTypes.Element
           if (node.type === 1 && node.tagType === 0 && node.tag !== 'template') {
             const { start } = node.loc;
+
             const tagLen = node.tag.length;
+
             const idx = start.offset + tagLen;
 
             const absolutePath = `${filePath}:${start.line.toString()}:${start.column.toString()}`;
 
             const relativePath = `${absolutePath.replace(process.cwd(), '')}`;
 
-            const attr = ` data-v-p="${absolutePath}|${relativePath}|${node.tag}|vue" `;
+            const attrValue = `${absolutePath}|${relativePath}|${node.tag}|vue`;
+
+            const domId = nanoid();
+
+            const attr = ` data-v-p="${domId}" `;
+
+            domConfigMap[domId] = {
+              launcher: attrValue,
+            };
 
             s.appendLeft(idx + 1, attr);
           }

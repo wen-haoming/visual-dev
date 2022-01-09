@@ -1,4 +1,5 @@
 import { inject, reactive, provide, onMounted, onUnmounted } from 'vue';
+import type { DevConfig } from '../env';
 
 export const useAimNamespace = 'useAim';
 const rawData = {
@@ -6,6 +7,9 @@ const rawData = {
   component: '',
   visibile: false,
   isAimStatus: false,
+  devConfig: {
+    editor: 'vscode',
+  } as DevConfig,
   setVisibile(visibile: boolean) {
     this.visibile = visibile;
   },

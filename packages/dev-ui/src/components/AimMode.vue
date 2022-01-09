@@ -16,7 +16,7 @@ let previosDom: Element | null = null;
 
 onMounted(() => {
   // 收集全局带有 data-v-p 属性的 Dom
-  const collectElement = () => {
+  const removeArrtElement = () => {
     document.querySelectorAll('[data-v-p]').forEach((ele) => {
       const attr = ele.getAttribute('data-v-p');
       if (attr) {
@@ -25,10 +25,11 @@ onMounted(() => {
       ele.removeAttribute('data-v-p');
     });
   };
-  collectElement();
+  removeArrtElement();
   const observer = new MutationObserver(() => {
-    collectElement();
+    removeArrtElement();
   });
+  // 在热更新的时候，涉及 dom 的更新，需要重新执行回调
   observer.observe(document.body, { attributes: false, childList: true, subtree: true });
 });
 
@@ -74,7 +75,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
       const [absolutePath] = targetDomData.split('|');
       const [srcPath, line, column] = absolutePath.split(':');
 
-      const url = launchEditor({ srcPath, line, column, editor: 'vscode' });
+      const url = launchEditor({ srcPath, line, column, editor: useAimData!.devConfig.editor });
       // window.location.href = url;
       window.open(url);
     }
