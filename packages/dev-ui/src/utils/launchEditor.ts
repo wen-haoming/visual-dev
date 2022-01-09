@@ -26,7 +26,6 @@ export function launchEditor({
   line?: number | string;
   column?: number | string;
 }): string {
-  console.log(EDITORS[editor]);
   return (window.isDemo ? openGithub : EDITORS[editor]).replace(
     /{(.*?)}/g,
     (_$: any, $1: any): string => {

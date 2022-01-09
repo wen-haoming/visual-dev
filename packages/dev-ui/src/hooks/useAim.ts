@@ -1,5 +1,5 @@
 import { inject, reactive, provide, onMounted, onUnmounted } from 'vue';
-import type { DevConfig } from '../env';
+import type { DevConfig } from '../main';
 
 export const useAimNamespace = 'useAim';
 const rawData = {
