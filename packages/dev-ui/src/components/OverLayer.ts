@@ -1,11 +1,12 @@
 const initialOverLayerStyle = {
   'pointer-events': 'none',
+  display: 'none',
 };
 
 const initialDetailLayerStyle = {
   'z-index': 100000000,
   position: 'absolute',
-  display: 'flex',
+  display: 'none',
   'align-items': 'center',
   'font-family': `"SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;`,
   'font-weight': 'bold',
@@ -182,6 +183,7 @@ export class OverLayer {
     </div>`;
 
     Object.assign(this.detailLayer?.style, {
+      display: 'flex',
       left,
       top: `${parseInt(top, 10) + parseInt(height, 10) + 10}px`,
     });
@@ -220,8 +222,13 @@ export class OverLayer {
     });
 
     Object.assign(this.inspectContentDiv?.style, {
+      display: srcPath ? 'block' : 'none',
       'box-sizing': 'border-box',
       flex: 1,
+    });
+
+    Object.assign(this.overLayer?.style, {
+      display: 'block',
     });
   }
   unmount() {
