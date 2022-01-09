@@ -1,52 +1,27 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { createPrefixContext, createDrawerContext, useHotkeys } from './hooks';
+import { onMounted, reactive } from 'vue';
+import { createPrefixContext, createStore } from './hooks';
 import { getRequest } from './utils';
 import AimMode from './components/AimMode.vue';
+import Folder from './components/Folder.vue';
 
-const data = createDrawerContext();
 const prefix = createPrefixContext('vd');
-
-// 初始化快捷键
-useHotkeys({
-  close_all: {
-    keys: [['esc']],
-    callback() {
-      data.closeAll();
-    },
-  },
-  toggle_aim: {
-    keys: [
-      ['command', 'shift', 'x'],
-      ['ctrl', 'shift', 'x'],
-    ],
-    callback() {
-      data.setIsAimStatus(!data.isAimStatus);
-    },
-  },
+const data = reactive({
+  loading: true,
 });
+const globalData = createStore();
 
 onMounted(async () => {
   if (window.isDemo) return;
-  // if (window.isDemo) {
-  //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
-  //   return;
-  // }
-  const devConfig = await getRequest('getConfig');
-  data.devConfig = devConfig;
-  // if (mode === 'aim') {
-  //   AsyncApp.value = defineAsyncComponent(() => import('./components/AimMode.vue'));
-  // } else {
-  // }
+  data.loading = true;
+  globalData.devConfig = await getRequest('getConfig');
+  data.loading = false;
 });
 </script>
 
 <template>
-  <div :class="`${prefix}-pos`">
-    <AimMode />
-    <!-- <suspense>
-      <Component :is="AsyncApp" />
-    </suspense>-->
+  <div :class="`${prefix}-pos`" v-if="!data.loading">
+    <Folder />
   </div>
 </template>
 <style lang="less">
@@ -54,15 +29,13 @@ onMounted(async () => {
 .@{prefix-cls}-pos {
   position: fixed;
   bottom: 30px;
-  left: -15px;
-  width: 30px;
-  height: 30px;
+  left: 0px;
   transition: all 0.2s;
   cursor: pointer;
   color: var(--v-brand);
   z-index: 999999999;
-  &:hover {
-    left: 5px;
-  }
+  // &:hover {
+  //   left: 5px;
+  // }
 }
 </style>

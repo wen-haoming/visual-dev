@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { ref, watch, onMounted } from 'vue';
-import { useAim, usePrefix } from '../hooks';
-import SvgIcon from '../IconCompents/SvgIcon.vue';
+import { useStore, usePrefix } from '../hooks';
+import SvgIcon from '../IconCompents/Aim.vue';
 import Outline from '../IconCompents/Outline.vue';
 import { OverLayer } from './OverLayer';
 import { getParentNode, getElementDimensions, launchEditor } from '../utils';
 
 const prefix = usePrefix('aim');
 
-const useAimData = useAim();
+const globalData = useStore();
 const OverLayerRef = ref<OverLayer>();
 const domMap = ref(new WeakMap<Element, string>());
 
@@ -35,7 +35,7 @@ onMounted(() => {
 
 const handleAimClick = (e: SVGElementEventMap['click']) => {
   e.stopPropagation();
-  useAimData?.setIsAimStatus(true);
+  globalData?.setIsAimStatus(true);
 };
 
 // document mouse 事件添加遮罩层样式
@@ -75,17 +75,16 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
       const [absolutePath] = targetDomData.split('|');
       const [srcPath, line, column] = absolutePath.split(':');
 
-      const url = launchEditor({ srcPath, line, column, editor: useAimData!.devConfig.editor });
-      // window.location.href = url;
+      const url = launchEditor({ srcPath, line, column, editor: globalData!.devConfig.editor });
       window.open(url);
     }
   } finally {
-    useAimData?.setIsAimStatus(false);
+    globalData?.closeAll();
   }
 };
 
-watch([useAimData], () => {
-  if (useAimData?.isAimStatus) {
+watch([globalData], () => {
+  if (globalData?.isAimStatus) {
     // 注册事件
     OverLayerRef.value = new OverLayer();
     window.addEventListener<'mousemove'>('mousemove', inspectComponent, false);
@@ -101,13 +100,15 @@ watch([useAimData], () => {
 
 <template>
   <div :class="prefix" @click="handleAimClick">
-    <SvgIcon v-if="!useAimData?.isAimStatus" />
+    <SvgIcon v-if="!globalData?.isAimStatus" />
   </div>
-  <Outline v-if="useAimData?.isAimStatus" />
+  <Outline v-if="globalData?.isAimStatus" />
 </template>
 
 <style lang="less">
-// @import '../style/vars.less';
-// .@{prefix-cls}-aim {
-// }
+@import '../style/vars.less';
+.@{prefix-cls}-aim {
+  display: flex;
+  align-items: center;
+}
 </style>

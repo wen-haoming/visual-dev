@@ -1,8 +1,6 @@
 import type { RequestHandler } from 'express';
 import type { PluginOptions } from '../../';
 
-export const domConfigMap: Record<string, { launcher: string }> = {};
-
 export const getConfig = (props: PluginOptions): RequestHandler => {
   let mode = '';
 
@@ -18,7 +16,7 @@ export const getConfig = (props: PluginOptions): RequestHandler => {
     res.send({
       mode,
       editor: props.editor || 'vscode',
-      proxyMode: props.proxy ? props.proxy : false,
+      devServerProxy: props.proxy ? props.proxy : false,
     });
   };
 };

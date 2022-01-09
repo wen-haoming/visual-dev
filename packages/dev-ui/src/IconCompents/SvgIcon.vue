@@ -17,8 +17,8 @@ const prefix = usePrefix('aim-icon');
 
 .@{prefix-cls}-aim-icon {
   position: relative;
-  width: 25px;
-  height: 25px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   border: 3px solid #ccc;
   > div {

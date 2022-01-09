@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { inject, reactive, provide, onMounted, onUnmounted } from 'vue';
 import type { DevConfig } from '../main';
+import { useHotkeys } from './useHotkeys';
 
-export const useAimNamespace = 'useAim';
+export const useAimNamespace = 'useStore';
 const rawData = {
   type: '',
   component: '',
@@ -29,8 +31,27 @@ const rawData = {
   },
 };
 
-export const createDrawerContext = () => {
+export const createStore = () => {
   const data = reactive(rawData);
+
+  useHotkeys({
+    close_all: {
+      keys: [['esc']],
+      callback() {
+        data.closeAll();
+      },
+    },
+    toggle_aim: {
+      keys: [
+        ['command', 'shift', 'x'],
+        ['ctrl', 'shift', 'x'],
+      ],
+      callback() {
+        data.setIsAimStatus(!data.isAimStatus);
+      },
+    },
+  });
+
   const handlekeydown = (e: HTMLElementEventMap['keydown']) => {
     switch (e.key) {
       case 'Escape':
@@ -53,6 +74,6 @@ export const createDrawerContext = () => {
   return data;
 };
 
-export const useAim = () => {
+export const useStore = () => {
   return inject<typeof rawData>(useAimNamespace);
 };

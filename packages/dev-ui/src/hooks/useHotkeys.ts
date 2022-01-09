@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import hotkeys from 'hotkeys-js';
 import { onMounted } from 'vue';
 import type { KeyHandler } from 'hotkeys-js';

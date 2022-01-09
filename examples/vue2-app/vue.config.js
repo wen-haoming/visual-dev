@@ -7,7 +7,7 @@ module.exports = {
       '/api': {
         target: '<url>',
         ws: true,
-        changeOrigin: true
+        changeOrigin: true,
       },
       '/foo': {
         target: '<other_url>'
