@@ -9,7 +9,7 @@
 
 ## Introduction
 
-plugin to facilitate project maintenance, provide document rendering, and the ability to locate components to ide
+Just one click, you can jump directly to the local IDE source code!
 
 ## Preview
 
@@ -62,6 +62,19 @@ plugins: ['visual-dev/plugins/umi'];
  resolve:{
     includes:[path.resolve(__dirname,'./components')] // components dir
   },
+```
+
+vite
+
+```js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import VisualDev from ''visual-dev/plugins/vite''
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue(),VisualDev()]
+})
 ```
 
 ## License
