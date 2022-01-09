@@ -1,7 +1,5 @@
 import { parse, transform } from '@vue/compiler-dom';
 import MagicString from 'magic-string';
-import { domConfigMap } from '../server/MiddleWare';
-import { nanoid } from 'nanoid';
 
 export const insertVueAttr = (source: string, filePath: string): string => {
   const ast = parse(source);
@@ -27,13 +25,7 @@ export const insertVueAttr = (source: string, filePath: string): string => {
 
             const attrValue = `${absolutePath}|${relativePath}|${node.tag}|vue`;
 
-            const domId = nanoid();
-
-            const attr = ` data-v-p="${domId}" `;
-
-            domConfigMap[domId] = {
-              launcher: attrValue,
-            };
+            const attr = ` data-v-p="${attrValue}" `;
 
             s.appendLeft(idx + 1, attr);
           }

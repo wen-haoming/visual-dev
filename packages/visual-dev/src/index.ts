@@ -1,3 +1,5 @@
+import type { Options } from 'http-proxy-middleware';
+
 export * from './server';
 
 export const ASSETS_DIR = 'assets';
@@ -21,4 +23,5 @@ export interface PluginOptions {
   resolve?: {
     includes: string[];
   };
+  proxy?: Record<string, Options>;
 }
