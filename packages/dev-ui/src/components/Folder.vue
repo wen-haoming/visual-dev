@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { usePrefix, useStore } from '../hooks';
 import RightArrow from '../IconCompents/RightArrow.vue';
+import ProxyMode from './ProxyMode.vue';
 import AimMode from './AimMode.vue';
 
 const prefix = usePrefix('folder');
@@ -9,7 +10,9 @@ const globalData = useStore();
 <template>
   <div :class="`${prefix}`" v-show="!globalData?.isAimStatus">
     <div :class="`${prefix}-btns`">
-      <AimMode :style="{ width: '10px', height: '10px' }" />
+      <ProxyMode />
+      <span :class="`${prefix}-split`"></span>
+      <AimMode />
       <span :class="`${prefix}-split`"></span>
     </div>
     <RightArrow :class="`${prefix}-arrow`" />
@@ -26,7 +29,7 @@ const globalData = useStore();
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   box-sizing: border-box;
-  transform: translateX(-35px);
+  transform: translateX(-65px);
   transition: all 0.2s;
   &:hover {
     transform: translateX(0);

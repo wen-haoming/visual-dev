@@ -2,7 +2,6 @@
 import { onMounted, reactive } from 'vue';
 import { createPrefixContext, createStore } from './hooks';
 import { getRequest } from './utils';
-import AimMode from './components/AimMode.vue';
 import Folder from './components/Folder.vue';
 
 const prefix = createPrefixContext('vd');
