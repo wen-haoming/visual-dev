@@ -12,11 +12,13 @@ const globalData = createStore();
 
 onMounted(async () => {
   if (window.isDemo) {
+    data.loading = true;
     globalData.devConfig = {
       devServerProxy: false,
       editor: 'vscode',
       mode: 'aim',
     };
+    data.loading = false;
     return;
   }
   data.loading = true;
