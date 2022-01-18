@@ -17,6 +17,7 @@ onMounted(async () => {
       editor: 'vscode',
       mode: 'aim',
     };
+    return;
   }
   data.loading = true;
   globalData.devConfig = await getRequest('getConfig');
