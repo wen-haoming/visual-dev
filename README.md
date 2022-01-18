@@ -12,8 +12,7 @@
 Just one click, you can jump directly to the local IDE source code!
 
 ## Preview
-
-![Oct-22-2021 01-17-26](https://user-images.githubusercontent.com/42735363/138326264-bd3d51f4-27ae-42f9-aef9-cd06793cec53.gif)
+![Jan-19-2022 01-34-02](https://user-images.githubusercontent.com/42735363/149988859-8577c98f-74ef-4a36-81a1-682d0e405253.gif)
 
 ## Installation
 
