@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 import { useStore, usePrefix } from '../hooks';
 import SvgIcon from '../IconCompents/Aim.vue';
 import Outline from '../IconCompents/Outline.vue';
@@ -75,6 +75,20 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
       const [absolutePath] = targetDomData.split('|');
       const [srcPath, line, column] = absolutePath.split(':');
 
+      // if (targetDom.parentElement && domMap.value.get(targetDom.parentElement)) {
+      //   const targetDomParentData = domMap.value.get(targetDom.parentElement)
+      //   if (targetDomParentData) {
+      //     const [absolutePath2] = targetDomParentData.split('|');
+      //     const [srcPath2, line2, column2] = absolutePath2.split(':');
+      //     if (srcPath !== srcPath2) {
+      //       const url = launchEditor({ srcPath: srcPath2, line: line2, column: column2, editor: globalData!.devConfig.editor });
+      //       window.open(url);
+      //       globalData?.closeAll();
+      //       return
+      //     }
+      //   }
+      // }
+
       const url = launchEditor({ srcPath, line, column, editor: globalData!.devConfig.editor });
       window.open(url);
     }
@@ -83,7 +97,7 @@ const documentHandleClick = async (e: HTMLElementEventMap['click']) => {
   }
 };
 
-watch([globalData], () => {
+watchEffect(() => {
   if (globalData?.isAimStatus) {
     // 注册事件
     OverLayerRef.value = new OverLayer();
@@ -102,7 +116,6 @@ watch([globalData], () => {
   <div :class="prefix" @click="handleAimClick">
     <SvgIcon v-if="!globalData?.isAimStatus" />
   </div>
-  <Outline v-if="globalData?.isAimStatus" />
 </template>
 
 <style lang="less">

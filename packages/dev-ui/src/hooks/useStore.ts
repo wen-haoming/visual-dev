@@ -11,6 +11,7 @@ const rawData = {
   isAimStatus: false,
   devConfig: {
     editor: 'vscode',
+    mode: '',
   } as DevConfig,
   setVisibile(visibile: boolean) {
     this.visibile = visibile;

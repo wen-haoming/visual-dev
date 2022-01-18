@@ -45,6 +45,5 @@ export const insertReactAttr = (source: string, filePath: string): string => {
     plugins: [insertJSXElementPathPlugin],
     filename: filePath,
   });
-
   return code || '';
 };
