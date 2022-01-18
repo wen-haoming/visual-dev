@@ -20,16 +20,27 @@ Just one click, you can jump directly to the local IDE source code!
 npm i visual-dev -D
 ```
 
+## Options
+
+```typescript
+type Options = {
+  /**
+   *  default open vscode.
+   */
+  editor: Editor //vscode  webstorm atom sublime textmate emacs macvim phpstorm idea
+ }
+```
+
 ## Usage
 
 webpack
 
 ```js
 // webpack.config.js
-const WebpackDevToolPLugin = require('visual-dev/plugins/webpack').default;
+const VisualDev = require('visual-dev/plugins/webpack').default;
 
 module.exports = {
-  plugins: [new WebpackDevToolPLugin()],
+  plugins: [new VisualDev()],
 };
 ```
 
