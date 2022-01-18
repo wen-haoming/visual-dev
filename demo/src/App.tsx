@@ -13,7 +13,7 @@ function App() {
       if (aimDom) {
         wrapper.current.appendChild(aimDom);
       }
-    }, 100);
+    }, 2000);
   }, []);
 
   return (
