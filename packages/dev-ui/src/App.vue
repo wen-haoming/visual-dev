@@ -11,7 +11,13 @@ const data = reactive({
 const globalData = createStore();
 
 onMounted(async () => {
-  if (window.isDemo) return;
+  if (window.isDemo) {
+    globalData.devConfig = {
+      devServerProxy: false,
+      editor: 'vscode',
+      mode: 'aim',
+    };
+  }
   data.loading = true;
   globalData.devConfig = await getRequest('getConfig');
   data.loading = false;

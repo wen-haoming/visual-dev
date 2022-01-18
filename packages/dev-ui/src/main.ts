@@ -9,5 +9,5 @@ createApp(App).mount('#dev-tools');
 export interface DevConfig {
   mode: string;
   editor: keyof typeof EDITORS;
-  devServerProxy?: Record<string, Options>;
+  devServerProxy?: Record<string, Options> | false;
 }
