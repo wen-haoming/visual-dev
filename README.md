@@ -1,4 +1,4 @@
-<h1 align="center"><i style="color:#2082a6">visual</i>-<i style="color:#3ab9d4">dev</i> </h1>
+<h1 align="center">visual-dev</h1>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/visual-dev" target="_blank" rel="noopener noreferrer"><img src="https://badgen.net/npm/v/visual-dev" alt="NPM Version" /></a>
@@ -9,16 +9,31 @@
 
 ## Introduction
 
-Just one click, you can jump directly to the local IDE source code!
+Just one click, you can jump directly to the local IDE source code and **vue** and **react** are supported! !
 
 ## Preview
 
-![Oct-22-2021 01-17-26](https://user-images.githubusercontent.com/42735363/138326264-bd3d51f4-27ae-42f9-aef9-cd06793cec53.gif)
+![Jan-19-2022 01-34-02](https://user-images.githubusercontent.com/42735363/149988859-8577c98f-74ef-4a36-81a1-682d0e405253.gif)
+
+## Motivation
+
+In a huge project, there are many different components on the page, but it will be very troublesome to find where the component is. Using this plugin, you only need to click to jump to the corresponding position of the ide.
 
 ## Installation
 
 ```bash
 npm i visual-dev -D
+```
+
+## Options
+
+```typescript
+type Options = {
+  /**
+   *  default open vscode.
+   */
+  editor: Editor; //vscode  webstorm atom sublime textmate emacs macvim phpstorm idea
+};
 ```
 
 ## Usage
@@ -27,10 +42,10 @@ webpack
 
 ```js
 // webpack.config.js
-const WebpackDevToolPLugin = require('visual-dev/plugins/webpack').default;
+const VisualDev = require('visual-dev/plugins/webpack').default;
 
 module.exports = {
-  plugins: [new WebpackDevToolPLugin()],
+  plugins: [new VisualDev(options)],
 };
 ```
 
@@ -38,30 +53,10 @@ umi
 
 ```js
 // .umiirc.ts
-plugins: ['visual-dev/plugins/umi'];
-```
-
-## Options
-
-webpack
-
-```js
-module.exports = {
-  plugins: [new WebpackDevToolPLugin({
-    resolve:{
-        includes:[path.resolve(__dirname,'./components')] // components dir
-    })],
-};
-```
-
-umi
-
-```js
-// .umiirc.ts
-plugins: ['visual-dev/plugins/umi'];
- resolve:{
-    includes:[path.resolve(__dirname,'./components')] // components dir
-  },
+{
+  plugins: ['visual-dev/plugins/umi'];
+  visualDev: options;
+}
 ```
 
 vite
@@ -73,7 +68,7 @@ import VisualDev from ''visual-dev/plugins/vite''
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),VisualDev()]
+  plugins: [vue(),VisualDev(options)]
 })
 ```
 
