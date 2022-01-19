@@ -16,7 +16,7 @@ export const getConfig = (props: PluginOptions): RequestHandler => {
     res.send({
       mode,
       editor: props.editor || 'vscode',
-      devServerProxy: props.proxy ? props.proxy : false,
+      devServerProxy: props.devServerProxy ? props.devServerProxy : false,
     });
   };
 };

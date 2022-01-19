@@ -33,16 +33,21 @@ class WriteAndCopy {
 }
 
 export default (api: IApi) => {
-  // api.describe({
-  //   key: 'visualDev',
-  //   config: {
-  //     schema(joi) {
-  //       return joi.object();
-  //     },
-  //     onChange: api.ConfigChangeType.regenerateTmpFiles,
-  //   },
-  //   enableBy: api.EnableBy.config,
-  // });
+  api.describe({
+    key: 'visualDev',
+    config: {
+      default: {
+        devServerProxy: false,
+        editor: 'vscode',
+        mode: 'aim',
+      },
+      schema(joi) {
+        return joi.object();
+      },
+      onChange: api.ConfigChangeType.regenerateTmpFiles,
+    },
+    enableBy: api.EnableBy.config,
+  });
 
   api.modifyBabelOpts((babelOptions) => {
     babelOptions.plugins.unshift([insertJSXElementPathPlugin]);
@@ -60,6 +65,6 @@ export default (api: IApi) => {
   });
 
   api.onStart(() => {
-    createServer();
+    createServer(api.config.visualDev);
   });
 };

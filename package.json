@@ -16,8 +16,6 @@
     "build:ui": "cd ./packages/dev-ui && pnpm build",
     "build:visual-dev": "cd ./packages/visual-dev  && pnpm build",
     "build:end": "node ./scripts/moveFiles.js",
-    "build:demo": "cd ./demo  && pnpm build",
-    "build:demo-move-file": "node ./scripts/demo.js",
     "build": "run-s build:*",
     "dev": "run-p dev:*",
     "start": "cd examples && cd cra-app && pnpm start",

@@ -23,5 +23,6 @@ export interface PluginOptions {
   resolve?: {
     includes: string[];
   };
-  proxy?: Record<string, Options>;
+  devServerProxy?: Record<string, Options> | false;
+  mode?: 'aim';
 }

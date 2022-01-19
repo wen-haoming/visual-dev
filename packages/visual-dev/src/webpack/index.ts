@@ -54,7 +54,7 @@ export const WebpackDevtoolPlugin = class {
     }
     compiler.hooks.environment.tap('createServer', () => {
       if (Object.keys(newProxyOptions).length > 0) {
-        this.options.proxy = newProxyOptions;
+        this.options.devServerProxy = newProxyOptions;
       }
       createServer(this.options);
     });
