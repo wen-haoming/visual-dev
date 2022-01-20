@@ -32,6 +32,7 @@ const vitePlugin = (options: PluginOptions): PluginOption => {
       return html;
     },
     buildStart() {
+      if (options.noServer) return;
       createServer(options);
     },
   };

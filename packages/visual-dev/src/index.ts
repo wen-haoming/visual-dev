@@ -25,4 +25,5 @@ export interface PluginOptions {
   };
   devServerProxy?: Record<string, Options> | false;
   mode?: 'aim';
+  noServer?: boolean;
 }
