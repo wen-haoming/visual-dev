@@ -32,6 +32,13 @@ export const useHotkeys = (options: Options) => {
   });
 
   return {
+    update(updateOptions: Options) {
+      Object.entries(updateOptions).forEach(([, value]) => {
+        value.keys.forEach((keys) => {
+          hotkeys(keys.join('+'), value.callback);
+        });
+      });
+    },
     unbind() {
       Object.entries(options).forEach(([scope, value]) => {
         hotkeys.unbind(value.keys.join('+'), scope);

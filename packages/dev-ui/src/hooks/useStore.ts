@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { inject, reactive, provide, onMounted, onUnmounted } from 'vue';
+import { inject, reactive, provide, onMounted, onUnmounted, watchEffect } from 'vue';
 import type { DevConfig } from '../main';
 import { useHotkeys } from './useHotkeys';
 
@@ -12,6 +12,9 @@ const rawData = {
   devConfig: {
     editor: 'vscode',
     mode: '',
+    shortcuts: {
+      inspect: [],
+    },
   } as DevConfig,
   setVisibile(visibile: boolean) {
     this.visibile = visibile;
@@ -35,7 +38,7 @@ const rawData = {
 export const createStore = () => {
   const data = reactive(rawData);
 
-  useHotkeys({
+  const { update } = useHotkeys({
     close_all: {
       keys: [['esc']],
       callback() {
@@ -62,6 +65,17 @@ export const createStore = () => {
         return null;
     }
   };
+
+  watchEffect(() => {
+    if (data.devConfig.shortcuts?.inspect?.length) {
+      update({
+        open_aim: {
+          keys: [data.devConfig.shortcuts?.inspect],
+          callback: () => data.setIsAimStatus(!data.isAimStatus),
+        },
+      });
+    }
+  });
 
   onMounted(() => {
     window.addEventListener<'keydown'>('keydown', handlekeydown, false);

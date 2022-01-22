@@ -10,4 +10,7 @@ export interface DevConfig {
   mode: string;
   editor: keyof typeof EDITORS;
   devServerProxy?: Record<string, Options> | false;
+  shortcuts?: {
+    inspect?: [string, string] | [string, string, string] | [];
+  };
 }

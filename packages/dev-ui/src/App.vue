@@ -12,6 +12,7 @@ const globalData = createStore();
 
 onMounted(async () => {
   if (window.isDemo) {
+    //用于 demo 的渲染
     data.loading = true;
     globalData.devConfig = {
       devServerProxy: false,

@@ -9,13 +9,13 @@ import Outline from '../IconCompents/Outline.vue';
 const prefix = usePrefix('folder');
 const globalData = useStore();
 
-const isShowFolder = computed(
-  () => !globalData?.isAimStatus && globalData?.devConfig.mode !== 'aim',
-);
-const isShowAim = computed(() => !isShowFolder.value);
+// const isShowFolder = computed(
+//   () => !globalData?.isAimStatus && globalData?.devConfig.mode !== 'aim',
+// );
+// const isShowAim = computed(() => !isShowFolder.value);
 </script>
 <template>
-  <div :class="`${prefix}`" v-if="isShowFolder">
+  <!-- <div :class="`${prefix}`" v-if="isShowFolder">
     <div :class="`${prefix}-btns`">
       <ProxyMode />
       <span :class="`${prefix}-split`"></span>
@@ -23,8 +23,11 @@ const isShowAim = computed(() => !isShowFolder.value);
       <span :class="`${prefix}-split`"></span>
     </div>
     <RightArrow :class="`${prefix}-arrow`" />
-  </div>
-  <div :class="`${prefix}-aim-btn`" v-show="isShowAim">
+  </div> 
+   <div :class="`${prefix}-aim-btn`" v-show="isShowAim">
+    <AimMode />
+  </div>-->
+  <div :class="`${prefix}-aim-btn`">
     <AimMode />
   </div>
   <Outline v-if="globalData?.isAimStatus" />
