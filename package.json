@@ -4,7 +4,7 @@
   "engines": {
     "node": ">=10.0.0"
   },
-  "description": "",
+  "description": "Just one click, you can jump directly to the local IDE source code!",
   "workspaces": [
     "packages/*"
   ],
@@ -27,13 +27,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wen-haoming/web-devtools.git"
+    "url": "git+https://github.com/wen-haoming/visual-dev.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "vue",
+    "visual-dev",
+    "webpack",
+    "umi",
+    "vite"
+  ],
+  "author": "wen-haoming",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wen-haoming/web-devtools/issues"
+    "url": "https://github.com/wen-haoming/visual-dev/issues"
   },
   "gitHooks": {
     "pre-commit": "npm run build:before && lint-staged --concurrent false",
@@ -46,7 +53,7 @@
       "prettier --write"
     ]
   },
-  "homepage": "https://github.com/wen-haoming/web-devtools#readme",
+  "homepage": "https://github.com/wen-haoming/visual-dev#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
@@ -59,9 +66,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "2.4.1",
     "typescript": "^4.5.5",
-    "yorkie": "^2.0.0"
-  },
-  "dependencies": {
+    "yorkie": "^2.0.0",
     "eslint-define-config": "^1.2.3",
     "eslint-plugin-node": "^11.1.0"
   }
