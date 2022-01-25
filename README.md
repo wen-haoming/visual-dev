@@ -45,7 +45,9 @@ webpack
 const VisualDev = require('visual-dev/plugins/webpack').default;
 
 module.exports = {
-  plugins: [new VisualDev(options)],
+  plugins: [new VisualDev({
+    editor:'vscode'
+  })],
 };
 ```
 
@@ -55,7 +57,9 @@ umi
 // .umiirc.ts
 {
   plugins: ['visual-dev/plugins/umi'];
-  visualDev: options;
+  visualDev: {
+    editor:'vscode'
+  };
 }
 ```
 
@@ -68,7 +72,9 @@ import VisualDev from 'visual-dev/plugins/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), VisualDev(options)],
+  plugins: [vue(), VisualDev({
+    editor:'vscode'
+  })],
 });
 ```
 
