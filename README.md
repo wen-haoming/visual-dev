@@ -10,6 +10,7 @@
 ## Introduction
 
 Just one click, you can jump directly to the local IDE source code and **vue** and **react** are supported! !
+一键直接跳转到本地IDE源码，支持vue和react！ ！
 
 ## Preview
 
@@ -18,6 +19,8 @@ Just one click, you can jump directly to the local IDE source code and **vue** a
 ## Motivation
 
 In a huge project, there are many different components on the page, but it will be very troublesome to find where the component is. Using this plugin, you only need to click to jump to the corresponding position of the ide.
+
+在一个大型的项目中，页面上有很多不同的组件，但是要找到组件在哪里会很麻烦。使用这个插件，只需要点击跳转到ide的对应位置
 
 ## Installation
 
@@ -32,7 +35,7 @@ type Options = {
   /**
    *  default open vscode.
    */
-  editor: Editor; //vscode  webstorm atom sublime textmate emacs macvim phpstorm idea
+  editor: Editor; //vscode  webstorm atom sublime textmate emacs macvim phpstorm idea 支持多种编辑器，默认使用 vscode
 };
 ```
 
@@ -78,7 +81,11 @@ export default defineConfig({
 });
 ```
 
-## WeChat
+the project is successfully launched, a small icon will appear in the lower left corner of the screen, which can be triggered by clicking.
+
+项目启动成功后，在屏幕的左下角会有一个小图标出现，点击即可触发。
+
+## WeChat 
 
 <img width="250" src="https://user-images.githubusercontent.com/42735363/154826910-b45ca498-d83e-4053-9dd2-907d3ad4aab9.jpg" />
 
