@@ -78,6 +78,11 @@ export default defineConfig({
 });
 ```
 
+## WeChat
+
+![481645326768_ pic](https://user-images.githubusercontent.com/42735363/154826910-b45ca498-d83e-4053-9dd2-907d3ad4aab9.jpg)
+
+
 ## License
 
 [MIT LICENSE](./LICENSE)
