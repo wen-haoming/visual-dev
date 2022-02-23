@@ -22,7 +22,7 @@ Just one click, you can jump directly to the local IDE source code and **vue** a
 
 In a huge project, there are many different components on the page, but it will be very troublesome to find where the component is. Using this plugin, you only need to click to jump to the corresponding position of the ide.
 
-在一个大型的项目中，页面上有很多不同的组件，但是要找到组件在哪里会很麻烦。使用这个插件，只需要点击跳转到 IDE 的对应位置
+在一个大型的项目中，页面上有很多不同的组件，但是要找到组件在哪里会很麻烦。使用这个插件，只需要点击对应的 dom，就能跳转到 IDE 的对应位置。
 
 ## Installation
 
