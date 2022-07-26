@@ -29,4 +29,9 @@ export interface PluginOptions {
   shortcuts?: {
     inspect?: [string, string, string] | [string, string];
   };
+
+  // analysisPlugin
+  analysisPlugin?: {
+    rootPath?: string;
+  };
 }

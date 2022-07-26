@@ -5,6 +5,9 @@ const WebpackDevToolPLugin = require('../../packages/visual-dev/plugins/webpack'
 
 module.exports = override(addWebpackPlugin(new WebpackDevToolPLugin({
     injectFile:false,
+    analysisPlugin:{
+        rootPath:'./src/Pages'
+    },
     shortcuts:{
         inspect:['c','v','b']
     }

@@ -1,5 +1,6 @@
 import path from 'path';
 import injectFile from './injectFile';
+import analysisPlugin from './analysisPlugin';
 import { createServer } from '../server';
 import type { Compiler } from 'webpack';
 import type { PluginOptions } from '../';
@@ -35,6 +36,9 @@ export const WebpackDevtoolPlugin = class {
     this.options = { ...defaultOptions, ...options };
   }
   apply(compiler: Compiler) {
+    // 依赖分析
+    analysisPlugin(compiler, this.options.analysisPlugin);
+
     compiler.options.module?.rules.push({
       test: /\.(j|t)sx$/,
       use: {

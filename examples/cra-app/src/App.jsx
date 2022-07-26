@@ -3,9 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import B from './b';
 import Form from './Form';
+import PageA from './Pages/PageA'
+import PageB from './Pages/PageB'
 
 function App() {
+
   return <div className="App">
+    <PageA/>
+    <PageB/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>123
