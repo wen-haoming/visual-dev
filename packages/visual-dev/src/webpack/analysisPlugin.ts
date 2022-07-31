@@ -1,9 +1,24 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs-extra';
 import type { Compiler } from 'webpack';
 
 const LEGAL_FILES = ['.js', '.ts', '.jsx', '.tsx', '.css'];
+
+type NODE = {
+  id: string;
+  label: string;
+};
+
+type EDGE = {
+  source: string;
+  target: string;
+};
+
+type analysisData = {
+  nodes: NODE[];
+  edges: EDGE[];
+};
 
 function checkFile(filePath: string) {
   const ext = path.extname(filePath);
@@ -71,8 +86,43 @@ const analysisPlugin = (compiler: Compiler, options?: Options) => {
       const r = routers.map((dir) => {
         return path.resolve(rootPath, dir, 'index.jsx');
       });
-      // console.log(r);
-      // debugger;
+      const templateFilePath = path.resolve(__dirname, '../../dev-ui/index.html');
+      if (fs.pathExistsSync(templateFilePath)) {
+        const templateFile = fs.readFileSync(templateFilePath, 'utf-8');
+        // console.log(dependenciesTree, r);
+        const data: analysisData = {
+          nodes: Object.keys(dependenciesTree).map((p) => {
+            p = p.replace(process.cwd(), '');
+            return {
+              id: p,
+              label: p,
+            };
+          }),
+          edges: Object.entries(dependenciesTree).reduce<
+            {
+              source: string;
+              target: string;
+            }[]
+          >((pre, [p, { parent, next }]) => {
+            p = p.replace(process.cwd(), '');
+            const edges = next.map((nextItem) => {
+              return {
+                source: p,
+                target: nextItem.replace(process.cwd(), ''),
+              };
+            });
+            return [...pre, ...edges];
+          }, []),
+        };
+        // console.log(data);
+        // debugger;
+        const fileData = `${templateFile}
+          <script>
+            var analysisPluginData = ${JSON.stringify(data)}
+          </script>
+          `;
+        fs.writeFileSync(templateFilePath, fileData);
+      }
     }
   });
 };

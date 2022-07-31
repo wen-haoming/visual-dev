@@ -5,6 +5,7 @@ import RightArrow from '../IconCompents/RightArrow.vue';
 import ProxyMode from './ProxyMode.vue';
 import AimMode from './AimMode.vue';
 import Outline from '../IconCompents/Outline.vue';
+import Dialog from './Dialog.vue';
 
 const prefix = usePrefix('folder');
 const globalData = useStore();
@@ -27,9 +28,10 @@ const globalData = useStore();
    <div :class="`${prefix}-aim-btn`" v-show="isShowAim">
     <AimMode />
   </div>-->
-  <div :class="`${prefix}-aim-btn`">
+  <!-- <div :class="`${prefix}-aim-btn`">
     <AimMode />
-  </div>
+  </div> -->
+  <Dialog />
   <Outline v-if="globalData?.isAimStatus" />
 </template>
 <style lang="less">

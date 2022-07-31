@@ -23,7 +23,8 @@
     "start": "cd examples && cd cra-app && pnpm start",
     "clean": "node ./scripts/clear.js",
     "format": "prettier --write ./packages && npm run lint",
-    "lint": "eslint ./packages --ext js,jsx,ts,tsx,vue --fix --color"
+    "lint": "eslint ./packages --ext js,jsx,ts,tsx,vue --fix --color",
+    "start:page": "cd ./packages/dev-page  && pnpm dev"
   },
   "repository": {
     "type": "git",

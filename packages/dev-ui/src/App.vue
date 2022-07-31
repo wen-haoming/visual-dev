@@ -23,7 +23,7 @@ onMounted(async () => {
     return;
   }
   data.loading = true;
-  globalData.devConfig = await getRequest('getConfig');
+  // globalData.devConfig = await getRequest('getConfig');
   data.loading = false;
 });
 </script>

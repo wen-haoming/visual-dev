@@ -8,6 +8,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@antv/g6": "^4.6.15",
     "hotkeys-js": "^3.8.7",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
