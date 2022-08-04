@@ -4,15 +4,15 @@ import { ref, onMounted } from 'vue';
 
 const analysisPluginData = {
   nodes: [
-    { id: '/src/index.js', label: '/src/index.js' },
-    { id: '/src/reportWebVitals.js', label: '/src/reportWebVitals.js' },
-    { id: '/src/index.css', label: '/src/index.css' },
-    { id: '/src/App.jsx', label: '/src/App.jsx' },
-    { id: '/src/App.css', label: '/src/App.css' },
-    { id: '/src/b.jsx', label: '/src/b.jsx' },
-    { id: '/src/Form.jsx', label: '/src/Form.jsx' },
-    { id: '/src/Pages/PageA/index.jsx', label: '/src/Pages/PageA/index.jsx' },
-    { id: '/src/Pages/PageB/index.jsx', label: '/src/Pages/PageB/index.jsx' },
+    { id: '/src/index.js', label: '/src/index.js', name: 'index.js' },
+    { id: '/src/reportWebVitals.js', label: '/src/reportWebVitals.js', name: 'index.js' },
+    { id: '/src/index.css', label: '/src/index.css', name: 'index.js' },
+    { id: '/src/App.jsx', label: '/src/App.jsx', name: 'index.js' },
+    { id: '/src/App.css', label: '/src/App.css', name: 'index.js' },
+    { id: '/src/b.jsx', label: '/src/b.jsx', name: 'index.js' },
+    { id: '/src/Form.jsx', label: '/src/Form.jsx', name: 'index.js' },
+    { id: '/src/Pages/PageA/index.jsx', label: '/src/Pages/PageA/index.jsx', name: 'index.js' },
+    { id: '/src/Pages/PageB/index.jsx', label: '/src/Pages/PageB/index.jsx', name: 'index.js' },
   ],
   edges: [
     { source: '/src/index.js', target: '/src/reportWebVitals.js' },
@@ -41,8 +41,8 @@ const tooltip = new G6.Tooltip({
   // 自定义 tooltip 内容
   getContent: (e) => {
     const outDiv = document.createElement('div');
-    outDiv.style.width = 'fit-content';
-    outDiv.style.height = 'fit-content';
+    // outDiv.style.width = 'fit-content';
+    // outDiv.style.height = 'fit-content';
     const model = e.item.getModel();
     if (e.item.getType() === 'node') {
       outDiv.innerHTML = `${model.name}`;
