@@ -2,15 +2,15 @@
   "name": "dev-page",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite build && node ./moveDir.js",
     "preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "@antv/g6": "^4.6.15",
+    "@vueuse/core": "^9.1.0",
     "ant-design-vue": "^3.2.10",
     "vue": "^3.2.37",
     "vue-router": "4"

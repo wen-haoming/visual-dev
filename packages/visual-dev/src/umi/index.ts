@@ -1,6 +1,6 @@
 import type { IApi } from 'umi';
 import type { Compiler } from 'webpack';
-import { createServer } from '../server';
+// import { createServer } from '../server';
 import { insertJSXElementPathPlugin } from '../ast';
 
 import fs from 'fs';
@@ -65,6 +65,6 @@ export default (api: IApi) => {
   });
 
   api.onStart(() => {
-    createServer(api.config.visualDev);
+    // createServer(api.config.visualDev);
   });
 };

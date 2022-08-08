@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+import {
+  ReadOutlined,
+  ApartmentOutlined,
+  PartitionOutlined,
+  GithubOutlined,
+} from '@ant-design/icons-vue';
+import { reactive } from 'vue';
+
+const data = reactive({
+  collapsed: false,
+  selectedKeys: [],
+});
+</script>
+
 <template>
   <a-layout class="layout" style="min-height: 100vh">
     <a-layout-sider v-model:collapsed="data.collapsed" collapsible>
@@ -52,19 +67,7 @@
     </a-layout>
   </a-layout>
 </template>
-<script lang="ts" setup>
-import {
-  ReadOutlined,
-  ApartmentOutlined,
-  PartitionOutlined,
-  GithubOutlined,
-} from '@ant-design/icons-vue';
-import { reactive } from 'vue';
-const data = reactive({
-  collapsed: false,
-  selectedKeys: [],
-});
-</script>
+
 <style lang="less" scoped>
 .layout {
   .logo {

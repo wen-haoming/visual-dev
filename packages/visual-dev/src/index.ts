@@ -30,8 +30,7 @@ export interface PluginOptions {
     inspect?: [string, string, string] | [string, string];
   };
 
-  // analysisPlugin
-  analysisPlugin?: {
+  analysisPlugin: {
     rootPath?: string;
   };
 }

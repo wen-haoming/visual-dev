@@ -194,6 +194,7 @@ importers:
       '@ant-design/icons-vue': ^6.1.0
       '@antv/g6': ^4.6.15
       '@vitejs/plugin-vue': ^3.0.0
+      '@vueuse/core': ^9.1.0
       ant-design-vue: ^3.2.10
       less: ^4.1.1
       typescript: ^4.6.4
@@ -205,6 +206,7 @@ importers:
     dependencies:
       '@ant-design/icons-vue': 6.1.0_vue@3.2.37
       '@antv/g6': 4.6.15
+      '@vueuse/core': 9.1.0_vue@3.2.37
       ant-design-vue: 3.2.10_vue@3.2.37
       vue: 3.2.37
       vue-router: 4.1.3_vue@3.2.37
@@ -7746,6 +7748,13 @@ packages:
       '@types/vfile-message': 2.0.0
     dev: true
 
+  /@types/web-bluetooth/0.0.15:
+    resolution:
+      {
+        integrity: sha512-w7hEHXnPMEZ+4nGKl/KDRVpxkwYxYExuHOYXyzIzCDzEZ9ZCGMAewulr9IqJu2LR4N37fcnb1XVeuZ09qgOxhA==,
+      }
+    dev: false
+
   /@types/webpack-dev-server/3.11.6_debug@4.3.3:
     resolution:
       {
@@ -10524,6 +10533,40 @@ packages:
         integrity: sha512-Iu8Tbg3f+emIIMmI2ycSI8QcEuAUgPTgHwesDU1eKMLE4YC/c/sFbGc70QgMq31ijRftV0R7vCm9co6rldCeOA==,
       }
     dev: true
+
+  /@vueuse/core/9.1.0_vue@3.2.37:
+    resolution:
+      {
+        integrity: sha512-BIroqvXEqt826aE9r3K5cox1zobuPuAzdYJ36kouC2TVhlXvFKIILgFVWrpp9HZPwB3aLzasmG3K87q7TSyXZg==,
+      }
+    dependencies:
+      '@types/web-bluetooth': 0.0.15
+      '@vueuse/metadata': 9.1.0
+      '@vueuse/shared': 9.1.0_vue@3.2.37
+      vue-demi: 0.13.6_vue@3.2.37
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vueuse/metadata/9.1.0:
+    resolution:
+      {
+        integrity: sha512-8OEhlog1iaAGTD3LICZ8oBGQdYeMwByvXetOtAOZCJOzyCRSwqwdggTsmVZZ1rkgYIEqgUBk942AsAPwM21s6A==,
+      }
+    dev: false
+
+  /@vueuse/shared/9.1.0_vue@3.2.37:
+    resolution:
+      {
+        integrity: sha512-pB/3njQu4tfJJ78ajELNda0yMG6lKfpToQW7Soe09CprF1k3QuyoNi1tBNvo75wBDJWD+LOnr+c4B5HZ39jY/Q==,
+      }
+    dependencies:
+      vue-demi: 0.13.6_vue@3.2.37
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
 
   /@web-devtools/core/0.0.6:
     resolution:
@@ -34440,6 +34483,24 @@ packages:
       yargs: 16.2.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /vue-demi/0.13.6_vue@3.2.37:
+    resolution:
+      {
+        integrity: sha512-02NYpxgyGE2kKGegRPYlNQSL1UWfA/+JqvzhGCOYjhfbLWXU5QQX0+9pAm/R2sCOPKr5NBxVIab7fvFU0B1RxQ==,
+      }
+    engines: { node: '>=12' }
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.37
     dev: false
 
   /vue-eslint-parser/7.11.0_eslint@6.8.0:

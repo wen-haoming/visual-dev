@@ -2,13 +2,13 @@ import type { PluginOption } from 'vite';
 import { insertVueAttr, insertReactAttr } from '../ast';
 import path from 'path';
 import fs from 'fs';
-import { createServer } from '../server';
-import type { PluginOptions } from '../';
+// import { createServer } from '../server';
+// import type { PluginOptions } from '../';
 
 const assetsDir = path.resolve(__dirname, `../../dev-ui/assets`);
 const templateFile = path.resolve(__dirname, '../../dev-ui/index.html');
 
-const vitePlugin = (options: PluginOptions): PluginOption => {
+const vitePlugin = (): PluginOption => {
   return {
     name: 'visual-dev',
     enforce: 'pre',
@@ -32,8 +32,8 @@ const vitePlugin = (options: PluginOptions): PluginOption => {
       return html;
     },
     buildStart() {
-      if (options.noServer) return;
-      createServer(options);
+      // if (options.noServer) return;
+      // createServer(options);
     },
   };
 };

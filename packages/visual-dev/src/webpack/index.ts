@@ -1,6 +1,5 @@
-import path from 'path';
-import injectFile from './injectFile';
 import analysisPlugin from './analysisPlugin';
+import type { ServerProps } from '../server';
 import { createServer } from '../server';
 import type { Compiler } from 'webpack';
 import type { PluginOptions } from '../';
@@ -36,32 +35,32 @@ export const WebpackDevtoolPlugin = class {
     this.options = { ...defaultOptions, ...options };
   }
   apply(compiler: Compiler) {
+    const serverProps = {} as ServerProps;
     // 依赖分析
-    analysisPlugin(compiler, this.options.analysisPlugin);
+    analysisPlugin(compiler, this.options.analysisPlugin, serverProps);
 
-    compiler.options.module?.rules.push({
-      test: /\.(j|t)sx$/,
-      use: {
-        loader: path.resolve(__dirname, './parseReactLoader.js'),
-      },
-    });
-
-    compiler.options.module?.rules.push({
-      test: /\.vue$/,
-      use: {
-        loader: path.resolve(__dirname, './parseVueLoader.js'),
-      },
-    });
-
-    if (this.options.injectFile) {
-      compiler.hooks.emit.tap('injectFile', injectFile);
-    }
+    // 启动服务
     compiler.hooks.environment.tap('createServer', () => {
-      if (Object.keys(newProxyOptions).length > 0) {
-        this.options.devServerProxy = newProxyOptions;
-      }
-      createServer(this.options);
+      createServer(this.options, serverProps);
     });
+
+    // compiler.options.module?.rules.push({
+    //   test: /\.(j|t)sx$/,
+    //   use: {
+    //     loader: path.resolve(__dirname, './parseReactLoader.js'),
+    //   },
+    // });
+
+    // compiler.options.module?.rules.push({
+    //   test: /\.vue$/,
+    //   use: {
+    //     loader: path.resolve(__dirname, './parseVueLoader.js'),
+    //   },
+    // });
+
+    // if (this.options.injectFile) {
+    //   compiler.hooks.emit.tap('injectFile', injectFile);
+    // }
   }
 };
 

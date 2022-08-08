@@ -9,17 +9,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:before": "pnpm clean",
-    "dev:ui": "cd ./packages/dev-ui && pnpm dev",
-    "dev:visual-dev": "cd ./packages/visual-dev && pnpm dev",
-    "build:before": "node ./scripts/clear.js",
-    "build:ui": "cd ./packages/dev-ui && pnpm build",
-    "build:visual-dev": "cd ./packages/visual-dev  && pnpm build",
-    "build:end": "node ./scripts/moveFiles.js",
-    "build:demo": "cd ./demo  && pnpm build",
-    "build:demo-move-file": "node ./scripts/demo.js",
-    "build": "run-s build:*",
+    "dev:visual-dev": "cd ./packages/visual-dev && npm run dev",
+    "dev:dev-page": "cd ./packages/dev-page && npm run dev",
     "dev": "run-p dev:*",
+    "build:visual-dev": "cd ./packages/visual-dev && npm run build",
+    "build:dev-page": "cd ./packages/dev-page && npm run build",
+    "build": "run-p build:*",
     "start": "cd examples && cd cra-app && pnpm start",
     "clean": "node ./scripts/clear.js",
     "format": "prettier --write ./packages && npm run lint",
@@ -44,7 +39,7 @@
     "url": "https://github.com/wen-haoming/visual-dev/issues"
   },
   "gitHooks": {
-    "pre-commit": "npm run build:before && lint-staged --concurrent false",
+    "pre-commit": "lint-staged --concurrent false",
     "commit-msg": "fabric verify-commit"
   },
   "lint-staged": {

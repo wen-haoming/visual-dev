@@ -1,32 +1,7 @@
 <script lang="ts" setup>
 import G6 from '@antv/g6';
 import { ref, onMounted } from 'vue';
-
-const analysisPluginData = {
-  nodes: [
-    { id: '/src/index.js', label: '/src/index.js', name: 'index.js' },
-    { id: '/src/reportWebVitals.js', label: '/src/reportWebVitals.js', name: 'index.js' },
-    { id: '/src/index.css', label: '/src/index.css', name: 'index.js' },
-    { id: '/src/App.jsx', label: '/src/App.jsx', name: 'index.js' },
-    { id: '/src/App.css', label: '/src/App.css', name: 'index.js' },
-    { id: '/src/b.jsx', label: '/src/b.jsx', name: 'index.js' },
-    { id: '/src/Form.jsx', label: '/src/Form.jsx', name: 'index.js' },
-    { id: '/src/Pages/PageA/index.jsx', label: '/src/Pages/PageA/index.jsx', name: 'index.js' },
-    { id: '/src/Pages/PageB/index.jsx', label: '/src/Pages/PageB/index.jsx', name: 'index.js' },
-  ],
-  edges: [
-    { source: '/src/index.js', target: '/src/reportWebVitals.js' },
-    { source: '/src/index.js', target: '/src/index.css' },
-    { source: '/src/index.js', target: '/src/App.jsx' },
-    { source: '/src/index.css', target: '/src/index.css' },
-    { source: '/src/App.jsx', target: '/src/App.css' },
-    { source: '/src/App.jsx', target: '/src/b.jsx' },
-    { source: '/src/App.jsx', target: '/src/Form.jsx' },
-    { source: '/src/App.jsx', target: '/src/Pages/PageA/index.jsx' },
-    { source: '/src/App.jsx', target: '/src/Pages/PageB/index.jsx' },
-    { source: '/src/App.css', target: '/src/App.css' },
-  ],
-};
+import { useFetch } from '@vueuse/core';
 
 const container = ref();
 
@@ -39,7 +14,7 @@ const tooltip = new G6.Tooltip({
   itemTypes: ['node', 'edge'],
   // custom the tooltip's content
   // 自定义 tooltip 内容
-  getContent: (e) => {
+  getContent: (e: any) => {
     const outDiv = document.createElement('div');
     // outDiv.style.width = 'fit-content';
     // outDiv.style.height = 'fit-content';
@@ -55,9 +30,16 @@ const tooltip = new G6.Tooltip({
   },
 });
 
-onMounted(() => {
+onMounted(async () => {
+  const res = await useFetch(
+    `http://localhost:${(window as any)._port}/web-devtools/analysisFile`,
+    { method: 'GET' },
+  ).json();
+  const data = res?.data?.value?.data;
+
   const width = container.value.scrollWidth;
   const height = container.value.scrollHeight || 500;
+
   const graph = new G6.Graph({
     container: container.value,
     width,
@@ -83,7 +65,7 @@ onMounted(() => {
     console.log(e);
   });
 
-  graph.data(analysisPluginData);
+  graph.data(data || {});
   graph.render();
 });
 </script>
@@ -97,10 +79,12 @@ onMounted(() => {
 .dialog-bg {
   width: 100%;
   height: 100%;
+
   .dialog-wrap {
     width: 100%;
     height: 100%;
   }
+
   .g6-component-tooltip {
     border: 1px solid #e2e2e2;
     border-radius: 4px;
