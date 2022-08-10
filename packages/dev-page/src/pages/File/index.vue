@@ -2,13 +2,36 @@
 import G6 from '@antv/g6';
 import { ref, onMounted } from 'vue';
 import { useFetch } from '@vueuse/core';
+// import { dataTest } from './test.ts';
 
 const container = ref();
+
+// const globalFontSize = 12;
+// const fittingString = (str:string, maxWidth:number, fontSize:number) => {
+//   let currentWidth = 0;
+//   let res = str;
+//   const pattern = new RegExp('[\u4E00-\u9FA5]+'); // distinguish the Chinese charactors and letters
+//   str.split('').forEach((letter, i) => {
+//     if (currentWidth > maxWidth) return;
+//     if (pattern.test(letter)) {
+//       // Chinese charactors
+//       currentWidth += fontSize;
+//     } else {
+//       // get the width of single letter according to the fontSize
+//       currentWidth += G6.Util.getLetterWidth(letter, fontSize);
+//     }
+//     if (currentWidth > maxWidth) {
+//       res = `${str.substr(0, i)}\n${str.substr(i)}`;
+//     }
+//   });
+//   return res;
+// };
 
 const tooltip = new G6.Tooltip({
   offsetX: 10,
   offsetY: 10,
   fixToNode: [1, 0.5],
+
   // the types of items that allow the tooltip show up
   // 允许出现 tooltip 的 item 类型
   itemTypes: ['node', 'edge'],
@@ -28,6 +51,13 @@ const tooltip = new G6.Tooltip({
     }
     return outDiv;
   },
+  nodeStateStyles: {
+    hover: {
+      lineWidth: 2,
+      stroke: '#1890ff',
+      fill: '#e6f7ff',
+    },
+  },
 });
 
 onMounted(async () => {
@@ -35,8 +65,12 @@ onMounted(async () => {
     `http://localhost:${(window as any)._port}/web-devtools/analysisFile`,
     { method: 'GET' },
   ).json();
-  const data = res?.data?.value?.data;
 
+  let data = res?.data?.value?.data;
+  // data.nodes.forEach(item=>{
+  //     item.id = fittingString(item.id,80,globalFontSize)
+  //     item.label = fittingString(item.label,80,globalFontSize)
+  // })
   const width = container.value.scrollWidth;
   const height = container.value.scrollHeight || 500;
 
@@ -49,17 +83,17 @@ onMounted(async () => {
     },
     plugins: [tooltip],
     layout: {
-      type: 'fruchterman',
-      gravity: 10,
-      speed: 5,
-      // for rendering after each iteration
-      tick: () => {
-        graph.refreshPositions();
-      },
+      type: 'dagre',
+      rankdir: 'LR', // 可选，默认为图的中心
+      align: 'DL', // 可选
+      nodesep: 10, // 可选
+      ranksep: 50, // 可选
+      controlPoints: true, // 可
     },
-    animate: false,
+    animate: true,
     defaultNode: {
-      size: 40,
+      type: 'modelRect',
+      size: [150, 50],
     },
   }).on('node:click', (e) => {
     console.log(e);
