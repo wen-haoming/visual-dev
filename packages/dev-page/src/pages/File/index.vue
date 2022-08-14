@@ -2,7 +2,8 @@
 import G6 from '@antv/g6';
 import { ref, onMounted } from 'vue';
 import { useFetch } from '@vueuse/core';
-// import { dataTest } from './test.ts';
+import { launchEditor } from '../../utils';
+import { dataTest } from './test.ts';
 
 const container = ref();
 
@@ -31,7 +32,7 @@ const tooltip = new G6.Tooltip({
   offsetX: 10,
   offsetY: 10,
   fixToNode: [1, 0.5],
-
+  trigger: 'click',
   // the types of items that allow the tooltip show up
   // 允许出现 tooltip 的 item 类型
   itemTypes: ['node', 'edge'],
@@ -39,11 +40,20 @@ const tooltip = new G6.Tooltip({
   // 自定义 tooltip 内容
   getContent: (e: any) => {
     const outDiv = document.createElement('div');
-    // outDiv.style.width = 'fit-content';
-    // outDiv.style.height = 'fit-content';
     const model = e.item.getModel();
+
     if (e.item.getType() === 'node') {
-      outDiv.innerHTML = `${model.name}`;
+      const url = launchEditor({
+        srcPath: model.name,
+        editor: 'vscode',
+        column: 0,
+        line: 0,
+      });
+      outDiv.innerHTML = `<a href="${url}" target="_blank">点击打开源码位置</a> `;
+      // outDiv.onclick = ()=>{
+
+      //   //  window.open(url)
+      // }
     } else {
       const source = e.item.getSource();
       const target = e.item.getTarget();
@@ -60,17 +70,20 @@ const tooltip = new G6.Tooltip({
   },
 });
 
-onMounted(async () => {
-  const res = await useFetch(
-    `http://localhost:${(window as any)._port}/web-devtools/analysisFile`,
-    { method: 'GET' },
-  ).json();
+const toolbar = new G6.ToolBar({
+  // position: { x: 10, y: 10 },
+  container: container.value,
+});
 
-  let data = res?.data?.value?.data;
-  // data.nodes.forEach(item=>{
-  //     item.id = fittingString(item.id,80,globalFontSize)
-  //     item.label = fittingString(item.label,80,globalFontSize)
-  // })
+onMounted(async () => {
+  // const res = await useFetch(
+  //   `http://localhost:${(window as any)._port}/web-devtools/analysisFile`,
+  //   { method: 'GET' },
+  // ).json();
+
+  // let data = res?.data?.value?.data;
+  let data = dataTest.data;
+
   const width = container.value.scrollWidth;
   const height = container.value.scrollHeight || 500;
 
@@ -81,7 +94,7 @@ onMounted(async () => {
     modes: {
       default: ['drag-canvas', 'drag-node'],
     },
-    plugins: [tooltip],
+    plugins: [tooltip, toolbar],
     layout: {
       type: 'dagre',
       rankdir: 'LR', // 可选，默认为图的中心
@@ -95,12 +108,16 @@ onMounted(async () => {
       type: 'modelRect',
       size: [150, 50],
     },
-  }).on('node:click', (e) => {
-    console.log(e);
   });
 
   graph.data(data || {});
   graph.render();
+
+  window.onresize = () => {
+    if (!graph || graph.get('destroyed')) return;
+    if (!container.value || !container.value.scrollWidth || !container.value.scrollHeight) return;
+    graph.changeSize(container.value.scrollWidth, container.value.scrollHeight);
+  };
 });
 </script>
 

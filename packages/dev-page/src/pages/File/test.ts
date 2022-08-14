@@ -1,32 +1,56 @@
 export const dataTest = {
   data: {
     nodes: [
-      { id: '/src/index.js', label: '/src/index.js', name: '/src/index.js' },
-      { id: '/src/App.jsx', label: '/src/App.jsx', name: '/src/App.jsx' },
       {
-        id: '/src/reportWebVitals.js',
-        label: '/src/reportWebVitals.js',
-        name: '/src/reportWebVitals.js',
-      },
-      { id: '/src/index.css', label: '/src/index.css', name: '/src/index.css' },
-      { id: '/src/App.css', label: '/src/App.css', name: '/src/App.css' },
-      { id: '/src/b.jsx', label: '/src/b.jsx', name: '/src/b.jsx' },
-      { id: '/src/Form.jsx', label: '/src/Form.jsx', name: '/src/Form.jsx' },
-      {
-        id: '/src/Pages/PageB/index.jsx',
-        label: '/src/Pages/PageB/index.jsx',
-        name: '/src/Pages/PageB/index.jsx',
+        id: 'index.js',
+        label: 'index.js',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/index.js',
       },
       {
-        id: '/src/Pages/PageA/index.jsx',
-        label: '/src/Pages/PageA/index.jsx',
-        name: '/src/Pages/PageA/index.jsx',
+        id: 'App.jsx',
+        label: 'App.jsx',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/App.jsx',
+      },
+      {
+        id: 'reportWebVitals.js',
+        label: 'reportWebVitals.js',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/reportWebVitals.js',
+      },
+      {
+        id: 'index.css',
+        label: 'index.css',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/index.css',
+      },
+      {
+        id: 'App.css',
+        label: 'App.css',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/App.css',
+      },
+      {
+        id: 'b.jsx',
+        label: 'b.jsx',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/b.jsx',
+      },
+      {
+        id: 'Form.jsx',
+        label: 'Form.jsx',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/Form.jsx',
+      },
+      {
+        id: 'index.jsx',
+        label: 'index.jsx',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/Pages/PageA/index.jsx',
+      },
+      {
+        id: 'index.jsx',
+        label: 'index.jsx',
+        name: '/Users/wenhaoming/Desktop/project/visual-dev/examples/cra-app/src/Pages/PageB/index.jsx',
       },
     ],
     edges: [
       {
-        source: '/src/index.js',
-        target: '/src/App.jsx',
+        source: 'index.js',
+        target: 'App.jsx',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -35,8 +59,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/index.js',
-        target: '/src/reportWebVitals.js',
+        source: 'index.js',
+        target: 'reportWebVitals.js',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -45,8 +69,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/index.js',
-        target: '/src/index.css',
+        source: 'index.js',
+        target: 'index.css',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -55,8 +79,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/App.jsx',
-        target: '/src/App.css',
+        source: 'App.jsx',
+        target: 'App.css',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -65,8 +89,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/App.jsx',
-        target: '/src/b.jsx',
+        source: 'App.jsx',
+        target: 'b.jsx',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -75,8 +99,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/App.jsx',
-        target: '/src/Form.jsx',
+        source: 'App.jsx',
+        target: 'Form.jsx',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -85,8 +109,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/App.jsx',
-        target: '/src/Pages/PageB/index.jsx',
+        source: 'App.jsx',
+        target: 'index.jsx',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -95,8 +119,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/App.jsx',
-        target: '/src/Pages/PageA/index.jsx',
+        source: 'App.jsx',
+        target: 'index.jsx',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -105,8 +129,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/index.css',
-        target: '/src/index.css',
+        source: 'index.css',
+        target: 'index.css',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',
@@ -115,8 +139,8 @@ export const dataTest = {
         },
       },
       {
-        source: '/src/App.css',
-        target: '/src/App.css',
+        source: 'App.css',
+        target: 'App.css',
         style: {
           endArrow: {
             path: 'M 0,0 L 20,-7.5\n        L 13.333333333333334,0 L 20,7.5 Z',

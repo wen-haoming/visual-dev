@@ -17,7 +17,9 @@ module.exports = {
     configureWebpack: {
       plugins: [
         new WebpackDevToolPLugin({
-          injectFile:false
+          analysisPlugin:{
+            rootPath:'./src/Pages'
+        },
         })
       ]
     }

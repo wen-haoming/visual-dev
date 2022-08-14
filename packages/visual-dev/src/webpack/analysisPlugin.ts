@@ -86,10 +86,9 @@ const analysisPlugin = (compiler: Compiler, options: Options, serverProps: Serve
       // const routers = fs.readdirSync(path.resolve(process.cwd(), rootPath));
       const data: analysisData = {
         nodes: Object.keys(dependenciesTree).map((p) => {
-          p = p.replace(process.cwd(), '');
           return {
-            id: p,
-            label: p,
+            id: p.match('[^/]+(?!.*/)')![0],
+            label: p.match('[^/]+(?!.*/)')![0],
             name: p,
           };
         }),
@@ -102,8 +101,8 @@ const analysisPlugin = (compiler: Compiler, options: Options, serverProps: Serve
           p = p.replace(process.cwd(), '');
           const edges = next.map((nextItem) => {
             return {
-              source: p,
-              target: nextItem.replace(process.cwd(), ''),
+              source: p.match('[^/]+(?!.*/)')![0],
+              target: nextItem.match('[^/]+(?!.*/)')![0],
               style: {
                 endArrow: {
                   path: G6.Arrow.vee(),
