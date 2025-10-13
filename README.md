@@ -91,9 +91,6 @@ the project is successfully launched, a small icon will appear in the lower left
 
 项目启动成功后，在屏幕的左下角会有一个小图标出现，点击即可触发。
 
-## WeChat
-
-<img width="250" src="https://user-images.githubusercontent.com/42735363/154826910-b45ca498-d83e-4053-9dd2-907d3ad4aab9.jpg" />
 
 ## License
 
